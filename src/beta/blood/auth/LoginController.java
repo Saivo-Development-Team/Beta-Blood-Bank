@@ -9,8 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -22,9 +24,28 @@ public class LoginController implements Initializable {
     @FXML PasswordField password;
             
     @FXML
-    private void login(){
-        System.out.println(number.getText() + " " + password.getText());
+    private void login(){        
+        if("admin".equals(number.getText())){
+                if("admin".equals(password.getText())){
+                    System.out.println("login");
+                }else{
+                    System.out.println("incorrect password");
+                }
+            }else{
+                System.out.println("incorrect username or password");
+            }   
     }
+    
+    @FXML
+    private void exit() {
+        System.exit(0);
+    }
+    
+    @FXML
+    private void help() {
+        JOptionPane.showMessageDialog(null, "enter");
+    }
+    
     /**
      * Initializes the controller class.
      */
