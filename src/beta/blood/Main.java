@@ -15,11 +15,11 @@ import javafx.stage.Stage;
  *
  * @author perso
  */
-public class UIApplication extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLInterface.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/beta/blood/auth/Login.fxml"));
         
         Scene scene = new Scene(root);
         
