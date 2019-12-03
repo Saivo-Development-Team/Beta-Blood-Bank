@@ -17,14 +17,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
@@ -41,7 +44,7 @@ public class LoginController implements Initializable {
 
                 
     @FXML
-    private void login() throws Exception {
+    private void login(ActionEvent event) throws Exception {
         
              Connection conn;
              Statement s;
@@ -58,11 +61,21 @@ public class LoginController implements Initializable {
                 String userType = rs.getString("Admin");
                 if (userType.equals("1")){
                     System.out.println("Welcome admin");
-                    Parent root2 = FXMLLoader.load(getClass().getResource("Login.fxml"));
-                    Scene sceneAdminHome = new Scene(root2);
-                    //stage.setScene(sceneAdminHome);
+                    Parent adminHomeParent = FXMLLoader.load(getClass().getResource("/beta/blood/admin/adminHome.fxml"));
+                    Scene adminHomeScene = new Scene(adminHomeParent);
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    window.setScene(adminHomeScene);
+                    window.setTitle("Admin Home");
+                    window.show();
+                    
                 } else if (userType.equals("0")){
                     System.out.println("Welcome nurse");
+                    Parent nurseHomeParent = FXMLLoader.load(getClass().getResource("/beta/blood/nurse/nurseHome.fxml"));
+                    Scene nurseHomeScene = new Scene(nurseHomeParent);
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    window.setScene(nurseHomeScene);
+                    window.setTitle("Nurse Home");
+                    window.show();
                 }
         } else{
             conn.close();
@@ -70,8 +83,13 @@ public class LoginController implements Initializable {
         }
             
         }catch(SQLException ex){
-            System.out.println("Unable to connect");
+            System.out.println("Unable to connect to database");
         }
+    }
+    
+    public void changeScreenAdmin(ActionEvent event) throws IOException
+    {
+        
     }
         
     @FXML
