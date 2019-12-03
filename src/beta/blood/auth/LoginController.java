@@ -5,7 +5,10 @@
  */
 package beta.blood.auth;
 
+import beta.blood.database.DatabaseService;
 import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +25,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
@@ -32,6 +34,7 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
  * @author perso
  */
 public class LoginController implements Initializable {
+    DatabaseService dbService = DatabaseService.service();
     @FXML TextField number;
     @FXML PasswordField password;
     @FXML Label message;
@@ -80,7 +83,7 @@ public class LoginController implements Initializable {
     public void openWebpage() {
         try {
             Desktop.getDesktop().browse(new URL("https://sanbs.org.za/").toURI());
-        } catch (Exception e) {}
+        } catch (IOException | URISyntaxException e) {}
     }
     
     @FXML
@@ -92,9 +95,7 @@ public class LoginController implements Initializable {
         
     }
     
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
