@@ -5,6 +5,7 @@
  */
 package beta.blood;
 
+import beta.blood.auth.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,11 +21,13 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/beta/blood/auth/Login.fxml"));
+        Scene sceneLogin = new Scene(root);
+        ViewHandler login = new ViewHandler(stage);
         
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
+        stage.setScene(sceneLogin);
+        stage.setTitle("Beta Blood Home Page");
         stage.show();
+        
     }
 
     /**
