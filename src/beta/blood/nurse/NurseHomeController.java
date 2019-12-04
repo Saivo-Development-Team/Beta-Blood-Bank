@@ -5,14 +5,9 @@
  */
 package beta.blood.nurse;
 
+import beta.blood.database.DatabaseService;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +30,10 @@ public class NurseHomeController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+private void addDonor() {
+    
+}
     
    
 @FXML
