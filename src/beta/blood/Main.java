@@ -20,10 +20,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass()
-                .getResource("/beta/blood/auth/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/beta/blood/auth/Login.fxml"));
         Scene launch = new Scene(root);
-
         stage.setScene(launch);
         stage.setTitle("Beta Blood");
         stage.show();
