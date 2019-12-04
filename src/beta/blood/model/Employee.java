@@ -20,9 +20,8 @@ public class Employee {
 
     private final String employeeId, name, surname, telephone, branch, password;
     private final int position;
-    
 
-    public Employee(String employeeId, String name, String surname,String telephone, String branch, String password, int position) {
+    public Employee(String employeeId, String name, String surname, String telephone, String branch, String password, int position) {
         this.employeeId = employeeId;
         this.name = name;
         this.surname = surname;
@@ -60,14 +59,12 @@ public class Employee {
         return position;
     }
 
-    
-    
     public static Employee getById(String employeeId) {
         try {
-            String getQuery = String.format(
-                   "select * from employee where employeeId='%s'", employeeId
+            String query = String.format(
+                    "select * from employee where employeeId='%s'", employeeId
             );
-            ResultSet result = DatabaseService.service().executeQuery(getQuery);
+            ResultSet result = DatabaseService.service().executeQuery(query);
 
             if (result.next()) {
                 return new Employee(
@@ -82,7 +79,9 @@ public class Employee {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(LoginService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(
+                    LoginService.class.getName()).log(Level.SEVERE, null, ex
+            );
         }
         return null;
     }

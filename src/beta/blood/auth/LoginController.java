@@ -5,6 +5,7 @@
  */
 package beta.blood.auth;
 
+import beta.blood.Handler;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,38 +30,25 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
  *
  * @author perso
  */
-
-
 public class LoginController implements Initializable {
 
-    LoginService loginService = new LoginService();
     @FXML
     TextField number;
     @FXML
     PasswordField password;
     @FXML
     Label message;
-    private int access;
 
     @FXML
     private void login(ActionEvent event) throws Exception {
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        access = loginService.checkDetails(number.getText(), password.getText());
+        Stage window = Handler.getStage(event);
 
-        switch (access) {
+        switch (LoginService.checkDetails(number.getText(), password.getText())) {
             case 0:
-                Parent adminHomeParent = FXMLLoader.load(getClass().getResource("/beta/blood/admin/adminHome.fxml"));
-                Scene adminHomeScene = new Scene(adminHomeParent);
-                window.setScene(adminHomeScene);
-                window.setTitle("Admin Home");
-                window.show();
+                Handler.changeScene(getClass(), event, "Admin Home", "/beta/blood/admin/adminHome.fxml");
                 break;
             case 1:
-                Parent nurseHomeParent = FXMLLoader.load(getClass().getResource("/beta/blood/nurse/nurseHome.fxml"));
-                Scene nurseHomeScene = new Scene(nurseHomeParent);
-                window.setScene(nurseHomeScene);
-                window.setTitle("Nurse Home");
-                window.show();
+                Handler.changeScene(getClass(), event, "Nurse Home", "/beta/blood/nurse/nurseHome.fxml");
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "UserName Or Password Invalid");
