@@ -11,5 +11,35 @@ package beta.blood.model;
  */
 public class Recipient {
     private int recipientID;
-    String name, address, telephone, email;
+    private String name, address, telephone, email;
+
+    public Recipient(int recipientID, String name, String address, String telephone, String email) {
+        this.recipientID = recipientID;
+        this.name = name;
+        this.address = address;
+        this.telephone = telephone;
+        this.email = email;
+    }
+
+    public int getRecipientID() {
+        return recipientID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    
+    
 }
