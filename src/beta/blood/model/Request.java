@@ -12,4 +12,19 @@ package beta.blood.model;
 public class Request {
 
     private int bloodId, orderId;
+
+    public Request(int bloodId, int orderId) {
+        this.bloodId = bloodId;
+        this.orderId = orderId;
+    }
+
+    public int getBloodId() {
+        return bloodId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+    
+    
 }
