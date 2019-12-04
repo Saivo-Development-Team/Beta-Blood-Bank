@@ -5,17 +5,13 @@
  */
 package beta.blood.admin;
 
+import beta.blood.Handler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
@@ -30,14 +26,10 @@ public class AdminHomeController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private void logout(ActionEvent event) throws IOException{
+    private void logout() throws IOException{
     int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out", "Logout", YES_NO_OPTION);
     if(result == JOptionPane.YES_OPTION){
-        Parent nurseHomeParent = FXMLLoader.load(getClass().getResource("/beta/blood/auth/Login.fxml"));
-        Scene nurseHomeScene = new Scene(nurseHomeParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(nurseHomeScene);
-        window.show();
+        Handler.setScene(getClass(), "Beta Blood", "/beta/blood/auth/Login.fxml");
     }
 }
     @Override

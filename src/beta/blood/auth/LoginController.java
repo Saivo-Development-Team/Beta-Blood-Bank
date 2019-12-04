@@ -13,15 +13,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
@@ -40,13 +35,13 @@ public class LoginController implements Initializable {
     Label message;
 
     @FXML
-    private void login(ActionEvent event) throws Exception {
+    private void login() throws Exception {
         switch (LoginService.checkDetails(number.getText(), password.getText())) {
             case 0:
-                Handler.changeScene(getClass(), event, "Admin Home", "/beta/blood/admin/adminHome.fxml");
+                Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
                 break;
             case 1:
-                Handler.changeScene(getClass(), event, "Nurse Home", "/beta/blood/nurse/nurseHome.fxml");
+                Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "UserName Or Password Invalid");

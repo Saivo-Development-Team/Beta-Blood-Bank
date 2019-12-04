@@ -6,9 +6,6 @@
 package beta.blood;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -17,14 +14,12 @@ import javafx.stage.Stage;
  * @author Ian Mubangizi
  */
 public class Main extends Application {
+    protected static Stage window;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/beta/blood/auth/Login.fxml"));
-        Scene launch = new Scene(root);
-        stage.setScene(launch);
-        stage.setTitle("Beta Blood");
-        stage.show();
+        Main.window = stage;
+        Handler.setScene(getClass(), "Beta Blood", "/beta/blood/auth/Login.fxml");
     }
 
     /**
