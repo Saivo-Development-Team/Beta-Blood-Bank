@@ -6,6 +6,8 @@
 package beta.blood.database;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +20,7 @@ public class DatabaseService {
 
     private final String user = "root";
     private final String password = "";
-    private final String jdbc_driver = "com.mysql.cj.jdbc.Driver";
+    private final String jdbc_driver = "com.mysql.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/betablooddatabase";
 
     private static DatabaseService service = null;
@@ -40,18 +42,31 @@ public class DatabaseService {
             Class.forName(jdbc_driver);
             this.connection = DriverManager.getConnection(url, user, password);
             this.statement = this.connection.createStatement();
-        } catch (ClassNotFoundException | SQLException ignored) {
-
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
         }
     }
 
-    public Statement getStatement() {
+    private Statement getStatement() {
         if (this.statement == null) {
             try {
                 this.statement = this.connection.createStatement();
-            } catch (SQLException ignored) {
+            } catch (SQLException ex) {
+                System.out.println(ex);
             }
         }
         return this.statement;
     }
+    
+    public ResultSet executeQuery(String query) {
+        try {
+           return this.getStatement().executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseService.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
 }
