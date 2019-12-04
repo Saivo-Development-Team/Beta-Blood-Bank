@@ -12,5 +12,35 @@ package beta.blood.model;
 public class Blood {
 
     private int bloodID, quantity, offeredBy;
-    String type, verifiedBy;
+    private String type, verifiedBy;
+
+    public Blood(int bloodID, int quantity, int offeredBy, String type, String verifiedBy) {
+        this.bloodID = bloodID;
+        this.quantity = quantity;
+        this.offeredBy = offeredBy;
+        this.type = type;
+        this.verifiedBy = verifiedBy;
+    }
+
+    public int getBloodID() {
+        return bloodID;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getOfferedBy() {
+        return offeredBy;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getVerifiedBy() {
+        return verifiedBy;
+    }
+    
+    
 }

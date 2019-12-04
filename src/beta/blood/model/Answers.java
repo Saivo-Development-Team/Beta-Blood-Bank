@@ -12,5 +12,20 @@ package beta.blood.model;
 public class Answers {
 
     private int answersId;
-    String text;
+    private String text;
+
+    public Answers(int answersId, String text) {
+        this.answersId = answersId;
+        this.text = text;
+    }
+
+    public int getAnswersId() {
+        return answersId;
+    }
+
+    public String getText() {
+        return text;
+    }
+    
+    
 }

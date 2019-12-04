@@ -15,5 +15,30 @@ public class Order {
 
     private int orderId, orderedBy;
     private Date date;
-    String processedBy;
+    private String processedBy;
+
+    public Order(int orderId, int orderedBy, Date date, String processedBy) {
+        this.orderId = orderId;
+        this.orderedBy = orderedBy;
+        this.date = date;
+        this.processedBy = processedBy;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public int getOrderedBy() {
+        return orderedBy;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getProcessedBy() {
+        return processedBy;
+    }
+    
+   
 }

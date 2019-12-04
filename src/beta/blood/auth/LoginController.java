@@ -41,8 +41,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private void login(ActionEvent event) throws Exception {
-        Stage window = Handler.getStage(event);
-
         switch (LoginService.checkDetails(number.getText(), password.getText())) {
             case 0:
                 Handler.changeScene(getClass(), event, "Admin Home", "/beta/blood/admin/adminHome.fxml");
