@@ -11,7 +11,10 @@ package beta.blood.model;
  */
 public class Donor {
 
-    private int donorID, age, answers;
-    String name, surname, address, gender;
-
+    private int donorID, age, answers; 
+    private String name, surname, address, gender;
+    
+    public static void insert(){
+        
+    }
 }
