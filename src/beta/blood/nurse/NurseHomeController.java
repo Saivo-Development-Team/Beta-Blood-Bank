@@ -30,6 +30,11 @@ public class NurseHomeController implements Initializable {
     /**
      * Initializes the controller class.
      */
+
+@FXML
+private void addDonornNavigation(){
+    
+}
     
 private void addDonor() {
     
