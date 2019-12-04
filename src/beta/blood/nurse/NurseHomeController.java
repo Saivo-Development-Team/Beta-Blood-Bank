@@ -5,6 +5,7 @@
  */
 package beta.blood.nurse;
 
+import beta.blood.Handler;
 import beta.blood.database.DatabaseService;
 import java.io.IOException;
 import java.net.URL;
@@ -32,8 +33,8 @@ public class NurseHomeController implements Initializable {
      */
 
 @FXML
-private void addDonornNavigation(){
-    
+private void donorNavigation(ActionEvent event){
+    Handler.changeScene(getClass(), event, "Add Donor", "/beta/blood/nurse/nurseAddDonor.fxml");
 }
     
 private void addDonor() {
