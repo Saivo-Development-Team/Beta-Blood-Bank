@@ -26,12 +26,33 @@ public class AdminHomeController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
+    private void adminAddNurseNavigation() {
+        Handler.setScene(getClass(), "Add nurse", "/beta/blood/admin/AdminAddNurse.fxml");
+        Handler.getWindow().setMaximized(true);
+    }
+    
+    @FXML
+    private void adminAddRecipientNavigation() {
+        Handler.setScene(getClass(), "Add nurse", "/beta/blood/admin/AdminAddRecipient.fxml");
+        Handler.getWindow().setMaximized(true);
+    }    
+    
+    @FXML
     private void logout() throws IOException{
     int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out", "Logout", YES_NO_OPTION);
     if(result == JOptionPane.YES_OPTION){
         Handler.setScene(getClass(), "Beta Blood", "/beta/blood/auth/Login.fxml");
     }
-}
+    }    
+    
+    @FXML
+    private void changePassword() {
+        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/admin/AdminChangePassword.fxml");
+    }
+    
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

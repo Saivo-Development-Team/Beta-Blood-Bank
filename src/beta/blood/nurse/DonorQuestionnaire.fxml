@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Donor Questionnaire">
          <font>
@@ -14,5 +14,62 @@
          </font>
       </Label>
       <Separator layoutX="14.0" layoutY="54.0" prefHeight="0.0" prefWidth="569.0" />
+      <Label fx:id="q1" layoutX="14.0" layoutY="96.0" prefHeight="17.0" prefWidth="500.0" text="Do you consider your blood safe to be transfused to a patient?" />
+      <RadioButton fx:id="q1y" layoutX="14.0" layoutY="113.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q1n" layoutX="60.0" layoutY="113.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q2" layoutX="14.0" layoutY="139.0" prefHeight="17.0" prefWidth="500.0" text="Have you ever used recreational/street drugs by nose, mouth or injection needle?" wrapText="true" />
+      <RadioButton fx:id="q2y" layoutX="14.0" layoutY="154.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q2n" layoutX="60.0" layoutY="154.0" mnemonicParsing="false" text="No" />
+      <Label layoutX="14.0" layoutY="206.0" prefHeight="17.0" prefWidth="500.0" text="In the past 6 months have you;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="q3" layoutX="14.0" layoutY="231.0" prefHeight="17.0" prefWidth="500.0" text="Had a tattoo, body piercing or permanent makeup applied?" wrapText="true" />
+      <RadioButton fx:id="q3y" layoutX="14.0" layoutY="248.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q3n" layoutX="60.0" layoutY="248.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q4" layoutX="14.0" layoutY="273.0" prefHeight="17.0" prefWidth="500.0" text="Had raatib, ritual scarring, ritual piercing, ritual circumcision, blood sharing or been stabbed?" wrapText="true" />
+      <RadioButton fx:id="q4y" layoutX="14.0" layoutY="290.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q4n" layoutX="60.0" layoutY="290.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q5" layoutX="14.0" layoutY="314.0" prefHeight="17.0" prefWidth="500.0" text="Come into contact with another person's blood?" wrapText="true" />
+      <RadioButton fx:id="q5y" layoutX="14.0" layoutY="331.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q5n" layoutX="60.0" layoutY="331.0" mnemonicParsing="false" text="No" />
+      <Label layoutX="14.0" layoutY="394.0" prefHeight="17.0" prefWidth="500.0" text="Questions of a sexual nature">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="q6" layoutX="14.0" layoutY="425.0" prefHeight="17.0" prefWidth="500.0" text="Do you have AIDS or are you HIV positive?" wrapText="true" />
+      <RadioButton fx:id="q6y" layoutX="14.0" layoutY="442.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q6n" layoutX="60.0" layoutY="442.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q7" layoutX="14.0" layoutY="465.0" prefHeight="17.0" prefWidth="500.0" text="Have you ever had sexual contact with anyone who has AIDS or is HIV positive?" wrapText="true" />
+      <RadioButton fx:id="q7y" layoutX="14.0" layoutY="482.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q7n" layoutX="60.0" layoutY="482.0" mnemonicParsing="false" text="No" />
+      <Label layoutX="14.0" layoutY="544.0" prefHeight="17.0" prefWidth="500.0" text="Health questions">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="q8" layoutX="14.0" layoutY="583.0" prefHeight="17.0" prefWidth="500.0" text="Are you feeling well today?" />
+      <RadioButton fx:id="q8y" layoutX="14.0" layoutY="600.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q8n" layoutX="60.0" layoutY="600.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q9" layoutX="14.0" layoutY="628.0" prefHeight="17.0" prefWidth="500.0" text="In the past 4 hours have you had something to eat and drink?" wrapText="true" />
+      <RadioButton fx:id="q9y" layoutX="14.0" layoutY="645.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q9n" layoutX="60.0" layoutY="645.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q10" layoutX="14.0" layoutY="673.0" prefHeight="17.0" prefWidth="500.0" text="Have you taken any painkillers, anti-inflammatories or aspirin?" wrapText="true" />
+      <RadioButton fx:id="q10y" layoutX="14.0" layoutY="690.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q10n" layoutX="60.0" layoutY="690.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q11" layoutX="14.0" layoutY="717.0" prefHeight="17.0" prefWidth="500.0" text="Do you have any blood diseases or deficiencies you have or may have?" wrapText="true" />
+      <RadioButton fx:id="q11y" layoutX="14.0" layoutY="734.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q11n" layoutX="60.0" layoutY="734.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q12" layoutX="14.0" layoutY="763.0" prefHeight="17.0" prefWidth="500.0" text="Have you had malaria in  the past 3 years?" wrapText="true" />
+      <RadioButton fx:id="q12y" layoutX="14.0" layoutY="780.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q12n" layoutX="60.0" layoutY="780.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q13" layoutX="14.0" layoutY="809.0" prefHeight="17.0" prefWidth="500.0" text="Are you taking growth hormones?" wrapText="true" />
+      <RadioButton fx:id="q13y" layoutX="14.0" layoutY="826.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q13n" layoutX="60.0" layoutY="826.0" mnemonicParsing="false" text="No" />
+      <Label fx:id="q14" layoutX="14.0" layoutY="849.0" prefHeight="17.0" prefWidth="500.0" text="Have you ever injected or been injected with illegal steroids?" wrapText="true" />
+      <RadioButton fx:id="q14y" layoutX="14.0" layoutY="866.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="q14n" layoutX="60.0" layoutY="866.0" mnemonicParsing="false" text="No" />
    </children>
 </AnchorPane>
