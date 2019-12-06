@@ -3,29 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beta.blood;
+package beta.blood.nurse;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 /**
+ * FXML Controller class
  *
- * @author perso
+ * @author ethan
  */
-public class FXMLInterfaceController implements Initializable {
+public class NurseAddDonorController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
     
-    @FXML
-    private Label label;
     
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
