@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="794.0" prefWidth="1104.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
    <children>
       <Button layoutX="931.0" layoutY="22.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="151.0" text="Log out" textFill="RED">
          <font>
@@ -20,7 +20,7 @@
          </font>
       </Button>
       <Separator layoutX="14.0" layoutY="80.0" prefHeight="6.0" prefWidth="1075.0" />
-      <Button layoutX="611.0" layoutY="473.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="166.0" text="Verify Blood" textFill="RED">
+      <Button layoutX="611.0" layoutY="473.0" mnemonicParsing="false" onAction="#verifyBloodNavigation" prefHeight="59.0" prefWidth="166.0" text="Verify Blood" textFill="RED">
          <font>
             <Font size="18.0" />
          </font>
@@ -35,5 +35,6 @@
             <Image url="@../../../resources/sanbs.jpg" />
          </image>
       </ImageView>
+      <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
    </children>
 </AnchorPane>
