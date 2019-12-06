@@ -8,8 +8,11 @@ package beta.blood.admin;
 import beta.blood.Handler;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -18,6 +21,18 @@ import javafx.fxml.Initializable;
  */
 public class AdminAddUserController implements Initializable {
 
+     @FXML
+    ComboBox<String> branch;
+    
+    ObservableList<String> branches = FXCollections.observableArrayList(
+        "Cape Town",
+        "Durban",
+        "Johanessburg",
+        "Langebaan",
+        "Port Elizabeth",
+        "Pretoria");
+    
+    
     
     @FXML
     private void back() {
@@ -28,6 +43,7 @@ public class AdminAddUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        branch.setItems(branches);
     }    
     
 }
