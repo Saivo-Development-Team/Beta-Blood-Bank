@@ -23,7 +23,9 @@ public class AdminAddUserController implements Initializable {
 
      @FXML
     ComboBox<String> branch;
-    
+    ComboBox<String> employeeType;
+     
+     
     ObservableList<String> branches = FXCollections.observableArrayList(
         "Cape Town",
         "Durban",
@@ -31,6 +33,10 @@ public class AdminAddUserController implements Initializable {
         "Langebaan",
         "Port Elizabeth",
         "Pretoria");
+    ObservableList<String> types = FXCollections.observableArrayList(
+        "Nurse",
+        "Admin"
+        );
     
     
     
@@ -44,6 +50,7 @@ public class AdminAddUserController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         branch.setItems(branches);
+        employeeType.setItems(types);
     }    
     
 }
