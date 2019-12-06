@@ -26,14 +26,26 @@ public class AdminHomeController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private void adminAddNurseNavigation() {
-        Handler.setScene(getClass(), "Add nurse", "/beta/blood/admin/AdminAddNurse.fxml");
+    private void adminModifyRepos() {
+        Handler.setScene(getClass(), "Modify Repository", "AdminModifyRepos.fxml");
+        Handler.getWindow().setMaximized(true);
+    }
+    
+     @FXML
+    private void changeDetails() {
+        Handler.setScene(getClass(), "Change Details", "AdminChangeDetails.fxml");
         Handler.getWindow().setMaximized(true);
     }
     
     @FXML
-    private void adminAddRecipientNavigation() {
-        Handler.setScene(getClass(), "Add nurse", "/beta/blood/admin/AdminAddRecipient.fxml");
+    private void adminAddUser() {
+        Handler.setScene(getClass(), "Add User/recipient", "AdminAddUser.fxml");
+        Handler.getWindow().setMaximized(true);
+    }    
+    
+     @FXML
+    private void adminRequestReport() {
+        Handler.setScene(getClass(), "Report Request", "AdminRequestReport.fxml");
         Handler.getWindow().setMaximized(true);
     }    
     
@@ -45,10 +57,7 @@ public class AdminHomeController implements Initializable {
     }
     }    
     
-    @FXML
-    private void changePassword() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/admin/AdminChangePassword.fxml");
-    }
+   
     
     
     

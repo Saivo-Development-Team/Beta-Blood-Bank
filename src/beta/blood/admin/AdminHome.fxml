@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminHomeController">
    <children>
-      <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#logout" text="Log out" />
-      <Button layoutX="92.0" layoutY="159.0" mnemonicParsing="false" onAction="#adminAddNurseNavigation" text="Add nurse" />
-      <Button layoutX="339.0" layoutY="159.0" mnemonicParsing="false" onAction="#adminAddRecipientNavigation" text="Add recipient" />
-      <Button layoutX="111.0" layoutY="59.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
+      <Button layoutX="431.0" layoutY="361.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="160.0" text="Log out" />
+      <Button layoutX="175.0" layoutY="129.0" mnemonicParsing="false" onAction="#adminAddUser" onMouseClicked="#adminAddUser" prefHeight="25.0" prefWidth="251.0" text="Add new User/Recipient to the system" />
+      <Button layoutX="35.0" layoutY="361.0" mnemonicParsing="false" onAction="#changeDetails" onMouseClicked="#changeDetails" prefHeight="25.0" prefWidth="160.0" text="Change Account Details" />
+      <Button layoutX="174.0" layoutY="174.0" mnemonicParsing="false" onAction="#adminRequestReport" onMouseClicked="#adminRequestReport" prefHeight="25.0" prefWidth="251.0" text="Request System Report" />
+      <Button layoutX="174.0" layoutY="220.0" mnemonicParsing="false" onAction="#adminModifyRepos" onMouseClicked="#adminModifyRepos" prefHeight="25.0" prefWidth="251.0" text="Modify Repositories" />
+      <Label layoutX="73.0" layoutY="47.0" text="Admin Home" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
