@@ -5,6 +5,7 @@
  */
 package beta.blood.nurse;
 
+import beta.blood.Handler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -49,7 +50,7 @@ public class NurseAddDonorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //cant get scroll pane to show donor questionnaire without an error
-        //scrollpane.setContent(Handler.loadFxml(getClass(), "beta/blood/nurse/DonorQuestionnaire.fxml"));
+        scrollpane.setContent(Handler.loadFxml(getClass(), "DonorQuestionnaire.fxml"));
         combobox.setItems(options);
     }    
     
