@@ -5,8 +5,10 @@
  */
 package beta.blood.admin;
 
+import beta.blood.Handler;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -16,9 +18,13 @@ import javafx.fxml.Initializable;
  */
 public class AdminAddUserController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    
+    @FXML
+    private void back() {
+    Handler.setScene(getClass(), "Verify Blood", "/beta/blood/admin/AdminHome.fxml");
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

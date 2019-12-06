@@ -23,7 +23,7 @@ public class AdminChangeDetailsController implements Initializable {
      */
 @FXML
 private void back() {
-    Handler.setScene(getClass(), "Verify Blood", "/beta/blood/admin/AdminHome.fxml");
+    Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
 }
     
     @Override
