@@ -85,4 +85,21 @@ public class Employee {
         }
         return null;
     }
+
+    public static void insert(Employee employee) {
+
+        String query = String.format(
+                "insert into employee "
+                + "(employeeId,name,surname,telephoine,branch,password,position)"
+                + " values ('%s','%s','%s','%s','%s','%s','%d')",
+                employee.employeeId,
+                employee.name,
+                employee.surname,
+                employee.telephone,
+                employee.branch,
+                employee.password,
+                employee.position
+        );
+        DatabaseService.service().executeQuery(query);
+    }
 }

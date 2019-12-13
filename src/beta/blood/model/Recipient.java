@@ -10,8 +10,8 @@ package beta.blood.model;
  * @author Elsa
  */
 public class Recipient {
-    private int recipientID;
-    private String name, address, telephone, email;
+    private final int recipientID;
+    private final String name, address, telephone, email;
 
     public Recipient(int recipientID, String name, String address, String telephone, String email) {
         this.recipientID = recipientID;
@@ -40,6 +40,5 @@ public class Recipient {
     public String getEmail() {
         return email;
     }
-    
     
 }
