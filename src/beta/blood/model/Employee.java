@@ -64,7 +64,7 @@ public class Employee {
             String query = String.format(
                     "select * from employee where employeeId='%s'", employeeId
             );
-            ResultSet result = DatabaseService.service().executeQuery(query);
+            ResultSet result = DatabaseService.service().executeResultQuery(query);
 
             if (result.next()) {
                 return new Employee(
@@ -87,10 +87,9 @@ public class Employee {
     }
 
     public static void insert(Employee employee) {
-
         String query = String.format(
                 "insert into employee "
-                + "(employeeId,name,surname,telephoine,branch,password,position)"
+                + "(employeeId,name,surname,telephone,branch,password,position)"
                 + " values ('%s','%s','%s','%s','%s','%s','%d')",
                 employee.employeeId,
                 employee.name,
@@ -100,6 +99,6 @@ public class Employee {
                 employee.password,
                 employee.position
         );
-        DatabaseService.service().executeQuery(query);
+        DatabaseService.service().executeUpdateQuery(query);
     }
 }

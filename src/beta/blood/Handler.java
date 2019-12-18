@@ -8,8 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ *
+ * @author Ian Mubangizi
+ */
 public class Handler {
-    
+
     public static Parent loadFxml(Class<?> clazz, String path) {
         try {
             return FXMLLoader.load(clazz.getResource(path));

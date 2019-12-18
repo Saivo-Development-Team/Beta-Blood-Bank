@@ -5,11 +5,15 @@
  */
 package beta.blood.model;
 
+import beta.blood.database.DatabaseService;
+
 /**
  *
  * @author Elsa
  */
 public class Recipient {
+
+    public static int DEFAULT_ID = -1;
     private final int recipientID;
     private final String name, address, telephone, email;
 
@@ -40,5 +44,16 @@ public class Recipient {
     public String getEmail() {
         return email;
     }
-    
+
+    public static void insert(Recipient recipient) {
+        String query = String.format(
+                "insert into recipient (name,address,telephone,email) values "
+                + "('%s','%s','%s','%s')",
+                recipient.name,
+                recipient.address,
+                recipient.telephone,
+                recipient.email
+        );
+        DatabaseService.service().executeUpdateQuery(query);
+    }
 }
