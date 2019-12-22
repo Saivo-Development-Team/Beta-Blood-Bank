@@ -34,7 +34,6 @@ public class NurseHomeController implements Initializable {
     @FXML
     private void donorNavigation() {
         Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseAddDonor.fxml");
-        Handler.getWindow().setMaximized(true);
     }
 
     @FXML

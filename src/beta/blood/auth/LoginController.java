@@ -39,11 +39,9 @@ public class LoginController implements Initializable {
         switch (LoginService.checkDetails(number.getText(), password.getText())) {
             case 0:
                 Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
-                Handler.getWindow().setMaximized(true);
                 break;
             case 1:
                 Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-                Handler.getWindow().setMaximized(true);
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "UserName Or Password Invalid");

@@ -27,7 +27,6 @@ public class AdminHomeController implements Initializable {
     @FXML
     private void adminModifyRepos() {
         Handler.setScene(getClass(), "Modify Repository", "AdminModifyRepos.fxml");
-        Handler.getWindow().setMaximized(true);
     }
 
     @FXML
@@ -39,13 +38,11 @@ public class AdminHomeController implements Initializable {
     @FXML
     private void adminAddUser() {
         Handler.setScene(getClass(), "Add User/recipient", "AdminAddUser.fxml");
-        Handler.getWindow().setMaximized(true);
     }
 
     @FXML
     private void adminRequestReport() {
         Handler.setScene(getClass(), "Report Request", "AdminRequestReport.fxml");
-        Handler.getWindow().setMaximized(true);
     }
 
     @FXML

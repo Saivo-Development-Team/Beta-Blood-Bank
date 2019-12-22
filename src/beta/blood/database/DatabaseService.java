@@ -27,12 +27,11 @@ public class DatabaseService {
 
     private DatabaseService() {
         setService();
-        service = this;
     }
 
     public static DatabaseService service() {
         if (service == null) {
-            new DatabaseService();
+            service = new DatabaseService();
         }
         return service;
     }
