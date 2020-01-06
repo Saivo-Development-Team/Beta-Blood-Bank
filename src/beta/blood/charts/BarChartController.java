@@ -35,7 +35,7 @@ public class BarChartController implements Initializable {
     
     public void buildBarData() throws SQLException {
     String sql = "SELECT type, quantity FROM blood";
-    ResultSet rs = DatabaseService.service().executeQuery(sql);
+    ResultSet rs = DatabaseService.service().executeResultQuery(sql);
     
     XYChart.Series<String, Double> series = new XYChart.Series<>();
     

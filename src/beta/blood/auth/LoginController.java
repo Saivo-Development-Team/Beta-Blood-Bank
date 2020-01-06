@@ -22,7 +22,7 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 /**
  * FXML Controller class
  *
- * @author perso
+ * @author Ian Mubangizi
  */
 public class LoginController implements Initializable {
 

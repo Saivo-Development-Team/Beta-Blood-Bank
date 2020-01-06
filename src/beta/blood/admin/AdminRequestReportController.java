@@ -5,15 +5,9 @@
  */
 package beta.blood.admin;
 
-import beta.blood.Handler;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -22,13 +16,9 @@ import javafx.scene.control.ComboBox;
  */
 public class AdminRequestReportController implements Initializable {
 
-    /**
-     * initialises the controller class.
-     */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        // TODO
     }    
     
 }

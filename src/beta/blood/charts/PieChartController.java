@@ -35,7 +35,7 @@ public class PieChartController implements Initializable {
     
     public void buildPieData() throws SQLException{
         String sql = "SELECT type, quantity FROM blood";
-        ResultSet rs = DatabaseService.service().executeQuery(sql);
+        ResultSet rs = DatabaseService.service().executeResultQuery(sql);
     
         while(rs.next()) {
         data.add(new PieChart.Data(rs.getString("type"), rs.getDouble(2)));

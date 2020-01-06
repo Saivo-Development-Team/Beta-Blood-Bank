@@ -18,10 +18,10 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
 /**
  * FXML Controller class
  *
- * @author Admin
+ * @author Aaron
  */
 public class AdminHomeController implements Initializable {
-    
+
     @FXML
     Tab dash;
     @FXML
@@ -30,30 +30,35 @@ public class AdminHomeController implements Initializable {
     Tab sysrep;
     @FXML
     Tab modrep;
-    
+
     @FXML
     private void changeDetails() {
         Handler.setScene(getClass(), "Change Details", "AdminChangeDetails.fxml");
     }
-    
+
     @FXML
-    private void logout() throws IOException{
-    int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out", "Logout", YES_NO_OPTION);
-    if(result == JOptionPane.YES_OPTION){
-        Handler.setScene(getClass(), "Beta Blood", "/beta/blood/auth/Login.fxml");
+    private void adminModifyRepos() {
+        Handler.setScene(getClass(), "Modify Repository", "AdminModifyRepos.fxml");
     }
-    }
-    
+
     @FXML
-    private void goToGraph() {
-        Handler.setScene(getClass(), "Graph", "/beta/blood/charts/pieChart.fxml");
+    private void adminAddUser() {
+        Handler.setScene(getClass(), "Add User/recipient", "AdminAddUser.fxml");
     }
-    
+
     @FXML
-    private void goToGraph2() {
-        Handler.setScene(getClass(), "Graph", "/beta/blood/charts/barChart.fxml");
+    private void adminRequestReport() {
+        Handler.setScene(getClass(), "Report Request", "AdminRequestReport.fxml");
     }
-    
+
+    @FXML
+    private void logout() throws IOException {
+        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out", "Logout", YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            Handler.setScene(getClass(), "Beta Blood", "/beta/blood/auth/Login.fxml");
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -61,5 +66,6 @@ public class AdminHomeController implements Initializable {
         add.setContent(Handler.loadFxml(getClass(), "AdminAddUser.fxml"));
         sysrep.setContent(Handler.loadFxml(getClass(), "AdminRequestReport.fxml"));
         modrep.setContent(Handler.loadFxml(getClass(), "AdminModifyRepos.fxml"));
+
     }
 }

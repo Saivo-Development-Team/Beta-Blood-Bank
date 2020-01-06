@@ -15,7 +15,6 @@ public class Handler {
             return FXMLLoader.load(clazz.getResource(path));
         } catch (IOException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Exception is: " + ex);
         }
         return null;
     }
