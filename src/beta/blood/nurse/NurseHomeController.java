@@ -9,7 +9,6 @@ import beta.blood.Handler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -21,6 +20,8 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
  *
  * @author Admin
  */
+
+
 public class NurseHomeController implements Initializable {
     
     @FXML
@@ -34,14 +35,12 @@ public class NurseHomeController implements Initializable {
     @FXML
     private void donorNavigation() {
         Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseAddDonor.fxml");
-        Handler.getWindow().setMaximized(true);
     }
-    
+
     @FXML
     private void verifyBloodNavigation() {
         Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/VerifyBlood.fxml");
     }
-    
     @FXML
     private void changePassword() {
         Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseChangePassword.fxml");

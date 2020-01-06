@@ -27,12 +27,11 @@ public class DatabaseService {
 
     private DatabaseService() {
         setService();
-        service = this;
     }
 
     public static DatabaseService service() {
         if (service == null) {
-            new DatabaseService();
+            service = new DatabaseService();
         }
         return service;
     }
@@ -57,15 +56,24 @@ public class DatabaseService {
         }
         return this.statement;
     }
-    
-    public ResultSet executeQuery(String query) {
+
+    public ResultSet executeResultQuery(String query) {
         try {
-           return this.getStatement().executeQuery(query);
+            return this.getStatement().executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseService.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
         return null;
     }
-  
+
+    public int executeUpdateQuery(String query) {
+        try {
+            return this.getStatement().executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseService.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
 }

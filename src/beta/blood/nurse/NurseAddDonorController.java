@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleGroup;
 
 /**
  * FXML Controller class
@@ -38,20 +37,18 @@ public class NurseAddDonorController implements Initializable {
     RadioButton msex;
     @FXML
     RadioButton fsex;
-    
-    ObservableList<String> title = FXCollections.observableArrayList(
-        "MR",
-        "MS",
-        "MRS"
-            
-    );    
-    
-    
+
+    ObservableList<String> options = FXCollections.observableArrayList(
+            "MR",
+            "MS",
+            "MRS"
+    );
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //cant get scroll pane to show donor questionnaire without an error
         scrollpane.setContent(Handler.loadFxml(getClass(), "DonorQuestionnaire.fxml"));
-        combobox.setItems(title);
-    }    
-    
+        combobox.setItems(options);
+    }
+
 }
