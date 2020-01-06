@@ -37,7 +37,7 @@ public class DatabaseService {
         return service;
     }
 
-    private void setService() {
+    public void setService() {
         try {
             Class.forName(jdbc_driver);
             this.connection = DriverManager.getConnection(url, user, password);

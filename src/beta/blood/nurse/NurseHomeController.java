@@ -33,18 +33,18 @@ public class NurseHomeController implements Initializable {
 
     @FXML
     private void donorNavigation() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseAddDonor.fxml");
+        Handler.setScene(getClass(), "Verify Blood", "NurseAddDonor.fxml");
         Handler.getWindow().setMaximized(true);
     }
     
     @FXML
     private void verifyBloodNavigation() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/VerifyBlood.fxml");
+        Handler.setScene(getClass(), "Verify Blood", "VerifyBlood.fxml");
     }
     
     @FXML
     private void changePassword() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseChangePassword.fxml");
+        Handler.setScene(getClass(), "Verify Blood", "NurseChangePassword.fxml");
     }
 
     @Override

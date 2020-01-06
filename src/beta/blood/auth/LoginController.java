@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -51,10 +50,8 @@ public class LoginController implements Initializable {
             default:
                 break;
         }
-    }
-
-    public void changeScreenAdmin(ActionEvent event) throws IOException {
-
+        
+        
     }
 
     @FXML

@@ -9,9 +9,9 @@ import beta.blood.Handler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
@@ -21,33 +21,20 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
  * @author Admin
  */
 public class AdminHomeController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
-    @FXML
-    private void adminModifyRepos() {
-        Handler.setScene(getClass(), "Modify Repository", "AdminModifyRepos.fxml");
-        Handler.getWindow().setMaximized(true);
-    }
     
-     @FXML
+    @FXML
+    Tab dash;
+    @FXML
+    Tab add;
+    @FXML
+    Tab sysrep;
+    @FXML
+    Tab modrep;
+    
+    @FXML
     private void changeDetails() {
         Handler.setScene(getClass(), "Change Details", "AdminChangeDetails.fxml");
-        Handler.getWindow().setMaximized(true);
     }
-    
-    @FXML
-    private void adminAddUser() {
-        Handler.setScene(getClass(), "Add User/recipient", "AdminAddUser.fxml");
-        Handler.getWindow().setMaximized(true);
-    }    
-    
-     @FXML
-    private void adminRequestReport() {
-        Handler.setScene(getClass(), "Report Request", "AdminRequestReport.fxml");
-        Handler.getWindow().setMaximized(true);
-    }    
     
     @FXML
     private void logout() throws IOException{
@@ -55,16 +42,24 @@ public class AdminHomeController implements Initializable {
     if(result == JOptionPane.YES_OPTION){
         Handler.setScene(getClass(), "Beta Blood", "/beta/blood/auth/Login.fxml");
     }
-    }    
+    }
     
-   
+    @FXML
+    private void goToGraph() {
+        Handler.setScene(getClass(), "Graph", "/beta/blood/charts/pieChart.fxml");
+    }
     
-    
-    
+    @FXML
+    private void goToGraph2() {
+        Handler.setScene(getClass(), "Graph", "/beta/blood/charts/barChart.fxml");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
+        dash.setContent(Handler.loadFxml(getClass(), "/beta/blood/charts/chartHome.fxml"));
+        add.setContent(Handler.loadFxml(getClass(), "AdminAddUser.fxml"));
+        sysrep.setContent(Handler.loadFxml(getClass(), "AdminRequestReport.fxml"));
+        modrep.setContent(Handler.loadFxml(getClass(), "AdminModifyRepos.fxml"));
+    }
 }

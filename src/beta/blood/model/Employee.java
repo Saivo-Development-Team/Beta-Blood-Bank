@@ -1,4 +1,6 @@
 /*
+/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -62,7 +64,7 @@ public class Employee {
     public static Employee getById(String employeeId) {
         try {
             String query = String.format(
-                    "select * from employee where employeeId='%s'", employeeId
+                    "SELECT * FROM employee WHERE employeeId='%s'", employeeId
             );
             ResultSet result = DatabaseService.service().executeQuery(query);
 

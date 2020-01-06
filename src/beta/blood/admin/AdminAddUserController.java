@@ -13,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_CANCEL_OPTION;
 
 /**
  * FXML Controller class
@@ -32,7 +34,17 @@ public class AdminAddUserController implements Initializable {
         "Port Elizabeth",
         "Pretoria");
     
+    @FXML
+    private void addRec() {
+        JOptionPane.showConfirmDialog(null, "Are you sure all details are correct "
+                + "as they will now be added to the database?",null, YES_NO_CANCEL_OPTION);
+    }
     
+    @FXML
+    private void addEmp() {
+        JOptionPane.showConfirmDialog(null, "Are you sure all details are correct "
+                + "as they will now be added to the database?",null, YES_NO_CANCEL_OPTION);
+    }
     
     @FXML
     private void back() {

@@ -35,6 +35,6 @@
             <Image url="@../../../resources/sanbs.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
+      <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#changePassword" text="Change Account Details" />
    </children>
 </AnchorPane>
