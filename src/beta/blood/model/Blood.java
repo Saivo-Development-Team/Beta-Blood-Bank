@@ -48,5 +48,11 @@ public class Blood {
         return verifiedBy;
     }
     
-    
+    public static void insert(Blood blood){
+        String query = String.format("INSERT INTO `blood`(`BloodID`, `Quantity`, `Type`, `OfferedBy`, `VerifiedBy`) VALUES ('%d','%d','%d','%d','%d')",
+        blood.bloodID, blood.quantity, blood.type, blood.offeredBy, blood.verifiedBy);
+        
+         DatabaseService.service().executeUpdateQuery(query);
+    }
+           
 }
