@@ -201,5 +201,4 @@ public class AdminAddUserController implements Initializable {
         recipientPhone.setText("");
         recipientAddress.setText("");
     }
-
 }

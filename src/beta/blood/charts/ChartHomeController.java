@@ -3,34 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beta.blood.nurse;
+package beta.blood.charts;
 
-import beta.blood.Handler;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 
 /**
  * FXML Controller class
  *
- * @author Admin
+ * @author aaron
  */
-public class NurseChangePasswordController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+public class ChartHomeController implements Initializable {   
     
-@FXML
-private void back() {
-    
-    Handler.setScene(getClass(), "Verify Blood", "NurseHome.fxml");
-}    
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        
+        }
+        
 }

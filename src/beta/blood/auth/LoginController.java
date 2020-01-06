@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -39,9 +38,11 @@ public class LoginController implements Initializable {
         switch (LoginService.checkDetails(number.getText(), password.getText())) {
             case 0:
                 Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
+                Handler.getWindow().setMaximized(true);
                 break;
             case 1:
                 Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+                Handler.getWindow().setMaximized(true);
                 break;
             case 2:
                 JOptionPane.showMessageDialog(null, "UserName Or Password Invalid");
@@ -49,10 +50,8 @@ public class LoginController implements Initializable {
             default:
                 break;
         }
-    }
-
-    public void changeScreenAdmin(ActionEvent event) throws IOException {
-
+        
+        
     }
 
     @FXML

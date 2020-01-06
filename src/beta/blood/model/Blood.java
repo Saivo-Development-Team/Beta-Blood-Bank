@@ -5,6 +5,12 @@
  */
 package beta.blood.model;
 
+import beta.blood.database.DatabaseService;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Elsa
@@ -26,7 +32,7 @@ public class Blood {
         return bloodID;
     }
 
-    public int getQuantity() {
+    public int getQuantity(String type) {
         return quantity;
     }
 
