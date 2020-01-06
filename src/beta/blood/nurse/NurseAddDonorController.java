@@ -39,7 +39,7 @@ public class NurseAddDonorController implements Initializable {
     @FXML
     RadioButton fsex;
     
-    ObservableList<String> options = FXCollections.observableArrayList(
+    ObservableList<String> title = FXCollections.observableArrayList(
         "MR",
         "MS",
         "MRS"
@@ -51,7 +51,7 @@ public class NurseAddDonorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //cant get scroll pane to show donor questionnaire without an error
         scrollpane.setContent(Handler.loadFxml(getClass(), "DonorQuestionnaire.fxml"));
-        combobox.setItems(options);
+        combobox.setItems(title);
     }    
     
 }

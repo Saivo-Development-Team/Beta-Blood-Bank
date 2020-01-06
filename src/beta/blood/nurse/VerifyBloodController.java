@@ -7,21 +7,37 @@ package beta.blood.nurse;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 
-/**
- * FXML Controller class
- *
- * @author Admin
- */
+ 
+
+
 public class VerifyBloodController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    ComboBox<String> combobox;
+    
+    
+    ObservableList<String> types = FXCollections.observableArrayList(
+        "A+",
+        "A-",    
+        "B+",
+        "B-",
+        "AB+",
+        "AB-",
+        "O+",    
+        "O-"    
+    );
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      combobox.setItems(types);
     }    
     
 }
