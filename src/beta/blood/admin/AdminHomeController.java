@@ -56,6 +56,7 @@ public class AdminHomeController implements Initializable {
         int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out", "Logout", YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
             Handler.setScene(getClass(), "Beta Blood", "/beta/blood/auth/Login.fxml");
+            
         }
     }
 

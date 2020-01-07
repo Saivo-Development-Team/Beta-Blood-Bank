@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminChangeDetailsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminChangeDetailsController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Change Password" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -18,7 +18,7 @@
       <Button layoutX="507.0" layoutY="15.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="78.0" text="Back" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <AnchorPane layoutX="198.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="205.0" layoutY="8.0" prefWidth="230.0" text="Username" textFill="RED" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="205.6" />
+            <Label layoutX="205.0" layoutY="8.0" prefWidth="230.0" text="Employee ID" textFill="RED" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="205.6" />
             <Label layoutX="205.0" layoutY="55.0" prefWidth="230.0" text="Current Password" textFill="RED" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="205.6" />
             <Label layoutX="205.0" layoutY="101.0" prefWidth="230.0" text="New Password" textFill="RED" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="205.6" />
             <PasswordField layoutX="204.0" layoutY="25.0" prefWidth="230.0" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="205.6" />
