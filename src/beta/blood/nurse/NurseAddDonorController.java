@@ -51,4 +51,9 @@ public class NurseAddDonorController implements Initializable {
         combobox.setItems(options);
     }
 
+     @FXML
+    private void back() {
+        Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+    }
+    
 }

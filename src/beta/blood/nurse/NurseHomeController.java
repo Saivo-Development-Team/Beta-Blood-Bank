@@ -34,7 +34,7 @@ public class NurseHomeController implements Initializable {
 
     @FXML
     private void donorNavigation() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseAddDonor.fxml");
+        Handler.setScene(getClass(), "Add Donor", "/beta/blood/nurse/NurseAddDonor.fxml");
     }
 
     @FXML
@@ -43,7 +43,7 @@ public class NurseHomeController implements Initializable {
     }
     @FXML
     private void changePassword() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseChangePassword.fxml");
+        Handler.setScene(getClass(), "Change Password", "/beta/blood/nurse/NurseChangePassword.fxml");
     }
 
     @Override

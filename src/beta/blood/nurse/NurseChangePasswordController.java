@@ -24,7 +24,7 @@ public class NurseChangePasswordController implements Initializable {
     
 @FXML
 private void back() {
-    Handler.setScene(getClass(), "Verify Blood", "/beta/blood/nurse/NurseHome.fxml");
+    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
 }    
 
     @Override

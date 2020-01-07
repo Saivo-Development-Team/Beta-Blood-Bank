@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseAddDonorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseAddDonorController">
     <children>
         <TextField layoutX="236.0" layoutY="82.0" prefHeight="25.0" prefWidth="200.0" />
         <TextField layoutX="236.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" />
@@ -45,5 +45,6 @@
         <RadioButton fx:id="msex" layoutX="236.0" layoutY="309.0" mnemonicParsing="false" text="Male" />
         <RadioButton fx:id="fsex" layoutX="304.0" layoutY="309.0" mnemonicParsing="false" text="Female" />
         <Button fx:id="add" layoutX="476.0" layoutY="628.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="549.0" text="Add Donor" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="15.0" />
+      <Button layoutX="783.0" layoutY="23.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="80.0" text="Back" />
     </children>
 </AnchorPane>
