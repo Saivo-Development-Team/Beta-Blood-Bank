@@ -21,16 +21,14 @@ public class NurseChangePasswordController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
-@FXML
-private void back() {
-    
-    Handler.setScene(getClass(), "Verify Blood", "NurseHome.fxml");
-}    
+    @FXML
+    private void back() {
+        Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

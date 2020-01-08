@@ -20,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
 /**
  * FXML Controller class
@@ -65,6 +67,11 @@ public class AdminAddUserController implements Initializable {
                     "Pretoria"
             );
 
+    private final ObservableList<String> bloodList = FXCollections
+            .observableArrayList(
+                    "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"
+            );
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         employeeTypeComboBox.setItems(
@@ -75,7 +82,7 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void back() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/admin/AdminHome.fxml");
+        Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
     }
 
     @FXML
@@ -98,32 +105,39 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void addEmployee() {
-        if (isEmployeeFormCompleted()) {
-            Employee.insert(
-                    new Employee(
-                            employeeId,
-                            name,
-                            surname,
-                            telephone != null ? telephone : "",
-                            branch,
-                            password,
-                            position
-                    )
-            );
-            clearEmployeeForm();
+        int result = JOptionPane.showConfirmDialog(null, "Please ensure information is correct", "Alert", OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            if (isEmployeeFormCompleted()) {
+                Employee.insert(
+                        new Employee(
+                                employeeId,
+                                name,
+                                surname,
+                                telephone != null ? telephone : "",
+                                branch,
+                                password,
+                                position
+                        )
+                );
+                clearEmployeeForm();
+            }
         }
     }
 
     @FXML
     private void addRecipient() {
-        if (isRecipientFormCompleted()) {
-            Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
-                    getRecipientName(),
-                    getRecipientAddress(),
-                    getRecipientTelephone(),
-                    getRecipientEmail())
-            );
-            clearRecipientForm();
+        int result = JOptionPane.showConfirmDialog(null, "Please ensure information is correct", "Alert", OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+
+            if (isRecipientFormCompleted()) {
+                Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
+                        getRecipientName(),
+                        getRecipientAddress(),
+                        getRecipientTelephone(),
+                        getRecipientEmail())
+                );
+                clearRecipientForm();
+            }
         }
     }
 

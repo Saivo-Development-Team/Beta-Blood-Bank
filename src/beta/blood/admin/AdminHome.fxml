@@ -8,45 +8,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminHomeController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminHomeController">
 
    <children>
-      <Label layoutX="15.0" layoutY="24.0" prefHeight="44.0" prefWidth="359.0" text="Admin Home Page" textFill="RED">
+      <Label layoutX="15.0" layoutY="24.0" prefHeight="44.0" prefWidth="359.0" text="Admin Home Page" textFill="RED" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Separator layoutX="14.0" layoutY="83.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Button layoutX="431.0" layoutY="365.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="142.0" text="Log out" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Button layoutX="10.0" layoutY="364.0" mnemonicParsing="false" onAction="#changeDetails" onMouseClicked="#changeDetails" text="Change Account Details" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      <AnchorPane layoutY="121.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
+      <Separator layoutX="14.0" layoutY="83.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="55.0" />
+      <Button layoutX="431.0" layoutY="365.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="142.0" text="Log out" textFill="RED" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+      <Button layoutX="10.0" layoutY="364.0" mnemonicParsing="false" onAction="#changeDetails" onMouseClicked="#changeDetails" text="Change Account Details" textFill="RED" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" />
+      <AnchorPane layoutY="121.0" prefHeight="363.0" prefWidth="610.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="65.0">
          <children>
-            <TabPane layoutX="15.0" layoutY="136.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+            <TabPane layoutX="15.0" layoutY="136.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab fx:id="dash" text="Dashboard">
             <content>
-              <AnchorPane fx:id="dashanc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane fx:id="dashanc" />
             </content>
           </Tab>
           <Tab fx:id="add" text="Add new User/Recipient to the system">
             <content>
-              <AnchorPane fx:id="addanc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane fx:id="addanc" />
             </content>
           </Tab>
             <Tab fx:id="sysrep" text="System Report">
                <content>
-                  <AnchorPane fx:id="sysrepanc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane fx:id="sysrepanc" />
                </content>
             </Tab>
             <Tab fx:id="modrep" text="Modify Repositories">
                <content>
-                  <AnchorPane fx:id="modrepanc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane fx:id="modrepanc" />
                </content>
             </Tab>
         </tabs>
       </TabPane>
          </children>
       </AnchorPane>
-
    </children>
 </AnchorPane>
