@@ -27,31 +27,48 @@ public class NurseAddDonorController implements Initializable {
 
     @FXML
     ScrollPane scrollpane;
+
     @FXML
     ComboBox<String> combobox;
+
     @FXML
     Button add;
+
     @FXML
-    RadioButton msex;
+    RadioButton fsex, msex,
+            q1y, q1n,
+            q2y, q2n,
+            q3y, q3n,
+            q4y, q4n,
+            q5y, q5n,
+            q6y, q6n,
+            q7y, q7n,
+            q8y, q8n,
+            q9y, q9n,
+            q10y, q10n,
+            q11y, q11n,
+            q12y, q12n,
+            q13y, q13n,
+            q14y, q14n;
+
     @FXML
-    RadioButton fsex;
-    
+    RadioButton[] radios = {};
+
     ObservableList<String> options = FXCollections.observableArrayList(
-        "MR",
-        "MS",
-        "MRS"
-            
-    );    
-    
+            "MR",
+            "MS",
+            "MRS"
+    );
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //cant get scroll pane to show donor questionnaire without an error
         ToggleGroup toggle = new ToggleGroup();
         msex.setToggleGroup(toggle);
         fsex.setToggleGroup(toggle);
-        
+
         scrollpane.setContent(Handler.loadFxml(getClass(), "DonorQuestionnaire.fxml"));
         combobox.setItems(options);
-    }    
+    }
 
 }

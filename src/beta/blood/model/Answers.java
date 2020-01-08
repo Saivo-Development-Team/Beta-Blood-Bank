@@ -5,14 +5,16 @@
  */
 package beta.blood.model;
 
+import beta.blood.database.DatabaseService;
+
 /**
  *
  * @author Elsa
  */
 public class Answers {
 
-    private int answersId;
-    private String text;
+    private final int answersId;
+    private final String text;
 
     public Answers(int answersId, String text) {
         this.answersId = answersId;
@@ -26,6 +28,15 @@ public class Answers {
     public String getText() {
         return text;
     }
-    
-    
+
+    public static void insert(Answers answers) {
+        String query = String.format(
+                "INSERT INTO `answers`(`AnswersID`, `Answers`) "
+                + "VALUES ('%d','%s')",
+                answers.answersId,
+                answers.answersId);
+
+        DatabaseService.service().executeUpdateQuery(query);
+    }
+
 }

@@ -6,10 +6,6 @@
 package beta.blood.model;
 
 import beta.blood.database.DatabaseService;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,8 +13,8 @@ import java.util.logging.Logger;
  */
 public class Blood {
 
-    private int bloodID, quantity, offeredBy;
-    private String type, verifiedBy;
+    private final int bloodID, quantity, offeredBy;
+    private final String type, verifiedBy;
 
     public Blood(int bloodID, int quantity, int offeredBy, String type, String verifiedBy) {
         this.bloodID = bloodID;
@@ -47,6 +43,18 @@ public class Blood {
     public String getVerifiedBy() {
         return verifiedBy;
     }
-    
-    
+
+    public static void insert(Blood blood) {
+        String query = String.format(
+                "INSERT INTO `blood`(`BloodID`, `Quantity`, `Type`, `OfferedBy`, `VerifiedBy`)"
+                + " VALUES ('%d','%d','%s','%d','%s')",
+                blood.bloodID,
+                blood.quantity,
+                blood.type,
+                blood.offeredBy,
+                blood.verifiedBy);
+
+        DatabaseService.service().executeUpdateQuery(query);
+    }
+
 }

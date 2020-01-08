@@ -60,17 +60,17 @@ public class Donor {
 
     public static void insert(Donor donor) {
         String query = String.format(
-                "insert into donor "
-                + "(donorID,age,answers,name,surname,address,gender)"
-                + " values ('%s','%s','%s','%s','%s','%s','%s')",
+                "INSERT INTO `donor` "
+                + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`)"
+                + " VALUES ('%d','%s','%s','%s','%s','%d','%d')",
                 donor.donorID,
-                donor.age,
-                donor.answers,
                 donor.name,
                 donor.surname,
                 donor.address,
-                donor.gender
-        );
+                donor.gender,
+                donor.age,
+                donor.answers);
         DatabaseService.service().executeUpdateQuery(query);
+
     }
 }
