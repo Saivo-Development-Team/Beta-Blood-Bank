@@ -20,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
 /**
  * FXML Controller class
@@ -43,11 +45,11 @@ public class AdminAddUserController implements Initializable {
             employeeId;
 
     @FXML
-    TextField recipientName,
-            recipientEmail,
-            recipientPhone,
-            employeeNameTextField,
-            employeeSurnameTextField;
+    TextField   recipientName,
+                recipientEmail,
+                recipientPhone,
+                employeeNameTextField,
+                employeeSurnameTextField;
 
     @FXML
     TextArea recipientAddress;
@@ -64,6 +66,12 @@ public class AdminAddUserController implements Initializable {
                     "Port Elizabeth",
                     "Pretoria"
             );
+    
+    private final ObservableList<String> bloodList = FXCollections
+            .observableArrayList(
+                    "A+","A-","B+","B-","O+","O-","AB+","AB-"
+            );
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -98,8 +106,11 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void addEmployee() {
-        if (isEmployeeFormCompleted()) {
-            Employee.insert(
+        int result = JOptionPane.showConfirmDialog(null, "Please ensure information is correct", "Alert", OK_CANCEL_OPTION);
+        if(result == JOptionPane.OK_OPTION)
+        {
+            if (isEmployeeFormCompleted()) {
+                Employee.insert(
                     new Employee(
                             employeeId,
                             name,
@@ -109,21 +120,26 @@ public class AdminAddUserController implements Initializable {
                             password,
                             position
                     )
-            );
-            clearEmployeeForm();
+                );
+                clearEmployeeForm();
+            }
         }
     }
 
     @FXML
     private void addRecipient() {
-        if (isRecipientFormCompleted()) {
-            Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
+        int result = JOptionPane.showConfirmDialog(null, "Please ensure information is correct", "Alert", OK_CANCEL_OPTION);
+        if(result == JOptionPane.OK_OPTION) {
+            
+            if (isRecipientFormCompleted()) {
+                Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
                     getRecipientName(),
                     getRecipientAddress(),
                     getRecipientTelephone(),
                     getRecipientEmail())
-            );
-            clearRecipientForm();
+                );
+                clearRecipientForm();
+            }
         }
     }
 
@@ -201,5 +217,4 @@ public class AdminAddUserController implements Initializable {
         recipientPhone.setText("");
         recipientAddress.setText("");
     }
-
 }
