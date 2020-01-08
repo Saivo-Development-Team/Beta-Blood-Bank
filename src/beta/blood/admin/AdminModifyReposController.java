@@ -61,7 +61,20 @@ public class AdminModifyReposController implements Initializable {
     TableColumn<beta.blood.model.TableModel.nurseTable, String> col_branch_nu;
     
         
-    
+    //RECIPIENT CONTENT
+    @FXML
+    TableView<beta.blood.model.TableModel.recipientTable> recipienttable;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.recipientTable, String> col_id_rec;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.recipientTable, String> col_name_rec;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.recipientTable, String> col_address_rec;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.recipientTable, String> col_tel_rec;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.recipientTable, String> col_email_rec;
+        
     
     //Data for modrepo combo box of the admin and nurse
     private final ObservableList<String> branchList = FXCollections
@@ -88,7 +101,7 @@ public class AdminModifyReposController implements Initializable {
             );
     
     //Data for the recipient listview
-    private final ObservableList<String> recipientList = FXCollections
+    private final ObservableList<beta.blood.model.TableModel.recipientTable> recipientList = FXCollections
             .observableArrayList(
                     
             );
@@ -144,5 +157,26 @@ public class AdminModifyReposController implements Initializable {
         
             nursetable.setItems(nurseList);
         
+            
+            //RECIPIENT CONTENT
+            try {
+            ResultSet rs = DatabaseService.service().executeResultQuery("SELECT `RecipientID`, `Name`, `Address`, `Telephone`, `Email` FROM `recipient`");
+            
+                while(rs.next()) {
+                    recipientList.add(new beta.blood.model.TableModel.recipientTable(rs.getString("RecipientID"), rs.getString("Name"), 
+                            rs.getString("Address"), rs.getString("Telephone"), rs.getString("Email")));
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminModifyReposController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            col_id_rec.setCellValueFactory(new PropertyValueFactory<>("empid"));
+            col_name_rec.setCellValueFactory(new PropertyValueFactory<>("name"));
+            col_address_rec.setCellValueFactory(new PropertyValueFactory<>("address"));
+            col_tel_rec.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+            col_email_rec.setCellValueFactory(new PropertyValueFactory<>("email"));
+        
+            recipienttable.setItems(recipientList);
     }
 }
