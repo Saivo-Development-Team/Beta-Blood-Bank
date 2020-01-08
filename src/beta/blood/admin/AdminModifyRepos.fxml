@@ -7,11 +7,13 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -19,10 +21,17 @@
               <content>
                 <AnchorPane>
                      <children>
-                        <ListView layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="300.0" />
                         <Button layoutX="177.0" layoutY="363.0" mnemonicParsing="false" prefWidth="135.0" text="Delete" />
                         <Button layoutX="14.0" layoutY="363.0" mnemonicParsing="false" prefWidth="135.0" text="Change branch" />
                         <ComboBox fx:id="modadmcombo" layoutX="14.0" layoutY="324.0" prefWidth="135.0" />
+                        <TableView fx:id="admintable" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="600.0">
+                          <columns>
+                            <TableColumn fx:id="col_id_ad" prefWidth="150.0" text="EmployeeID" />
+                            <TableColumn fx:id="col_name_ad" prefWidth="150.0" text="Name" />
+                              <TableColumn fx:id="col_surname_ad" prefWidth="150.0" text="Surname" />
+                              <TableColumn fx:id="col_branch_ad" prefWidth="150.0" text="Branch" />
+                          </columns>
+                        </TableView>
                      </children>
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -34,10 +43,17 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <ListView layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="300.0" />
                         <Button layoutX="14.0" layoutY="363.0" mnemonicParsing="false" prefWidth="135.0" text="Change branch" />
                         <Button layoutX="177.0" layoutY="363.0" mnemonicParsing="false" prefWidth="135.0" text="Delete" />
                         <ComboBox fx:id="modnurcombo" layoutX="14.0" layoutY="324.0" prefWidth="135.0" />
+                        <TableView fx:id="nursetable" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="600.0">
+                          <columns>
+                            <TableColumn fx:id="col_id_nu" prefWidth="150.0" text="EmployeeID" />
+                            <TableColumn fx:id="col_name_nu" prefWidth="150.0" text="Name" />
+                              <TableColumn fx:id="col_surname_nu" prefWidth="150.0" text="Surname" />
+                              <TableColumn fx:id="col_branch_nu" prefWidth="150.0" text="Branch" />
+                          </columns>
+                        </TableView>
                      </children>
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -48,7 +64,7 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <ListView layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="300.0" />
+                        <ListView fx:id="recipientlist" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="300.0" />
                         <TextField layoutX="330.0" layoutY="15.0" prefHeight="26.0" prefWidth="200.0" />
                         <TextField layoutX="330.0" layoutY="65.0" prefHeight="26.0" prefWidth="200.0" />
                         <TextArea layoutX="330.0" layoutY="110.0" prefHeight="103.0" prefWidth="200.0" />
