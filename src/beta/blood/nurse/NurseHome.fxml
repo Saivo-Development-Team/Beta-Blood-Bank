@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
    <children>
 
       <Button layoutX="476.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
@@ -18,7 +18,6 @@
             <Font size="18.0" />
          </font>
       </Label>
-
       <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
       <AnchorPane layoutX="20.0" layoutY="51.0" prefHeight="389.0" prefWidth="620.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
          <children>

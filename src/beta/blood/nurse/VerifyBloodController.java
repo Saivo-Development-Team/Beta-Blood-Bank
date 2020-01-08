@@ -5,9 +5,14 @@
  */
 package beta.blood.nurse;
 
+import beta.blood.Handler;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -16,9 +21,21 @@ import javafx.fxml.Initializable;
  */
 public class VerifyBloodController implements Initializable {
 
+    @FXML
+    ComboBox<String> BloodTypes;
+
+    ObservableList<String> BloodType = FXCollections.observableArrayList(
+            "A+", "B+", "A-", "B-", "AB+", "AB-", "O+", "O-"
+    );
+
+    @FXML
+    private void back() {
+        Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        BloodTypes.setItems(BloodType);
+    }
+
 }

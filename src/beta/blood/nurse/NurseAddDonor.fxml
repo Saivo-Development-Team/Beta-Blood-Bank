@@ -45,5 +45,6 @@
         <RadioButton fx:id="msex" layoutX="236.0" layoutY="309.0" mnemonicParsing="false" text="Male" />
         <RadioButton fx:id="fsex" layoutX="304.0" layoutY="309.0" mnemonicParsing="false" text="Female" />
         <Button fx:id="add" layoutX="476.0" layoutY="628.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="549.0" text="Add Donor" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="15.0" />
+      <Button layoutX="783.0" layoutY="23.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="80.0" text="Back" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
     </children>
 </AnchorPane>
