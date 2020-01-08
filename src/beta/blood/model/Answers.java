@@ -28,13 +28,15 @@ public class Answers {
     public String getText() {
         return text;
     }
-     
-    public static void insert(Answers answers){
-        String query = String.format("INSERT INTO `answers`(`AnswersID`, `Answers`) VALUES ('%d','%s')",
+
+    public static void insert(Answers answers) {
+        String query = String.format(
+                "INSERT INTO `answers`(`AnswersID`, `Answers`) "
+                + "VALUES ('%d','%s')",
                 answers.answersId,
                 answers.answersId);
-                
-               DatabaseService.service().executeUpdateQuery(query); 
+
+        DatabaseService.service().executeUpdateQuery(query);
     }
-    
+
 }

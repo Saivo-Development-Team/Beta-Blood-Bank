@@ -27,11 +27,13 @@ public class Request {
     public int getOrderId() {
         return orderId;
     }
-    public static void insert(Request request){
-        String query = String.format("INSERT INTO `request`(`BloodID`, `OrderID`) VALUES ('%d','%d')",
+
+    public static void insert(Request request) {
+        String query = String.format(
+                "INSERT INTO `request`(`BloodID`, `OrderID`) VALUES ('%d','%d')",
                 request.bloodId,
                 request.orderId);
-         DatabaseService.service().executeUpdateQuery(query); 
+        DatabaseService.service().executeUpdateQuery(query);
     }
-    
+
 }

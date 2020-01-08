@@ -41,13 +41,17 @@ public class Order {
     public String getProcessedBy() {
         return processedBy;
     }
-    public static void insert(Order order){
-        String query = String.format("INSERT INTO `order` (`OrderID`, `Date`, `ProcessedBy`, `OrderedBy`) VALUES ('%d','%d','%s','%d')",
+
+    public static void insert(Order order) {
+        String query = String.format(
+                "INSERT INTO `order` "
+                + "(`OrderID`, `Date`, `ProcessedBy`, `OrderedBy`) "
+                + "VALUES ('%d','%d','%s','%d')",
                 order.orderId,
                 order.date,
                 order.processedBy,
                 order.orderedBy);
-        DatabaseService.service().executeUpdateQuery(query); 
+        DatabaseService.service().executeUpdateQuery(query);
     }
-   
+
 }

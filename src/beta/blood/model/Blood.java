@@ -7,10 +7,6 @@ package beta.blood.model;
 
 import beta.blood.database.DatabaseService;
 
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Elsa
@@ -47,16 +43,18 @@ public class Blood {
     public String getVerifiedBy() {
         return verifiedBy;
     }
-    
-    public static void insert(Blood blood){
-        String query = String.format("INSERT INTO `blood`(`BloodID`, `Quantity`, `Type`, `OfferedBy`, `VerifiedBy`) VALUES ('%d','%d','%s','%d','%s')",
-        blood.bloodID, 
-        blood.quantity, 
-        blood.type, 
-        blood.offeredBy,
-        blood.verifiedBy);
-        
-         DatabaseService.service().executeUpdateQuery(query);
+
+    public static void insert(Blood blood) {
+        String query = String.format(
+                "INSERT INTO `blood`(`BloodID`, `Quantity`, `Type`, `OfferedBy`, `VerifiedBy`)"
+                + " VALUES ('%d','%d','%s','%d','%s')",
+                blood.bloodID,
+                blood.quantity,
+                blood.type,
+                blood.offeredBy,
+                blood.verifiedBy);
+
+        DatabaseService.service().executeUpdateQuery(query);
     }
-           
+
 }
