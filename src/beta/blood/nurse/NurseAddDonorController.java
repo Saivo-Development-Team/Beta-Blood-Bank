@@ -60,6 +60,11 @@ public class NurseAddDonorController implements Initializable {
             "MRS"
     );
 
+    @FXML
+    private void back() {
+        Handler.setScene(getClass(), "Nurse Home", "NurseHome.fxml");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //cant get scroll pane to show donor questionnaire without an error
