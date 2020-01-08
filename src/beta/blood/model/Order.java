@@ -5,6 +5,7 @@
  */
 package beta.blood.model;
 
+import beta.blood.database.DatabaseService;
 import java.sql.Date;
 
 /**
@@ -13,9 +14,10 @@ import java.sql.Date;
  */
 public class Order {
 
-    private int orderId, orderedBy;
-    private Date date;
-    private String processedBy;
+    private final int orderId;
+    private final int orderedBy;
+    private final Date date;
+    private final String processedBy;
 
     public Order(int orderId, int orderedBy, Date date, String processedBy) {
         this.orderId = orderId;
@@ -39,6 +41,13 @@ public class Order {
     public String getProcessedBy() {
         return processedBy;
     }
-    
+    public static void insert(Order order){
+        String query = String.format("INSERT INTO `order` (`OrderID`, `Date`, `ProcessedBy`, `OrderedBy`) VALUES ('%d','%d','%s','%d')",
+                order.orderId,
+                order.date,
+                order.processedBy,
+                order.orderedBy);
+        DatabaseService.service().executeUpdateQuery(query); 
+    }
    
 }

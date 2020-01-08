@@ -5,13 +5,15 @@
  */
 package beta.blood.model;
 
+import beta.blood.database.DatabaseService;
+
 /**
  *
  * @author Elsa
  */
 public class Request {
 
-    private int bloodId, orderId;
+    private final int bloodId, orderId;
 
     public Request(int bloodId, int orderId) {
         this.bloodId = bloodId;
@@ -25,6 +27,11 @@ public class Request {
     public int getOrderId() {
         return orderId;
     }
-    
+    public static void insert(Request request){
+        String query = String.format("INSERT INTO `request`(`BloodID`, `OrderID`) VALUES ('%d','%d')",
+                request.bloodId,
+                request.orderId);
+         DatabaseService.service().executeUpdateQuery(query); 
+    }
     
 }

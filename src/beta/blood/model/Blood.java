@@ -6,8 +6,8 @@
 package beta.blood.model;
 
 import beta.blood.database.DatabaseService;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  */
 public class Blood {
 
-    private int bloodID, quantity, offeredBy;
-    private String type, verifiedBy;
+    private final int bloodID, quantity, offeredBy;
+    private final String type, verifiedBy;
 
     public Blood(int bloodID, int quantity, int offeredBy, String type, String verifiedBy) {
         this.bloodID = bloodID;
