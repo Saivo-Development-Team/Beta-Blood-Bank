@@ -58,6 +58,14 @@ public class Employee {
     public int getPosition() {
         return position;
     }
+    
+    public static String getEmployee() {
+        
+        String query = ("SELECT employeeID FROM employee");
+        ResultSet result = DatabaseService.service().executeResultQuery(query);
+           
+        return null;
+    }
 
     private static Employee resultToEmployee(ResultSet result) {
         try {
@@ -106,8 +114,7 @@ public class Employee {
 
     public static void insert(Employee employee) {
         String query = String.format(
-                "insert into employee "
-                + "(employeeId,name,surname,telephone,branch,password,position)"
+                "INSERT INTO `employee`(`EmployeeID`, `Name`, `Surname`, `Telephone`, `Branch`, `Position`, `Password`)"
                 + " values ('%s','%s','%s','%s','%s','%s','%d')",
                 employee.employeeId,
                 employee.name,
@@ -118,5 +125,15 @@ public class Employee {
                 employee.position
         );
         DatabaseService.service().executeUpdateQuery(query);
+    }
+    public static void delete(int employeeID){
+        String query = String.format(
+                "DELETE FROM `employee` WHERE `EmployeeID` = %d " , employeeID);
+    }
+    public static void update(int employeeID){
+        String query = String.format(
+              "UPDATE `employee` SET `EmployeeID`=%d,`Name`=%s,`Surname`=%s,`Telephone`=%d,`Branch`=%s,`Position`=%s,`Password`=%d WHERE `EmployeeID`= %d",employeeID);
+                
+                DatabaseService.service().executeUpdateQuery(query);
     }
 }

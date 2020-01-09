@@ -38,5 +38,15 @@ public class Answers {
 
         DatabaseService.service().executeUpdateQuery(query);
     }
-
+public static void delete(int answersID){
+    String query = String.format(
+            "DELETE FROM `answers` WHERE `AnswersID` = %d ", answersID);
+    DatabaseService.service().executeUpdateQuery(query);
+}
+public static void update(int answersID){
+    String query = String.format(
+           "UPDATE `answers` SET `AnswersID`=[value-1],`Answers`=[value-2] WHERE `AnswersID`= %d", answersID);
+     
+            DatabaseService.service().executeUpdateQuery(query);
+}
 }

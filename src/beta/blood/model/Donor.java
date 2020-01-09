@@ -73,4 +73,19 @@ public class Donor {
         DatabaseService.service().executeUpdateQuery(query);
 
     }
+
+    public static void delete(int donorID) {
+        String query = String.format(
+                "DELETE FROM `donor` WHERE `DonorID` = %d", donorID);
+
+        DatabaseService.service().executeUpdateQuery(query);
+
+    }
+    public static void update( int donorID){
+        String query = String.format(
+             "UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d WHERE `DonorID` = %d",donorID);  
+                
+           DatabaseService.service().executeUpdateQuery(query);       
+        
+    }
 }
