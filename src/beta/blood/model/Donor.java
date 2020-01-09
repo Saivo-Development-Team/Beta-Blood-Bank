@@ -5,12 +5,13 @@
  */
 package beta.blood.model;
 
+import beta.blood.database.DatabaseService;
+
 /**
  *
  * @author Elsa
  */
 public class Donor {
-    
 
     private final int donorID, age, answers;
     private final String name, surname, address, gender;
@@ -24,9 +25,9 @@ public class Donor {
         this.address = address;
         this.gender = gender;
     }
-    
-    public static void insert(){
-        
+
+    public static void insert() {
+
     }
 
     public int getDonorID() {
@@ -56,4 +57,14 @@ public class Donor {
     public String getGender() {
         return gender;
     }
+
+    public static void insert(Donor donor) {
+        String query = String.format("INSERT INTO `donor` (`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`) VALUES ('%d','%s','%s','%s','%s','%d','%d')", 
+                donor.donorID, donor.name, donor.surname, donor.address,
+                
+                donor.gender, donor.age, donor.answers);
+        DatabaseService.service().executeUpdateQuery(query);
+
+    }
+
 }
