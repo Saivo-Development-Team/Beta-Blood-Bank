@@ -67,7 +67,7 @@ private void back() {
       
       //DONOR CONTENT            
             try {
-            ResultSet rs = DatabaseService.service().executeResultQuery("SELECT Name, Surname, DonorID FROM `donor`");
+            ResultSet rs = DatabaseService.service().executeResultQuery("SELECT Name, Surname, DonorID FROM `donor` ");
             
                 while(rs.next()) {
                     donorList.add(new beta.blood.model.TableModel.donorTable(rs.getString("Name"), rs.getString("Surname"), 
