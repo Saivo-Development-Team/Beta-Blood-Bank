@@ -58,6 +58,14 @@ public class Employee {
     public int getPosition() {
         return position;
     }
+    
+    public static String getEmployee() {
+        
+        String query = ("SELECT employeeID FROM employee");
+        ResultSet result = DatabaseService.service().executeResultQuery(query);
+           
+        return null;
+    }
 
     public static Employee getById(String employeeId) {
         try {
