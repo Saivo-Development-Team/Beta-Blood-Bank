@@ -53,5 +53,16 @@ public class Order {
                 order.orderedBy);
         DatabaseService.service().executeUpdateQuery(query);
     }
-
+public static void delete(int orderID){
+    String query = String.format(
+            "DELETE FROM `order` WHERE `OrderID` = %d ", orderID);
+    
+    DatabaseService.service().executeUpdateQuery(query);
+}
+public static void update(int orderID){
+    String query = String.format(
+            "UPDATE `order` SET `OrderID`= %d,`Date`= %d,`ProcessedBy`= %s,`OrderedBy`= %d WHERE `OrderID`= %d",orderID);
+            
+             DatabaseService.service().executeUpdateQuery(query);
+}
 }

@@ -47,7 +47,7 @@ public class Recipient {
 
     public static void insert(Recipient recipient) {
         String query = String.format(
-                "insert into recipient (name,address,telephone,email) values "
+                "INSERT INTO `recipient`(`RecipientID`, `Name`, `Address`, `Telephone`, `Email`)"
                 + "('%s','%s','%s','%s')",
                 recipient.name,
                 recipient.address,
@@ -56,4 +56,17 @@ public class Recipient {
         );
         DatabaseService.service().executeUpdateQuery(query);
     }
+    public static void delete(int recipientID){
+        String query = String.format(
+                "DELETE FROM `recipient` WHERE `RecipientID` = %d ", recipientID);
+         DatabaseService.service().executeUpdateQuery(query);
+    }
+    public static void update( int recipientID){
+        String query = String.format(
+                "UPDATE `recipient` SET `RecipientID`=%d,`Name`= %s,`Address`=%s,"
+                        + "`Telephone`=%d,`Email`=%s WHERE `RecipientID`= %d", recipientID);
+                
+           DatabaseService.service().executeUpdateQuery(query);     
+        
+    } 
 }

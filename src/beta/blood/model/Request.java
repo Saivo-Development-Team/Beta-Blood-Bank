@@ -35,5 +35,15 @@ public class Request {
                 request.orderId);
         DatabaseService.service().executeUpdateQuery(query);
     }
-
+public static void delete(int bloodID, int orderID){
+    String query = String.format(
+            "DELETE FROM `request` WHERE `BloodID`= %d AND `OrderID`= %d",bloodID,orderID);
+    DatabaseService.service().executeUpdateQuery(query);
+}
+public static void update(int bloodID, int orderID){
+    String query = String.format(
+            "UPDATE `request` SET `BloodID`=%d,`OrderID`=%d WHERE `BloodID`= %d AND `OrderID`= %d",bloodID,orderID);
+            
+      DatabaseService.service().executeUpdateQuery(query);      
+}
 }

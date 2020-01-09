@@ -57,4 +57,16 @@ public class Blood {
         DatabaseService.service().executeUpdateQuery(query);
     }
 
+    public static void delete(int bloodId) {
+        String query = String.format(
+                "DELETE FROM `blood` WHERE `BloodID` = %d", bloodId);
+        
+        DatabaseService.service().executeUpdateQuery(query);
+    }
+    public static void update(int bloodID){
+        String query = String.format(
+                "UPDATE `blood` SET `BloodID`=%d`Quantity`=%d,`Type`=%s,`OfferedBy`=%d,`VerifiedBy`=%s WHERE `BloodID= %d", bloodID);
+                        
+                        DatabaseService.service().executeUpdateQuery(query);
+    }
 }
