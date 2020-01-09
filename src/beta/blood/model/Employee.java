@@ -5,12 +5,12 @@
  */
 package beta.blood.model;
 
-import beta.blood.auth.LoginService;
 import beta.blood.database.DatabaseService;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 /**
  *
@@ -59,13 +59,8 @@ public class Employee {
         return position;
     }
 
-    public static Employee getById(String employeeId) {
+    private static Employee resultToEmployee(ResultSet result) {
         try {
-            String query = String.format(
-                    "select * from employee where employeeId='%s'", employeeId
-            );
-            ResultSet result = DatabaseService.service().executeResultQuery(query);
-
             if (result.next()) {
                 return new Employee(
                         result.getString("EmployeeId"),
@@ -77,13 +72,36 @@ public class Employee {
                         result.getInt("Position")
                 );
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(
-                    LoginService.class.getName()).log(Level.SEVERE, null, ex
-            );
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    private static ArrayList<Employee> resultToEmployees(ResultSet result) {
+        ArrayList<Employee> employees = new ArrayList();
+        try {
+            while (!result.isAfterLast()) {
+                employees.add(resultToEmployee(result));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return employees;
+    }
+
+    public static Employee getById(String employeeId) {
+        String query = String.format(
+                "select * from employee where employeeId='%s'", employeeId
+        );
+        ResultSet result = DatabaseService.service().executeResultQuery(query);
+        return resultToEmployee(result);
+    }
+
+    public static ArrayList<Employee> getAll() {
+        String query = "select * from employee";
+        ResultSet result = DatabaseService.service().executeResultQuery(query);
+        return resultToEmployees(result);
     }
 
     public static void insert(Employee employee) {
