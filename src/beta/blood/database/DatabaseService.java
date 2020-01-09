@@ -17,6 +17,7 @@ public class DatabaseService {
 
     private Statement statement;
     private Connection connection;
+    private PreparedStatement preparedStatement;
 
     private final String user = "root";
     private final String password = "";
@@ -56,7 +57,7 @@ public class DatabaseService {
         }
         return this.statement;
     }
-
+    
     public ResultSet executeResultQuery(String query) {
         try {
             return this.getStatement().executeQuery(query);
@@ -76,4 +77,5 @@ public class DatabaseService {
         }
         return -1;
     }
+    
 }
