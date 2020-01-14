@@ -6,13 +6,8 @@
 package beta.blood.charts;
 
 import beta.blood.Handler;
-import beta.blood.database.DatabaseService;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,15 +28,15 @@ public class PieChartController implements Initializable {
     PieChart pieChart;
     ObservableList data = FXCollections.observableArrayList();
     
-    public void buildPieData() throws SQLException{
-        String sql = "SELECT type, quantity FROM blood";
-        ResultSet rs = DatabaseService.service().executeResultQuery(sql);
-    
-        while(rs.next()) {
-        data.add(new PieChart.Data(rs.getString("type"), rs.getDouble(2)));
-        
-        }
-    }
+//    public void buildPieData() throws SQLException{
+//        String sql = "SELECT type, quantity FROM blood";
+//        ResultSet rs = DatabaseService.service().executeResultQuery(sql);
+//    
+//        while(rs.next()) {
+//        data.add(new PieChart.Data(rs.getString("type"), rs.getDouble(2)));
+//        
+//        }
+//    }
     
     @FXML
     public void back() {
@@ -50,11 +45,11 @@ public class PieChartController implements Initializable {
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            buildPieData();
-        } catch (SQLException ex) {
-            Logger.getLogger(PieChartController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            buildPieData();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(PieChartController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         pieChart.getData().addAll(data);
     }    

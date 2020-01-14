@@ -5,7 +5,16 @@
  */
 package beta.blood.model;
 
+import beta.blood.Handler;
 import beta.blood.database.DatabaseService;
+import static beta.blood.database.DatabaseService.service;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import beta.blood.Handler.Function;
+import beta.blood.Handler.QueryType;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,11 +22,13 @@ import beta.blood.database.DatabaseService;
  */
 public class Donor {
 
-    private final int donorID, age, answers;
-    private final String name, surname, address, gender;
+    private final Long donorId;
+    private final int age, answers;
+    private final String name, surname, address;
+    char gender;
 
-    public Donor(int donorID, int age, int answers, String name, String surname, String address, String gender) {
-        this.donorID = donorID;
+    public Donor(Long donorID, int age, int answers, String name, String surname, String address, char gender) {
+        this.donorId = donorID;
         this.age = age;
         this.answers = answers;
         this.name = name;
@@ -26,12 +37,8 @@ public class Donor {
         this.gender = gender;
     }
 
-    public static void insert() {
-
-    }
-
-    public int getDonorID() {
-        return donorID;
+    public Long getDonorID() {
+        return donorId;
     }
 
     public int getAge() {
@@ -54,38 +61,96 @@ public class Donor {
         return address;
     }
 
-    public String getGender() {
+    public char getGender() {
         return gender;
     }
 
-    public static void insert(Donor donor) {
+    private static Donor resultToDonor(ResultSet result) {
+        try {
+            if (result.next()) {
+                return new Donor(
+                        result.getLong("DonorID"),
+                        result.getInt("Age"),
+                        result.getInt("Answers"),
+                        result.getString("Name"),
+                        result.getString("Surname"),
+                        result.getString("Address"),
+                        result.getString("Gender").charAt(0)
+                );
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Answers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    private static ArrayList<Donor> resultToDonors(ResultSet result) {
+        ArrayList<Donor> donors = new ArrayList();
+        try {
+            while (!result.isAfterLast()) {
+                donors.add(resultToDonor(result));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return donors;
+    }
+
+    public static void getById(Long donorId, Function<Donor> function) {
         String query = String.format(
-                "INSERT INTO `donor` "
+                "SELECT * FROM `donor` WHERE `DonorID` = %d", donorId
+        );
+        service().executeResultQuery(query, (result) -> {
+            function.cb(resultToDonor(result));
+        });
+    }
+
+    public static void getAll(Function<ArrayList<Donor>> function) {
+        String query = "SELECT * FROM `donor`";
+        service().executeResultQuery(query, (result) -> {
+            function.cb(resultToDonors(result));
+        });
+    }
+
+    public static void getByQuery(String query, QueryType type, Function function) {
+        service().executeQuery(query, type, (result) -> {
+            function.cb(result);
+        });
+    }
+
+    public static void getLastInserted(Function<Donor> function) {
+        String query = String.format(
+                "SELECT * FROM `donor` ORDER BY `DonorID` DESC LIMIT 1"
+        );
+        service().executeResultQuery(query, (Function<ResultSet>) (result) -> {
+            function.cb(resultToDonor(result));
+        });
+    }
+
+    public static void insert(Donor donor) {
+        String query = String.format("INSERT INTO `donor` "
                 + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`)"
                 + " VALUES ('%d','%s','%s','%s','%s','%d','%d')",
-                donor.donorID,
+                donor.donorId,
                 donor.name,
                 donor.surname,
                 donor.address,
                 donor.gender,
                 donor.age,
                 donor.answers);
-        DatabaseService.service().executeUpdateQuery(query);
-
+        service().executeUpdateQuery(query, null);
     }
 
     public static void delete(int donorID) {
         String query = String.format(
-                "DELETE FROM `donor` WHERE `DonorID` = %d", donorID);
-
-        DatabaseService.service().executeUpdateQuery(query);
-
+                "DELETE FROM `donor` WHERE `DonorID` = %d", donorID
+        );
+        service().executeUpdateQuery(query, null);
     }
-    public static void update( int donorID){
-        String query = String.format(
-             "UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d WHERE `DonorID` = %d",donorID);  
-                
-           DatabaseService.service().executeUpdateQuery(query);       
-        
+
+    public static void update(int donorId, Donor donor) {
+        String query = String.format("UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d WHERE `DonorID` = %d", donorId);
+        service().executeUpdateQuery(query, null);
     }
 }
