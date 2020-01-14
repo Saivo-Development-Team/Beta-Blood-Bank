@@ -21,13 +21,14 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
 public class NurseChangePasswordController implements Initializable {
  @FXML
-    TextField curpass;
+    TextField currpass;
     @FXML
     TextField newpass;
     
     
     String employeeID = LoginService.getLoggedInUser().getEmployeeId();
     String password;
+    String currentpass = LoginService.getLoggedInUser().getPassword();
     
     
 @FXML
@@ -39,18 +40,26 @@ private void back() {
     private void change() {
     int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to change your password?", "Alert", OK_CANCEL_OPTION);
         if(result == JOptionPane.OK_OPTION)
-        {
-            if (isPasswordChangeCompleted()) {
+        {   if(currpass.getText().equals(currentpass))
+            {   if(isPasswordChangeCompleted()) 
+                {
                 Employee.update(employeeID ,newpass.getText());
-               JOptionPane.showMessageDialog(null, "Password Changed");
-             }
-            Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-            Handler.getWindow().setMaximized(true); 
+                JOptionPane.showMessageDialog(null, "Password Changed");
+                clearForm();
+                }
+                Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+                Handler.getWindow().setMaximized(true); 
+            }
+            else 
+                JOptionPane.showMessageDialog(null, "Current Password is Incorrect");
+        clearForm();
+                    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+                    Handler.getWindow().setMaximized(true); 
         }
-        
-    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-    Handler.getWindow().setMaximized(true);  
-    }
+        else{
+            Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+            Handler.getWindow().setMaximized(true);  
+        }}
     
     private boolean isPasswordChangeCompleted() {
         return (setPassword());
@@ -61,6 +70,10 @@ private void back() {
         return isNotEmpty(password);
     }
 
+      private void clearForm() {
+        currpass.setText("");
+        newpass.setText("");
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

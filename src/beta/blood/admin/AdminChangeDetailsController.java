@@ -26,12 +26,13 @@ public class AdminChangeDetailsController implements Initializable {
 
   
     @FXML
-    TextField curpass;
+    TextField currpass;
     @FXML
     TextField newpass;
 
     private String employeeId =LoginService.getLoggedInUser().getEmployeeId();
     private String password;
+    String currentpass = LoginService.getLoggedInUser().getPassword();
     
     @FXML
     private void back() {
@@ -43,18 +44,26 @@ public class AdminChangeDetailsController implements Initializable {
     private void change() {
     int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to change your password?", "Alert", OK_CANCEL_OPTION);
         if(result == JOptionPane.OK_OPTION)
-        {
-            if (isPasswordChangeCompleted()) {
+        {   if(currpass.getText().equals(currentpass))
+            {   if(isPasswordChangeCompleted()) 
+                {
                 Employee.update(employeeId ,newpass.getText());
-               JOptionPane.showMessageDialog(null, "Password Changed");
-             }
-            Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
-            Handler.getWindow().setMaximized(true); 
+                JOptionPane.showMessageDialog(null, "Password Changed");
+                clearForm();
+                }
+                Handler.setScene(getClass(), "Admin Home", "/beta/blood/Admin/AdminHome.fxml");
+                Handler.getWindow().setMaximized(true); 
+            }
+            else 
+                JOptionPane.showMessageDialog(null, "Current Password is Incorrect");
+        clearForm();
+                    Handler.setScene(getClass(), "Admin Home", "/beta/blood/Admin/AdminHome.fxml");
+                    Handler.getWindow().setMaximized(true); 
         }
-        
-    Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
-    Handler.getWindow().setMaximized(true);  
-    }
+        else{
+            Handler.setScene(getClass(), "Admin Home", "/beta/blood/Admin/AdminHome.fxml");
+            Handler.getWindow().setMaximized(true);  
+        }}
 
     private boolean isPasswordChangeCompleted() {
         return (setPassword());
@@ -65,6 +74,10 @@ public class AdminChangeDetailsController implements Initializable {
         return isNotEmpty(password);
     }
     
+     private void clearForm() {
+        currpass.setText("");
+        newpass.setText("");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
