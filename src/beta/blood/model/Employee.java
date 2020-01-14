@@ -31,6 +31,8 @@ public class Employee {
         this.position = position;
     }
 
+  
+    
     public String getEmployeeId() {
         return employeeId;
     }
@@ -86,6 +88,8 @@ public class Employee {
         return null;
     }
 
+    
+    
     public static void insert(Employee employee) {
         String query = String.format(
                 "insert into employee "
@@ -99,6 +103,16 @@ public class Employee {
                 employee.password,
                 employee.position
         );
+        DatabaseService.service().executeUpdateQuery(query);
+    }
+    
+     public static void update(String employeeID,String newpassword) {
+        String query = 
+                "UPDATE `employee` SET `Password` = '"+ newpassword+ "' WHERE `EmployeeID` ='"+employeeID+"'";
+        
+        
+        
+        //
         DatabaseService.service().executeUpdateQuery(query);
     }
 }
