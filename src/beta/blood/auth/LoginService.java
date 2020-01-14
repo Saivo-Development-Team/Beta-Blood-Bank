@@ -13,7 +13,10 @@ import beta.blood.model.Employee;
  */
 public class LoginService {
     private static Employee employee;
-
+    public static Employee getLoggedInUser()
+    {return employee;
+    }
+    
     public static int checkDetails(String Id, String password) {
         employee = Employee.getById(Id);
         if (employee == null) {

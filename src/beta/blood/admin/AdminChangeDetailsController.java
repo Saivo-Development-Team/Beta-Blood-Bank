@@ -7,6 +7,7 @@ package beta.blood.admin;
 
 import beta.blood.Handler;
 import static beta.blood.Helper.isNotEmpty;
+import beta.blood.auth.LoginService;
 import beta.blood.model.Employee;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,15 +24,14 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
  */
 public class AdminChangeDetailsController implements Initializable {
 
-    @FXML
-    TextField username;
+  
     @FXML
     TextField curpass;
     @FXML
     TextField newpass;
 
-    private String employeeId,
-            password;
+    private String employeeId =LoginService.getLoggedInUser().getEmployeeId();
+    private String password;
     
     @FXML
     private void back() {
@@ -45,7 +45,7 @@ public class AdminChangeDetailsController implements Initializable {
         if(result == JOptionPane.OK_OPTION)
         {
             if (isPasswordChangeCompleted()) {
-                Employee.update(username.getText(),newpass.getText());
+                Employee.update(employeeId ,newpass.getText());
                JOptionPane.showMessageDialog(null, "Password Changed");
              }
             Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
@@ -64,10 +64,7 @@ public class AdminChangeDetailsController implements Initializable {
         password = newpass.getText();
         return isNotEmpty(password);
     }
-    private boolean setId() {
-        employeeId = username.getText();
-        return employeeId.matches("(?i)((ad)|(nu))-\\d+");
-    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
