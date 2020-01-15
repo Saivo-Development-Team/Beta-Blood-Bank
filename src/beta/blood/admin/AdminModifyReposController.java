@@ -57,21 +57,12 @@ public class AdminModifyReposController implements Initializable {
             .observableArrayList();
 
     @FXML
-    public void changeAdminBranch() {
-
-    }
-
-    @FXML
     public void deleteAdmin() {
         adminTableView.getSelectionModel().getSelectedItems().forEach((admin) -> {
             adminList.remove(admin);
         });
     }
 
-    @FXML
-    public void changeNurseBranch() {
-
-    }
 
     @FXML
     public void deleteNurse() {
