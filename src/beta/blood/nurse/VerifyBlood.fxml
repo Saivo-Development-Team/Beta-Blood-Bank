@@ -15,18 +15,18 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="387.0" layoutY="149.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="216.0" text="Verify Donor Blood" />
+      <Button layoutX="387.0" layoutY="149.0" mnemonicParsing="false" onAction="#verify" prefHeight="25.0" prefWidth="216.0" text="Verify Donor Blood" />
       <ComboBox fx:id="BloodTypes" layoutX="453.0" layoutY="96.0" prefWidth="150.0" />
       <Button layoutX="387.0" layoutY="201.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="216.0" text="Remove Donor From System" />
       <Label layoutX="387.0" layoutY="100.0" text="Blood Type" />
-      <Label layoutX="39.0" layoutY="83.0" text="List of Unverified Donors " />
       <Button layoutX="483.0" layoutY="37.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <TableView fx:id="donorTable" layoutX="15.0" layoutY="114.0" prefHeight="356.0" prefWidth="367.0">
+      <TableView fx:id="donorTable" layoutX="15.0" layoutY="122.0" prefHeight="348.0" prefWidth="367.0">
         <columns>
           <TableColumn fx:id="col_name_ad" prefWidth="83.0" text="Name" />
           <TableColumn fx:id="col_surname_ad" prefWidth="81.0" text="Surname" />
             <TableColumn fx:id="col_id_ad" prefWidth="201.0" text="ID Number" />
         </columns>
       </TableView>
+      <Label layoutX="15.0" layoutY="100.0" prefHeight="17.0" prefWidth="367.0" text="Select a unverified donor from the list below to verify" />
    </children>
 </AnchorPane>

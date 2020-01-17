@@ -7,6 +7,7 @@ package beta.blood.nurse;
 
 import beta.blood.Handler;
 import beta.blood.database.DatabaseService;
+import beta.blood.model.TableModel.donorTable;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -44,6 +47,8 @@ public class VerifyBloodController implements Initializable {
     
     
     
+   
+    
     
     @FXML
     ComboBox<String> BloodTypes;
@@ -58,7 +63,11 @@ private void back() {
     Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
 }  
 
-    
+    @FXML
+    private void verify()
+    {   
+        
+    }
 
     
     @Override
