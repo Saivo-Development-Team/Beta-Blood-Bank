@@ -132,4 +132,9 @@ public class VerifyBloodController implements Initializable {
         BloodTypes.setItems(BLOOD_TYPES);
     }
 
+    public void back()
+    {
+    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+    }
+    
 }
