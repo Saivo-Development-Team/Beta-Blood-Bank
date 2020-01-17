@@ -6,24 +6,26 @@
 package beta.blood.nurse;
 
 import beta.blood.Handler;
-import beta.blood.database.DatabaseService;
-import beta.blood.model.TableModel.donorTable;
+import beta.blood.Handler.Function;
+import static beta.blood.Handler.QueryType.RESULT;
+import static beta.blood.Handler.QueryType.UPDATE;
+import static beta.blood.Helper.StaticData.BLOOD_TYPES;
+import beta.blood.model.Blood;
+import beta.blood.model.Donor;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableView.TableViewSelectionModel;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ListView;
+import javafx.util.Pair;
 
 /**
  * FXML Controller class
@@ -52,16 +54,12 @@ public class VerifyBloodController implements Initializable {
     
     @FXML
     ComboBox<String> BloodTypes;
-    
-    
-    ObservableList<String> BloodType = FXCollections.observableArrayList(
-            "A+","B+","A-","B-","AB+","AB-","O+","O-"
-    );
-    
+
     @FXML
-private void back() {
-    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-}  
+    ListView<String> donorBloodListView;
+
+    ObservableList<String> strings;
+    ObservableSet<Pair<Donor, Blood>> bloodDonors = FXCollections.observableSet(new HashSet());
 
     @FXML
     private void verify()
@@ -69,32 +67,67 @@ private void back() {
         
     }
 
-    
+    @FXML
+    public void changeBloodType() {
+        String type = BloodTypes.getSelectionModel().getSelectedItem();
+        donorBloodListView.getSelectionModel().getSelectedItems().forEach((string) -> {
+            bloodDonors.forEach((pair) -> {
+                Long id = pair.getKey().getDonorID();
+                if (string.contains(String.format("[Id: %d]", id))) {
+                    Blood.getByQuery(String.format(
+                            "UPDATE `betablooddatabase`.`blood` "
+                            + "SET `Type` = '%s' "
+                            + "WHERE `blood`.`OfferedBy` = %d",
+                            type, id), UPDATE, null);
+                    bloodDonors.remove(pair);
+                    strings.remove(string);
+                    donorBloodListView.refresh();
+                }
+            });
+        });
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      BloodTypes.setItems(BloodType);
-      
-      //DONOR CONTENT            
-            try {
-            ResultSet rs = DatabaseService.service().executeResultQuery("SELECT Name, Surname, DonorID FROM `donor` ");
-            
-                while(rs.next()) {
-                    donorList.add(new beta.blood.model.TableModel.donorTable(rs.getString("Name"), rs.getString("Surname"), 
-                            rs.getString("DonorID")));
-                }
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(VerifyBloodController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            col_name_ad.setCellValueFactory(new PropertyValueFactory<>("name"));
-            col_surname_ad.setCellValueFactory(new PropertyValueFactory<>("surname"));
-            col_id_ad.setCellValueFactory(new PropertyValueFactory<>("DonorID"));
-            
-            donorTable.setItems(donorList);
-            
-      
-      
-    }    
-    
+        Blood.getByQuery("SELECT * FROM `blood` WHERE `blood`.`Type` = 'UN'",
+                RESULT, (Function<ResultSet>) (result)
+                -> Blood.resultToList(result).forEach((unit) -> {
+                    if (unit != null) {
+//                        if (!bloodDonors.stream()
+//                        .findAny()
+//                        .filter((pair)
+//                                -> pair
+//                                .getValue()
+//                                .getBloodID() == unit.getBloodID())
+//                        .isPresent()) {
+                            Donor.getById(unit.getOfferedBy(), (donor) -> {
+                                if (donor != null) {
+                                    bloodDonors.removeIf((pair)
+                                            -> Objects.equals(
+                                                    pair.getKey().getDonorID(),
+                                                    donor.getDonorID())
+                                    );
+                                    bloodDonors.add(new Pair(donor, unit));
+                                }
+                            });
+//                        }
+                    }
+                })
+        );
+
+        System.out.println(bloodDonors);
+        strings = FXCollections.observableArrayList(bloodDonors.stream()
+                .map((pair) -> String.format("[%s %s] [Id: %d] [Gender: %s]",
+                                pair.getKey().getName(),
+                                pair.getKey().getSurname(),
+                                pair.getKey().getDonorID(),
+                                pair.getKey().getGender()))
+                .collect(Collectors.toList()));
+        
+//        strings.addListener(null);
+        donorBloodListView.getItems().addAll(strings);
+        BloodTypes.setItems(BLOOD_TYPES);
+    }
+
 }

@@ -14,37 +14,37 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseAddDonorController">
     <children>
-        <TextField layoutX="236.0" layoutY="82.0" prefHeight="25.0" prefWidth="200.0" />
-        <TextField layoutX="236.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" />
-        <TextField layoutX="236.0" layoutY="171.0" prefHeight="25.0" prefWidth="200.0" />
-        <TextField layoutX="236.0" layoutY="214.0" prefHeight="25.0" prefWidth="200.0" />
-        <TextField layoutX="236.0" layoutY="446.0" prefHeight="25.0" prefWidth="200.0" />
-        <TextField layoutX="236.0" layoutY="489.0" prefHeight="25.0" prefWidth="200.0" />
-        <TextField layoutX="236.0" layoutY="534.0" prefHeight="25.0" prefWidth="200.0" />
-        <Label layoutX="14.0" layoutY="86.0" prefHeight="17.0" prefWidth="150.0" text="ID Number" />
-        <Label layoutX="14.0" layoutY="129.0" prefHeight="17.0" prefWidth="150.0" text="Name" />
-        <Label layoutX="14.0" layoutY="175.0" prefHeight="17.0" prefWidth="150.0" text="Surname" />
-        <Label layoutX="14.0" layoutY="218.0" prefHeight="17.0" prefWidth="150.0" text="Age" />
-        <Label layoutX="14.0" layoutY="263.0" prefHeight="17.0" prefWidth="150.0" text="Title" />
-        <Label layoutX="14.0" layoutY="309.0" prefHeight="17.0" prefWidth="150.0" text="Sex" />
-        <Label layoutX="14.0" layoutY="361.0" prefHeight="17.0" prefWidth="150.0" text="Date of birth" />
-        <Label layoutX="14.0" layoutY="404.0" prefHeight="17.0" prefWidth="150.0" text="Home address" />
-        <Label layoutX="14.0" layoutY="450.0" prefHeight="17.0" prefWidth="150.0" text="Email address" />
-        <Label layoutX="14.0" layoutY="493.0" prefHeight="17.0" prefWidth="150.0" text="Telephone number" />
-        <Label layoutX="14.0" layoutY="538.0" prefHeight="17.0" prefWidth="150.0" text="Cellphone number" />
-        <ComboBox fx:id="combobox" layoutX="236.0" layoutY="259.0" prefHeight="25.0" prefWidth="200.0" />
-        <DatePicker layoutX="236.0" layoutY="357.0" prefHeight="25.0" prefWidth="200.0" promptText="MM/DD/YYYY" />
-        <Separator layoutX="444.0" layoutY="64.0" orientation="VERTICAL" prefHeight="541.0" prefWidth="0.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="50.0" />
-        <TextArea layoutX="236.0" layoutY="394.0" prefHeight="38.0" prefWidth="200.0" />
+        <TextField fx:id="donorIdTextField" layoutX="235.0" layoutY="80.0" prefHeight="25.0" prefWidth="200.0" />
+        <TextField fx:id="nameTextField" layoutX="235.0" layoutY="115.0" prefHeight="25.0" prefWidth="200.0" />
+        <TextField fx:id="surnameTextField" layoutX="235.0" layoutY="150.0" prefHeight="25.0" prefWidth="200.0" />
+        <TextField fx:id="ageTextField" layoutX="235.0" layoutY="185.0" prefHeight="25.0" prefWidth="200.0" />
+        <Label layoutX="14.0" layoutY="80.0" prefHeight="17.0" prefWidth="150.0" text="ID Number" />
+        <Label layoutX="14.0" layoutY="115.0" prefHeight="17.0" prefWidth="150.0" text="Name" />
+        <Label layoutX="14.0" layoutY="150.0" prefHeight="17.0" prefWidth="150.0" text="Surname" />
+        <Label layoutX="14.0" layoutY="185.0" prefHeight="17.0" prefWidth="150.0" text="Age" />
+        <Label layoutX="14.0" layoutY="220.0" prefHeight="17.0" prefWidth="150.0" text="Title" />
+        <ComboBox fx:id="combobox" layoutX="235.0" layoutY="220.0" prefHeight="25.0" prefWidth="200.0" />
+        <RadioButton fx:id="maleRadioButton" layoutX="236.0" layoutY="255.0" mnemonicParsing="false" text="Male" />
+        <RadioButton fx:id="femaleRadioButton" layoutX="304.0" layoutY="255.0" mnemonicParsing="false" text="Female" />
+        <Label layoutX="14.0" layoutY="255.0" prefHeight="17.0" prefWidth="150.0" text="Sex" />
+        <Label layoutX="14.0" layoutY="285.0" prefHeight="17.0" prefWidth="150.0" text="Date of birth" />
+        <Label layoutX="14.0" layoutY="320.0" prefHeight="17.0" prefWidth="150.0" text="Home address" />
+        <Label layoutX="14.0" layoutY="388.0" prefHeight="17.0" prefWidth="150.0" text="Email address" />
+        <Label layoutX="14.0" layoutY="425.0" prefHeight="17.0" prefWidth="150.0" text="Telephone number" />
+        <Label layoutX="14.0" layoutY="460.0" prefHeight="17.0" prefWidth="150.0" text="Cellphone number" />
+        <DatePicker fx:id="dataOfBirthDatePicker" layoutX="235.0" layoutY="285.0" prefHeight="25.0" prefWidth="200.0" promptText="MM/DD/YYYY" />
+        <Separator layoutX="445.0" layoutY="50.0" orientation="VERTICAL" prefHeight="540.0" prefWidth="0.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="50.0" />
+        <TextArea fx:id="homeAddressTextArea" layoutX="235.0" layoutY="320.0" prefHeight="60.0" prefWidth="200.0" />
+        <TextField fx:id="emailTextField" layoutX="235.0" layoutY="390.0" prefHeight="25.0" prefWidth="200.0" />
+        <TextField fx:id="telephoneTextField" layoutX="235.0" layoutY="425.0" prefHeight="25.0" prefWidth="200.0" />
+        <TextField fx:id="cellhoneTextField" layoutX="235.0" layoutY="460.0" prefHeight="25.0" prefWidth="200.0" />
         <Label layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="422.0" text="Personal Information" textFill="RED" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <ScrollPane fx:id="scrollpane" layoutX="460.0" layoutY="56.0" prefHeight="550.0" prefWidth="550.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="55.0" />
-        <RadioButton fx:id="msex" layoutX="236.0" layoutY="309.0" mnemonicParsing="false" text="Male" />
-        <RadioButton fx:id="fsex" layoutX="304.0" layoutY="309.0" mnemonicParsing="false" text="Female" />
-        <Button fx:id="add" layoutX="476.0" layoutY="628.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="549.0" text="Add Donor" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="465.0" AnchorPane.rightAnchor="15.0" />
-      <Button layoutX="783.0" layoutY="23.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="80.0" text="Back" />
+        <ScrollPane fx:id="scrollpane" layoutX="459.0" layoutY="55.0" prefHeight="550.0" prefWidth="550.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="459.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="55.0" />
+        <Button layoutX="459.0" layoutY="619.6" mnemonicParsing="false" onAction="#addDonor" prefHeight="30.0" prefWidth="549.0" text="Add Donor" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="20.0" />
+      <Button layoutX="924.0" layoutY="15.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="80.0" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
     </children>
 </AnchorPane>

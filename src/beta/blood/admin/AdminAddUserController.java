@@ -7,12 +7,13 @@ package beta.blood.admin;
 
 import beta.blood.Handler;
 import static beta.blood.Helper.*;
+import static beta.blood.Helper.StaticData.BRANCH_OPTIONS;
 import beta.blood.model.Employee;
+import static beta.blood.model.Employee.*;
 import beta.blood.model.Recipient;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -20,8 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
 /**
  * FXML Controller class
@@ -60,25 +59,12 @@ public class AdminAddUserController implements Initializable {
     @FXML
     Label employeeIdLabel;
 
-    private final ObservableList<String> branchList = FXCollections
-            .observableArrayList(
-                    "Cape Town", "Durban", "Johanessburg", "Langebaan",
-                    "Port Elizabeth",
-                    "Pretoria"
-            );
-    
-    private final ObservableList<String> bloodList = FXCollections
-            .observableArrayList(
-                    "A+","A-","B+","B-","O+","O-","AB+","AB-"
-            );
-
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         employeeTypeComboBox.setItems(
                 FXCollections.observableArrayList("Admin", "Nurse")
         );
-        branchComboBox.setItems(branchList);
+        branchComboBox.setItems(BRANCH_OPTIONS);
     }
 
     @FXML
@@ -91,12 +77,12 @@ public class AdminAddUserController implements Initializable {
         String type = employeeTypeComboBox.getSelectionModel().getSelectedItem();
         if (type != null) {
             switch (type.toLowerCase()) {
-                case "admin":
-                    employeeIdLabel.setText("AD-" + (int) (Math.random() * 10000));
+                case ADMIN:
+                    employeeIdLabel.setText(EMPLOYEE_AD + randomInt(10000));
                     position = 0;
                     break;
-                case "nurse":
-                    employeeIdLabel.setText("NU-" + (int) (Math.random() * 10000));
+                case NURSE:
+                    employeeIdLabel.setText(EMPLOYEE_NU + randomInt(10000));
                     position = 1;
                     break;
             }
@@ -106,11 +92,8 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void addEmployee() {
-        int result = JOptionPane.showConfirmDialog(null, "Please ensure information is correct", "Alert", OK_CANCEL_OPTION);
-        if(result == JOptionPane.OK_OPTION)
-        {
-            if (isEmployeeFormCompleted()) {
-                Employee.insert(
+        if (isEmployeeFormCompleted() & isInfoCorret()) {
+            Employee.insert(
                     new Employee(
                             employeeId,
                             name,
@@ -120,26 +103,21 @@ public class AdminAddUserController implements Initializable {
                             password,
                             position
                     )
-                );
-                clearEmployeeForm();
-            }
+            );
+            clearEmployeeForm();
         }
     }
 
     @FXML
     private void addRecipient() {
-        int result = JOptionPane.showConfirmDialog(null, "Please ensure information is correct", "Alert", OK_CANCEL_OPTION);
-        if(result == JOptionPane.OK_OPTION) {
-            
-            if (isRecipientFormCompleted()) {
-                Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
+        if (isRecipientFormCompleted() & isInfoCorret()) {
+            Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
                     getRecipientName(),
                     getRecipientAddress(),
                     getRecipientTelephone(),
                     getRecipientEmail())
-                );
-                clearRecipientForm();
-            }
+            );
+            clearRecipientForm();
         }
     }
 
@@ -193,7 +171,7 @@ public class AdminAddUserController implements Initializable {
 
     private boolean setBranch() {
         branch = branchComboBox.getSelectionModel().getSelectedItem();
-        return branch != null & branchList.contains(branch);
+        return branch != null & BRANCH_OPTIONS.contains(branch);
     }
 
     private boolean setPassword() {
@@ -209,6 +187,7 @@ public class AdminAddUserController implements Initializable {
         employeeNameTextField.setText("");
         employeeSurnameTextField.setText("");
         employeePasswordField.setText("");
+
     }
 
     private void clearRecipientForm() {

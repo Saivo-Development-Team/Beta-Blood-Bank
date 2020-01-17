@@ -6,9 +6,7 @@
 package beta.blood.charts;
 
 import beta.blood.Handler;
-import beta.blood.database.DatabaseService;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 
-
 /**
  * FXML Controller class
  *
@@ -31,27 +28,26 @@ public class BarChartController implements Initializable {
     @FXML
     BarChart barChart;
     ObservableList data = FXCollections.observableArrayList();
-    
-    
+
     public void buildBarData() throws SQLException {
-    String sql = "SELECT type, quantity FROM blood";
-    ResultSet rs = DatabaseService.service().executeResultQuery(sql);
-    
-    XYChart.Series<String, Double> series = new XYChart.Series<>();
-    
-    while(rs.next()) {
-        series.getData().add(new XYChart.Data<>(rs.getString("type"), rs.getDouble(2)));
-        
-        }
-    barChart.getData().add(series);
-    
+        String sql = "SELECT type, quantity FROM blood";
+//    ResultSet rs = DatabaseService.service().executeResultQuery(sql);
+
+        XYChart.Series<String, Double> series = new XYChart.Series<>();
+
+//        while (rs.next()) {
+//            series.getData().add(new XYChart.Data<>(rs.getString("type"), rs.getDouble(2)));
+//
+//        }
+        barChart.getData().add(series);
+
     }
-    
+
     @FXML
     public void back() {
         Handler.setScene(getClass(), "Request System Report", "/beta/blood/admin/AdminRequestReport.fxml");
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -59,9 +55,7 @@ public class BarChartController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(BarChartController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-    }    
-    
+
+    }
+
 }

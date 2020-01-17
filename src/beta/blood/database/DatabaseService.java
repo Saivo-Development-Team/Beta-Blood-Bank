@@ -5,9 +5,12 @@
  */
 package beta.blood.database;
 
+import beta.blood.Handler;
+import static beta.blood.Handler.QueryType.RESULT;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import beta.blood.Handler.Function;
+import static beta.blood.Handler.QueryType.UPDATE;
+import static beta.blood.Handler.sqlExceptionHandler;
 
 /**
  *
@@ -57,23 +60,31 @@ public class DatabaseService {
         return this.statement;
     }
 
-    public ResultSet executeResultQuery(String query) {
-        try {
-            return this.getStatement().executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseService.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public void executeResultQuery(String query, Function<ResultSet> function) {
+        sqlExceptionHandler().runCatching(getStatement(), RESULT, query, (Function<ResultSet>) (result) -> {
+            if (function != null) {
+                function.cb(result);
+            }
+        });
     }
 
-    public int executeUpdateQuery(String query) {
-        try {
-            return this.getStatement().executeUpdate(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseService.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-        return -1;
+    public void executeUpdateQuery(String query, Function<Integer> function) {
+        sqlExceptionHandler().runCatching(getStatement(), UPDATE, query, (Function<Integer>) (result) -> {
+            if (function != null) {
+                function.cb(result);
+            }
+        });
     }
+
+    public void executeQuery(String query, Handler.QueryType type, Function function) {
+        switch (type) {
+            case RESULT:
+                executeResultQuery(query, function);
+                break;
+            case UPDATE:
+                executeUpdateQuery(query, function);
+                break;
+        }
+    }
+
 }
