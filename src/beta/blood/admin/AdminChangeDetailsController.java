@@ -17,8 +17,6 @@ import javafx.scene.control.TextField;
  *
  * @author Admin
  */
-
-
 public class AdminChangeDetailsController implements Initializable {
 
     @FXML
@@ -31,6 +29,7 @@ public class AdminChangeDetailsController implements Initializable {
     @FXML
     private void back() {
         Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
+        Handler.getWindow().setMaximized(true);
     }
 
     @FXML
