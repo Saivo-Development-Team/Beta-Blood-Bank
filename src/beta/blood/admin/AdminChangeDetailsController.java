@@ -30,9 +30,9 @@ public class AdminChangeDetailsController implements Initializable {
     @FXML
     TextField newpass;
 
-    private String employeeId =LoginService.getLoggedInUser().getEmployeeId();
+    private String employeeId =LoginService.getCurrentUser().getEmployeeId();
     private String password;
-    String currentpass = LoginService.getLoggedInUser().getPassword();
+    String currentpass = LoginService.getCurrentUser().getPassword();
     
     @FXML
     private void back() {
@@ -49,6 +49,7 @@ public class AdminChangeDetailsController implements Initializable {
                 {
                 Employee.update(employeeId ,newpass.getText());
                 JOptionPane.showMessageDialog(null, "Password Changed");
+                LoginService.getCurrentUser().setPassword(newpass.getText());
                 clearForm();
                 }
                 Handler.setScene(getClass(), "Admin Home", "/beta/blood/Admin/AdminHome.fxml");

@@ -26,9 +26,9 @@ public class NurseChangePasswordController implements Initializable {
     TextField newpass;
     
     
-    String employeeID = LoginService.getLoggedInUser().getEmployeeId();
+    String employeeID = LoginService.getCurrentUser().getEmployeeId();
     String password;
-    String currentpass = LoginService.getLoggedInUser().getPassword();
+    String currentpass = LoginService.getCurrentUser().getPassword();
     
     
 @FXML
@@ -45,6 +45,7 @@ private void back() {
                 {
                 Employee.update(employeeID ,newpass.getText());
                 JOptionPane.showMessageDialog(null, "Password Changed");
+                LoginService.getCurrentUser().setPassword(newpass.getText());
                 clearForm();
                 }
                 Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");

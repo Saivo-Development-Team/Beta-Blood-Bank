@@ -23,7 +23,7 @@ import java.util.Arrays;
 public class Employee {
 
     private final int position;
-    private final String employeeId, name, surname, telephone, branch, password;
+    private String employeeId, name, surname, telephone, branch, password;
     public static final String EMPLOYEE_AD = "AD-", EMPLOYEE_NU = "NU-";
     public static final String ADMIN = "admin", NURSE = "nurse";
 
@@ -40,7 +40,8 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-  
+    public void setPassword(String newpass)
+    {this.password = newpass;}
     
     public String getEmployeeId() {
         return employeeId;
@@ -163,6 +164,6 @@ public class Employee {
         
         
         //
-        DatabaseService.service().executeUpdateQuery(query);
+        service().executeUpdateQuery(query, null);
     }
 }
