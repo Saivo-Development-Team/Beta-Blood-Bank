@@ -20,10 +20,10 @@ import java.util.logging.Logger;
 public class Recipient {
 
     public static int DEFAULT_ID = -1;
-    private final int recipientId;
+    private final String recipientId;
     private final String name, address, telephone, email;
 
-    public Recipient(int recipientId, String name, String address, String telephone, String email) {
+    public Recipient(String recipientId, String name, String address, String telephone, String email) {
         this.recipientId = recipientId;
         this.name = name;
         this.address = address;
@@ -31,7 +31,7 @@ public class Recipient {
         this.email = email;
     }
 
-    public int getRecipientID() {
+    public String getRecipientID() {
         return recipientId;
     }
 
@@ -55,7 +55,7 @@ public class Recipient {
         try {
             if (result.next()) {
                 return new Recipient(
-                        result.getInt("RecipientID"),
+                        String.valueOf(result.getInt("RecipientID")),
                         result.getString("Name"),
                         result.getString("Address"),
                         result.getString("Telephone"),
@@ -114,10 +114,10 @@ public class Recipient {
         service().executeUpdateQuery(query, null);
     }
 
-    public static void update(int recipientID) {
+    public static void update(String recipientID) {
         String query = String.format(
-                "UPDATE `recipient` SET `RecipientID`=%d,`Name`= %s,`Address`=%s,"
-                + "`Telephone`=%d,`Email`=%s WHERE `RecipientID`= %d", recipientID);
+                "UPDATE `recipient` SET `RecipientID`=%d,`Name`= '%s',`Address`='%s',`Telephone`='%s',`Email`='%s' "
+                + "WHERE `RecipientID`= %d", Integer.parseInt(recipientID));
 
         service().executeUpdateQuery(query, null);
 
