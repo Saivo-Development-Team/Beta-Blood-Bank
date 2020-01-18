@@ -20,7 +20,7 @@
                 <AnchorPane>
                      <children>
                         <Button layoutX="177.0" layoutY="480.0" mnemonicParsing="false" onAction="#deleteAdmin" prefWidth="160.0" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" />
-                        <Button layoutX="14.0" layoutY="480.0" mnemonicParsing="false" onAction="#changeAdminBranch" prefWidth="160.0" text="Change branch" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                        <Button layoutX="14.0" layoutY="480.0" mnemonicParsing="false" prefWidth="160.0" text="Change branch" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
                         <ComboBox fx:id="adminComboBox" layoutX="14.0" layoutY="441.0" prefWidth="160.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" />
                         <TableView fx:id="adminTableView" layoutX="293.0" layoutY="-38.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
@@ -34,7 +34,7 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <Button layoutX="14.0" layoutY="496.0" mnemonicParsing="false" onAction="#changeNurseBranch" prefWidth="160.0" text="Change branch" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                        <Button layoutX="14.0" layoutY="496.0" mnemonicParsing="false" prefWidth="160.0" text="Change branch" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
                         <Button layoutX="177.0" layoutY="496.0" mnemonicParsing="false" onAction="#deleteNurse" prefWidth="160.0" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" />
                         <ComboBox fx:id="nurseComboBox" layoutX="14.0" layoutY="457.0" prefWidth="160.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" />
                         <TableView fx:id="nurseTableView" layoutX="14.0" layoutY="14.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
