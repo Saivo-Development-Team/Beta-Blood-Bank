@@ -37,6 +37,9 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
+    public void setPassword(String newpass)
+    {this.password = newpass;}
+    
     public String getEmployeeId() {
         return employeeId;
     }
@@ -153,6 +156,16 @@ public class Employee {
                 employee.password,
                 employeeId
         );
+        service().executeUpdateQuery(query, null);
+    }
+    
+     public static void update(String employeeID,String newpassword) {
+        String query = 
+                "UPDATE `employee` SET `Password` = '"+ newpassword+ "' WHERE `EmployeeID` ='"+employeeID+"'";
+        
+        
+        
+        //
         service().executeUpdateQuery(query, null);
     }
 }

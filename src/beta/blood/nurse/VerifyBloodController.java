@@ -25,6 +25,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.util.Pair;
 
 /**
@@ -35,6 +37,24 @@ import javafx.util.Pair;
 public class VerifyBloodController implements Initializable {
 
     @FXML
+    TableView<beta.blood.model.TableModel.donorTable> donorTable;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.donorTable, String> col_id_ad;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.donorTable, String> col_name_ad;
+    @FXML
+    TableColumn<beta.blood.model.TableModel.donorTable, String> col_surname_ad;
+    
+     //Data for the donor Tableview
+    private final ObservableList<beta.blood.model.TableModel.donorTable> donorList = FXCollections
+            .observableArrayList();
+    
+    
+    
+   
+    
+    
+    @FXML
     ComboBox<String> BloodTypes;
 
     @FXML
@@ -44,8 +64,9 @@ public class VerifyBloodController implements Initializable {
     ObservableSet<Pair<Donor, Blood>> bloodDonors = FXCollections.observableSet(new HashSet());
 
     @FXML
-    private void back() {
-        Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+    private void verify()
+    {   
+        
     }
 
     @FXML
@@ -111,4 +132,9 @@ public class VerifyBloodController implements Initializable {
         BloodTypes.setItems(BLOOD_TYPES);
     }
 
+    public void back()
+    {
+    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+    }
+    
 }

@@ -44,11 +44,11 @@ public class AdminAddUserController implements Initializable {
             employeeId;
 
     @FXML
-    TextField recipientName,
-            recipientEmail,
-            recipientPhone,
-            employeeNameTextField,
-            employeeSurnameTextField;
+    TextField   recipientName,
+                recipientEmail,
+                recipientPhone,
+                employeeNameTextField,
+                employeeSurnameTextField;
 
     @FXML
     TextArea recipientAddress;
