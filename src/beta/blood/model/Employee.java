@@ -5,16 +5,13 @@
  */
 package beta.blood.model;
 
-import beta.blood.Handler;
 import beta.blood.Handler.Function;
-import beta.blood.database.DatabaseService;
 import static beta.blood.database.DatabaseService.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -23,7 +20,7 @@ import java.util.Arrays;
 public class Employee {
 
     private final int position;
-    private final String employeeId, name, surname, telephone, branch, password;
+    private String employeeId, name, surname, telephone, branch, password;
     public static final String EMPLOYEE_AD = "AD-", EMPLOYEE_NU = "NU-";
     public static final String ADMIN = "admin", NURSE = "nurse";
 
@@ -66,6 +63,10 @@ public class Employee {
 
     public int getPosition() {
         return position;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
     private static Employee resultToEmployee(ResultSet result) {
@@ -131,17 +132,18 @@ public class Employee {
         service().executeUpdateQuery(query, null);
     }
 
-    public static void delete(int employeeID) {
+    public static void delete(String employeeID) {
         String query = String.format(
-                "DELETE FROM `employee` WHERE `EmployeeID` = %d ", employeeID
+                "DELETE FROM `employee` WHERE `EmployeeID` = '%s'", employeeID
         );
+        service().executeUpdateQuery(query, null);
     }
 
-    public static void update(int employeeId, Employee employee) {
+    public static void update(String employeeId, Employee employee) {
         String query = String.format(
                 "UPDATE `employee` "
-                + "SET `EmployeeID`=%s,`Name`=%s,`Surname`=%s,`Telephone`=%s,`Branch`=%s,`Position`=%d,`Password`=%s "
-                + "WHERE `EmployeeID`= %s",
+                + "SET `EmployeeID`='%s',`Name`='%s',`Surname`='%s',`Telephone`='%s',`Branch`='%s',`Position`=%d,`Password`='%s' "
+                + "WHERE `EmployeeID`= '%s'",
                 employee.employeeId,
                 employee.name,
                 employee.surname,

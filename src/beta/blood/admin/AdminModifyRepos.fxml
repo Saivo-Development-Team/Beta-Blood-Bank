@@ -11,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -48,9 +48,9 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <TextField layoutX="14.0" layoutY="302.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" />
-                        <TextField layoutX="14.0" layoutY="352.0" prefWidth="200.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="0.0" />
-                        <TextArea layoutX="14.0" layoutY="402.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                        <TextField fx:id="recChangeTel" layoutX="14.0" layoutY="302.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" />
+                        <TextField fx:id="recChangeEmail" layoutX="14.0" layoutY="352.0" prefWidth="200.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="0.0" />
+                        <TextArea fx:id="recChangeAddress" layoutX="14.0" layoutY="402.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
                         <Button layoutX="568.0" layoutY="348.0" mnemonicParsing="false" onAction="#changeRecTel" prefWidth="200.0" text="Change telephone number" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="230.0" />
                         <Button layoutX="568.0" layoutY="398.0" mnemonicParsing="false" onAction="#changeRecEmail" prefWidth="200.0" text="Change email address" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="230.0" />
                         <Button layoutX="568.0" layoutY="526.0" mnemonicParsing="false" onAction="#changeRecAddress" prefWidth="200.0" text="Change address" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" />
@@ -69,7 +69,6 @@
                         <Label layoutX="14.0" layoutY="39.0" prefHeight="16.0" prefWidth="150.0" text="Blood Type" />
                         <ComboBox fx:id="bloodComboBox" layoutX="217.0" layoutY="37.0" prefWidth="150.0" />
                         <TextField fx:id="bloodamount" layoutX="217.0" layoutY="92.0" prefHeight="26.0" prefWidth="150.0" />
-                        <Button layoutX="13.0" layoutY="144.0" mnemonicParsing="false" onAction="#addBlood" prefWidth="150.0" text="Add Units" />
                         <Button layoutX="217.0" layoutY="144.0" mnemonicParsing="false" onAction="#deleteBlood" prefWidth="150.0" text="Delete Units" />
                      </children>
                      <padding>
