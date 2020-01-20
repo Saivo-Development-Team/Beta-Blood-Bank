@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
    <children>
 
       <Button layoutX="476.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
@@ -21,21 +21,26 @@
       <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
       <AnchorPane layoutX="20.0" layoutY="51.0" prefHeight="389.0" prefWidth="620.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
          <children>
-            <Button layoutX="142.0" layoutY="280.0" mnemonicParsing="false" onAction="#donorNavigation" prefHeight="59.0" prefWidth="166.0" text="Add Donor" textFill="RED">
+            <Button layoutX="142.0" layoutY="310.0" mnemonicParsing="false" onAction="#donorNavigation" prefHeight="59.0" prefWidth="166.0" text="Add Donor" textFill="RED">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="332.0" layoutY="280.0" mnemonicParsing="false" onAction="#verifyBloodNavigation" prefHeight="59.0" prefWidth="166.0" text="Verify Blood" textFill="RED">
+            <Button layoutX="332.0" layoutY="310.0" mnemonicParsing="false" onAction="#verifyBloodNavigation" prefHeight="59.0" prefWidth="166.0" text="Verify Blood" textFill="RED">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <ImageView fitHeight="256.0" fitWidth="316.0" layoutX="225.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="256.0" fitWidth="316.0" layoutX="225.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/sanbs.jpg" />
                </image>
             </ImageView>
+            <Label fx:id="welcome" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="485.0" text="Label" textFill="#f80000">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

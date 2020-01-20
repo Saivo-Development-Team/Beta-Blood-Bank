@@ -6,11 +6,15 @@
 package beta.blood.admin;
 
 import beta.blood.Handler;
+import beta.blood.auth.LoginService;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
@@ -30,6 +34,8 @@ public class AdminHomeController implements Initializable {
     Tab sysrep;
     @FXML
     Tab modrep;
+    @FXML
+    Label welcome;
 
     @FXML
     private void changeDetails() {
@@ -59,11 +65,18 @@ public class AdminHomeController implements Initializable {
             
         }
     }
+    
+    public void openWebpage() {
+        try {
+            Desktop.getDesktop().browse(new URL("https://sanbs.org.za/").toURI());
+        } catch (IOException | URISyntaxException e) {
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        dash.setContent(Handler.loadFxml(getClass(), "/beta/blood/charts/chartHome.fxml"));
+        welcome.setText("Welcome " + LoginService.getCurrentUser().getName() + " " + LoginService.getCurrentUser().getSurname());
+        
         add.setContent(Handler.loadFxml(getClass(), "AdminAddUser.fxml"));
         sysrep.setContent(Handler.loadFxml(getClass(), "AdminRequestReport.fxml"));
         modrep.setContent(Handler.loadFxml(getClass(), "AdminModifyRepos.fxml"));
