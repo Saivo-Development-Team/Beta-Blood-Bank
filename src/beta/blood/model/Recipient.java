@@ -21,7 +21,7 @@ public class Recipient {
 
     public static int DEFAULT_ID = -1;
     private final String recipientId;
-    private final String name, address, telephone, email;
+    private String name, address, telephone, email;
 
     public Recipient(String recipientId, String name, String address, String telephone, String email) {
         this.recipientId = recipientId;
@@ -49,6 +49,18 @@ public class Recipient {
 
     public String getEmail() {
         return email;
+    }
+    
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     private static Recipient resultToRecipient(ResultSet result) {
@@ -114,10 +126,20 @@ public class Recipient {
         service().executeUpdateQuery(query, null);
     }
 
-    public static void update(String recipientID) {
+    public static void update(String recipientID, Recipient recipient) {
         String query = String.format(
-                "UPDATE `recipient` SET `RecipientID`=%d,`Name`= '%s',`Address`='%s',`Telephone`='%s',`Email`='%s' "
-                + "WHERE `RecipientID`= %d", Integer.parseInt(recipientID));
+                "UPDATE `recipient` "
+                + "SET `RecipientID`='%s',`Name`='%s',`Address`='%s',`Telephone`='%s',`Email`='%s' "
+                + "WHERE `RecipientID`= %d", 
+                recipient.recipientId,
+                recipient.name,
+                recipient.address,
+                recipient.telephone,
+                recipient.email,
+                Integer.parseInt(recipientID)
+                
+        );
+                
 
         service().executeUpdateQuery(query, null);
 

@@ -27,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 
@@ -46,6 +47,12 @@ public class AdminModifyReposController implements Initializable {
 
     @FXML
     TextField bloodamount;
+    @FXML
+    TextField recChangeTel;
+    @FXML
+    TextField recChangeEmail;
+    @FXML
+    TextArea recChangeAddress;
 
     @FXML
     TableView<Employee> adminTableView;
@@ -111,17 +118,41 @@ public class AdminModifyReposController implements Initializable {
 
     @FXML
     public void changeRecTel() {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
 
+            String newTel = recChangeTel.getText();
+            recipient.setTelephone(newTel);
+            Recipient.update(recipient.getRecipientID(), recipient);
+
+        });
+        recChangeTel.clear();
+        recipientTableView.refresh();
     }
 
     @FXML
     public void changeRecEmail() {
+         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
 
+            String newEmail = recChangeEmail.getText();
+            recipient.setEmail(newEmail);
+            Recipient.update(recipient.getRecipientID(), recipient);
+
+        });
+        recChangeEmail.clear();
+        recipientTableView.refresh();
     }
 
     @FXML
     public void changeRecAddress() {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
 
+            String newAddress = recChangeAddress.getText();
+            recipient.setAddress(newAddress);
+            Recipient.update(recipient.getRecipientID(), recipient);
+
+        });
+        recChangeAddress.clear();
+        recipientTableView.refresh();
     }
 
     @FXML
