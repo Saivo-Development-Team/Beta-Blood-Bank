@@ -50,7 +50,6 @@ public class NurseAddDonorController implements Initializable {
 
     @FXML
     ScrollPane scrollpane;
-
     @FXML
     ComboBox<String> combobox;
 
@@ -128,7 +127,8 @@ public class NurseAddDonorController implements Initializable {
         });
 
     }
-
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

@@ -153,4 +153,5 @@ public class Donor {
         String query = String.format("UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d WHERE `DonorID` = %d", donorId);
         service().executeUpdateQuery(query, null);
     }
+
 }
