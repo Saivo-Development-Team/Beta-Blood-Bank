@@ -111,7 +111,7 @@ public class AdminAddUserController implements Initializable {
     @FXML
     private void addRecipient() {
         if (isRecipientFormCompleted() & isInfoCorret()) {
-            Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
+            Recipient.insert(new Recipient("-1",
                     getRecipientName(),
                     getRecipientAddress(),
                     getRecipientTelephone(),
