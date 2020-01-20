@@ -5,6 +5,7 @@
  */
 package beta.blood.nurse;
 
+import beta.blood.Handler.Function;
 import static beta.blood.Handler.setScene;
 import static beta.blood.Helper.StaticData.QUESTIONNAIRE_ARRAY;
 import static beta.blood.Helper.StaticData.TITLE_OPTIONS;
@@ -38,8 +39,14 @@ import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
 import static beta.blood.nurse.DonorQuestionController.QUESTION_LABEL;
+import javafx.beans.value.ChangeListener;
+import javafx.scene.control.Alert;
+import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
+import static javafx.scene.control.Alert.AlertType.NONE;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  * FXML Controller class
@@ -127,8 +134,7 @@ public class NurseAddDonorController implements Initializable {
         });
 
     }
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -171,8 +177,9 @@ public class NurseAddDonorController implements Initializable {
 
     private void initializeQuestionnaire() {
         for (Questionnaire questionnaire : QUESTIONNAIRE_ARRAY) {
+            int limit = 0;
             VBox holder = (VBox) questionnaire.getHolder().lookup("#" + questionnaire.getId());
-            holder.getChildren().addAll(questionnaire.getQuestionNodes());
+            holder.getChildren().setAll(questionnaire.getQuestionNodes());
             mainVBox.getChildren().add(questionnaire.getHolder());
 
             for (Question question : questionnaire.getQuestions()) {
@@ -181,11 +188,14 @@ public class NurseAddDonorController implements Initializable {
                 toggle.selectedToggleProperty().addListener((o, b, value) -> {
                     RadioButton selected = (RadioButton) value;
                     String questionText = ((Label) question.view.lookup("#" + QUESTION_LABEL)).getText();
-
-                    if (question.answer == null ? selected.getText() != null
+                    if (question.answer == null
+                            ? selected.getText() != null
                             : !question.answer.equals(selected.getText())) {
                         addDonorButton.setDisable(true);
-                        alertMessage(questionText, "Incorrect Answer, Please Correct it Now!");
+                        ButtonType result = alertMessage(
+                                questionText, "Incorrect, Set Correct Answer",
+                                NONE, new ButtonType("Yes"), new ButtonType("No")
+                        ).get();
                     } else {
                         addDonorButton.setDisable(false);
                     }

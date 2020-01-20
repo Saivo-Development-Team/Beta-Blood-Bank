@@ -62,10 +62,10 @@ public class VerifyBloodController implements Initializable {
                             type, id), UPDATE, null);
                     bloodDonors.remove(pair);
                     strings.remove(string);
-                    donorBloodListView.refresh();
                 }
             });
         });
+        donorBloodListView.refresh();
 
     }
 
@@ -75,24 +75,14 @@ public class VerifyBloodController implements Initializable {
                 RESULT, (Function<ResultSet>) (result)
                 -> Blood.resultToList(result).forEach((unit) -> {
                     if (unit != null) {
-//                        if (!bloodDonors.stream()
-//                        .findAny()
-//                        .filter((pair)
-//                                -> pair
-//                                .getValue()
-//                                .getBloodID() == unit.getBloodID())
-//                        .isPresent()) {
                         Donor.getById(unit.getOfferedBy(), (donor) -> {
                             if (donor != null) {
                                 bloodDonors.removeIf((pair)
-                                        -> Objects.equals(
-                                                pair.getKey().getDonorID(),
-                                                donor.getDonorID())
+                                        -> Objects.equals(pair.getKey().getDonorID(), donor.getDonorID())
                                 );
                                 bloodDonors.add(new Pair(donor, unit));
                             }
                         });
-//                        }
                     }
                 })
         );
@@ -105,9 +95,7 @@ public class VerifyBloodController implements Initializable {
                 pair.getKey().getDonorID(),
                 pair.getKey().getGender()))
                 .collect(Collectors.toList()));
-
-//        strings.addListener(null);
         donorBloodListView.getItems().addAll(strings);
         BloodTypes.setItems(BLOOD_TYPES);
-    }    
+    }
 }

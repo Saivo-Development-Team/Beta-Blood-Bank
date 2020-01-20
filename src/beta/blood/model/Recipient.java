@@ -51,6 +51,10 @@ public class Recipient {
         return email;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
@@ -80,12 +84,12 @@ public class Recipient {
         return null;
     }
 
-    private static ArrayList<Recipient> resultToEmployees(ResultSet result) {
+    private static ArrayList<Recipient> resultToRecipients(ResultSet result) {
         ArrayList<Recipient> employees = new ArrayList();
         try {
-            while (!result.isAfterLast()) {
+            do {
                 employees.add(resultToRecipient(result));
-            }
+            } while (result.next());
         } catch (SQLException ex) {
             Logger.getLogger(Recipient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,7 +108,7 @@ public class Recipient {
     public static void getAll(Handler.Function<ArrayList<Recipient>> function) {
         String query = "SELECT * FROM `recipient`";
         service().executeResultQuery(query, (result) -> {
-            function.cb(resultToEmployees(result));
+            function.cb(resultToRecipients(result));
         });
     }
 

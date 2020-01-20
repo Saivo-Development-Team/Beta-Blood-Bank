@@ -10,9 +10,13 @@ import beta.blood.nurse.DonorQuestionController.Questionnaire;
 import static beta.blood.nurse.DonorQuestionController.setQuestionBox;
 import static beta.blood.nurse.DonorQuestionController.setQuestionnaireBox;
 import java.lang.reflect.Field;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -60,12 +64,12 @@ public class Helper<T> {
         return result == JOptionPane.OK_OPTION;
     }
 
-    public static boolean alertMessage(String message, String title) {
-        int result = JOptionPane.showConfirmDialog(
-                null, message, title,
-                OK_CANCEL_OPTION
-        );
-        return result == JOptionPane.OK_OPTION;
+    public static Optional<ButtonType> alertMessage(String message, String title, AlertType option, ButtonType... elements) {
+        Alert alert = new Alert(option);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.getButtonTypes().setAll(elements);
+        return alert.showAndWait();
     }
 
     public static int randomInt(int size) {

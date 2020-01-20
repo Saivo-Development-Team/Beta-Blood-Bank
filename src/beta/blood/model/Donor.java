@@ -5,8 +5,6 @@
  */
 package beta.blood.model;
 
-import beta.blood.Handler;
-import beta.blood.database.DatabaseService;
 import static beta.blood.database.DatabaseService.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -88,9 +86,9 @@ public class Donor {
     private static ArrayList<Donor> resultToDonors(ResultSet result) {
         ArrayList<Donor> donors = new ArrayList();
         try {
-            while (!result.isAfterLast()) {
+            do {
                 donors.add(resultToDonor(result));
-            }
+            } while (result.next());
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
