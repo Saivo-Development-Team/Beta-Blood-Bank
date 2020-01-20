@@ -8,11 +8,11 @@ package beta.blood.nurse;
 import static beta.blood.Handler.setScene;
 import static beta.blood.Helper.StaticData.QUESTIONNAIRE_ARRAY;
 import static beta.blood.Helper.StaticData.TITLE_OPTIONS;
+import static beta.blood.Helper.alertMessage;
 import static beta.blood.Helper.isNotEmpty;
 import beta.blood.model.Answers;
 import beta.blood.model.Donor;
 import static beta.blood.nurse.DonorQuestionController.LEFT_RADIO_BUTTON;
-import static beta.blood.nurse.DonorQuestionController.QUESTIONNAIRE;
 import beta.blood.nurse.DonorQuestionController.Question;
 import beta.blood.nurse.DonorQuestionController.Questionnaire;
 import static beta.blood.nurse.DonorQuestionController.RIGHT_RADIO_BUTTON;
@@ -37,6 +37,9 @@ import beta.blood.model.Blood;
 import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
+import static beta.blood.nurse.DonorQuestionController.QUESTION_LABEL;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -51,6 +54,8 @@ public class NurseAddDonorController implements Initializable {
     @FXML
     ComboBox<String> combobox;
 
+    @FXML
+    Button addDonorButton;
     @FXML
     TextField donorIdTextField;
     @FXML
@@ -78,13 +83,13 @@ public class NurseAddDonorController implements Initializable {
     char gender = 'N';
     String name, surname, age, email, telephone, cellphone, homeAddress;
     String answers = "";
-
     VBox mainVBox = new VBox();
     ToggleGroup genderToggle = new ToggleGroup();
 
     @FXML
     private void back() {
         setScene(getClass(), "Nurse Home", "NurseHome.fxml");
+        mainVBox.getChildren().clear();
     }
 
     @FXML
@@ -166,15 +171,25 @@ public class NurseAddDonorController implements Initializable {
 
     private void initializeQuestionnaire() {
         for (Questionnaire questionnaire : QUESTIONNAIRE_ARRAY) {
-            VBox holder = (VBox) questionnaire.getHolder().lookup("#" + QUESTIONNAIRE);
+            VBox holder = (VBox) questionnaire.getHolder().lookup("#" + questionnaire.getId());
             holder.getChildren().addAll(questionnaire.getQuestionNodes());
             mainVBox.getChildren().add(questionnaire.getHolder());
 
             for (Question question : questionnaire.getQuestions()) {
                 RadioButton left = (RadioButton) question.view.lookup("#" + LEFT_RADIO_BUTTON);
                 ToggleGroup toggle = left.getToggleGroup();
-                toggle.selectedToggleProperty().addListener((a, b, value) -> {
+                toggle.selectedToggleProperty().addListener((o, b, value) -> {
                     RadioButton selected = (RadioButton) value;
+                    String questionText = ((Label) question.view.lookup("#" + QUESTION_LABEL)).getText();
+
+                    if (question.answer == null ? selected.getText() != null
+                            : !question.answer.equals(selected.getText())) {
+                        addDonorButton.setDisable(true);
+                        alertMessage(questionText, "Incorrect Answer, Please Correct it Now!");
+                    } else {
+                        addDonorButton.setDisable(false);
+                    }
+
                     switch (selected.getId()) {
                         case LEFT_RADIO_BUTTON:
                             questionnaire.submitAnswer(question, selected.getText());

@@ -9,6 +9,7 @@ import beta.blood.Handler;
 import static beta.blood.Handler.loadFxml;
 import beta.blood.Helper.AnchorPaneConstraints;
 import static beta.blood.Helper.isNotEmpty;
+import static beta.blood.Helper.randomInt;
 import static beta.blood.Helper.setAnchorPaneConstraints;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,13 +53,13 @@ public class DonorQuestionController implements Initializable {
             QUESTION_LABEL = "questionLabel";
     private static String titleText, questionText, leftButtonText, rightButtonText;
 
-    public static Question setQuestionBox(String title, String question, String left, String right) {
+    public static Question setQuestionBox(String title, String question, String left, String right, String answer) {
         titleText = title;
         questionText = question;
         leftButtonText = left;
         rightButtonText = right;
         toggle = new ToggleGroup();
-        return new Question();
+        return new Question(answer);
     }
 
     public static Node setQuestionnaireBox(String title) {
@@ -96,16 +97,29 @@ public class DonorQuestionController implements Initializable {
 
     public static class Questionnaire {
 
-        private static int sections = 0;
         private final Node holder;
+        private final String Id;
+        private static int sections = 0;
+        
         private final ArrayList<Question> questions = new ArrayList();
         private final ObservableList<String> ANSWERS = FXCollections.observableArrayList();
-
         public Questionnaire(Node questionnaire, Question[] questions) {
+            this.Id = QUESTIONNAIRE + randomInt(100);
             this.holder = questionnaire;
+//            AnchorPane anchor = ((AnchorPane) holder);
+//            anchor.getChildren().forEach((view) -> {
+//                if (view instanceof VBox) {
+//                    view.setId(Id);
+//                }
+//            });
             this.questions.addAll(Arrays.asList(questions));
+            
         }
 
+        public interface BackPressedListener {
+            
+        }
+        
         public void submitAnswer(Question question, String answer) {
             Label label = (Label) question.view.lookup("#" + TITLE_LABEL);
             String title = label.getText();
@@ -117,8 +131,8 @@ public class DonorQuestionController implements Initializable {
                     + "[index:%d],[question:%s],[answer:%s]",
                     question.section, title, question.index,
                     ((Label) question.view
-                            .lookup("#" + QUESTION_LABEL))
-                            .getText(), answer
+                    .lookup("#" + QUESTION_LABEL))
+                    .getText(), answer
             );
             ANSWERS.add(_answer);
         }
@@ -163,16 +177,21 @@ public class DonorQuestionController implements Initializable {
             question.section = sections;
             return question.view;
         }
+
+        String getId() {
+            return this.Id;
+        }
     }
 
     public static class Question {
 
         Node view;
         int index;
-
         int section;
+        String answer;
 
-        public Question() {
+        public Question(String answer) {
+            this.answer = answer;
             view = loadFxml(DonorQuestionController.class, "DonorQuestion.fxml");
         }
 
