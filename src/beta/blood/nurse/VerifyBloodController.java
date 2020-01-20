@@ -109,6 +109,5 @@ public class VerifyBloodController implements Initializable {
 //        strings.addListener(null);
         donorBloodListView.getItems().addAll(strings);
         BloodTypes.setItems(BLOOD_TYPES);
-    }
-
+    }    
 }
