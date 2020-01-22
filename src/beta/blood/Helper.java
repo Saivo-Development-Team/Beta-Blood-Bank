@@ -93,7 +93,7 @@ public class Helper<T> {
     public static TableColumn createTableColumn(Field field) {
         TableColumn column = new TableColumn();
         column.setText(field.getName().toUpperCase());
-        column.setCellValueFactory((new PropertyValueFactory(field.getName())));
+        column.setCellValueFactory((new PropertyValueFactory<>(field.getName())));
         return column;
     }
 

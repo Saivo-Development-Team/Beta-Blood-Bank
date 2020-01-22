@@ -20,12 +20,11 @@ import java.util.ArrayList;
  */
 public class Donor {
 
-    private final Long donorId;
     private final int age, answers;
-    private final String name, surname, address;
+    private final String donorId, name, surname, address;
     char gender;
 
-    public Donor(Long donorID, int age, int answers, String name, String surname, String address, char gender) {
+    public Donor(String donorID, int age, int answers, String name, String surname, String address, char gender) {
         this.donorId = donorID;
         this.age = age;
         this.answers = answers;
@@ -35,7 +34,7 @@ public class Donor {
         this.gender = gender;
     }
 
-    public Long getDonorID() {
+    public String getDonorID() {
         return donorId;
     }
 
@@ -67,7 +66,7 @@ public class Donor {
         try {
             if (result.next()) {
                 return new Donor(
-                        result.getLong("DonorID"),
+                        result.getString("DonorID"),
                         result.getInt("Age"),
                         result.getInt("Answers"),
                         result.getString("Name"),
@@ -129,7 +128,7 @@ public class Donor {
     public static void insert(Donor donor) {
         String query = String.format("INSERT INTO `donor` "
                 + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`)"
-                + " VALUES ('%d','%s','%s','%s','%s','%d','%d')",
+                + " VALUES ('%s','%s','%s','%s','%s','%d','%d')",
                 donor.donorId,
                 donor.name,
                 donor.surname,

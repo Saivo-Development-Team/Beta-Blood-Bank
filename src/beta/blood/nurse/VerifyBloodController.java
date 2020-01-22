@@ -17,7 +17,6 @@ import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -40,7 +39,8 @@ public class VerifyBloodController implements Initializable {
     @FXML
     ListView<String> donorBloodListView;
 
-    ObservableList<String> strings;
+    ObservableList<String> donations = FXCollections.observableArrayList();
+
     ObservableSet<Pair<Donor, Blood>> bloodDonors = FXCollections.observableSet(new HashSet());
 
     @FXML
@@ -53,20 +53,22 @@ public class VerifyBloodController implements Initializable {
         String type = BloodTypes.getSelectionModel().getSelectedItem();
         donorBloodListView.getSelectionModel().getSelectedItems().forEach((string) -> {
             bloodDonors.forEach((pair) -> {
-                Long id = pair.getKey().getDonorID();
-                if (string.contains(String.format("[Id: %d]", id))) {
-                    Blood.getByQuery(String.format(
-                            "UPDATE `betablooddatabase`.`blood` "
-                            + "SET `Type` = '%s' "
-                            + "WHERE `blood`.`OfferedBy` = %d",
-                            type, id), UPDATE, null);
-                    bloodDonors.remove(pair);
-                    strings.remove(string);
+                String id = pair.getKey().getDonorID();
+                if (type != null) {
+                    if (string.contains(id)) {
+                        Blood.getByQuery(String.format(
+                                "UPDATE `betablooddatabase`.`blood` "
+                                + "SET `Type` = '%s' "
+                                + "WHERE `blood`.`OfferedBy` = %d",
+                                type, Long.parseLong(id)), UPDATE, null);
+                        donations.remove(string);
+                    }
+                } else {
+
                 }
             });
         });
         donorBloodListView.refresh();
-
     }
 
     @Override
@@ -78,7 +80,9 @@ public class VerifyBloodController implements Initializable {
                         Donor.getById(unit.getOfferedBy(), (donor) -> {
                             if (donor != null) {
                                 bloodDonors.removeIf((pair)
-                                        -> Objects.equals(pair.getKey().getDonorID(), donor.getDonorID())
+                                        -> Objects.equals(pair
+                                                .getKey().getDonorID(),
+                                                donor.getDonorID())
                                 );
                                 bloodDonors.add(new Pair(donor, unit));
                             }
@@ -87,15 +91,18 @@ public class VerifyBloodController implements Initializable {
                 })
         );
 
-        System.out.println(bloodDonors);
-        strings = FXCollections.observableArrayList(bloodDonors.stream()
-                .map((pair) -> String.format("[%s %s] [Id: %d] [Gender: %s]",
-                pair.getKey().getName(),
-                pair.getKey().getSurname(),
-                pair.getKey().getDonorID(),
-                pair.getKey().getGender()))
-                .collect(Collectors.toList()));
-        donorBloodListView.getItems().addAll(strings);
+        bloodDonors.forEach((pair) -> {
+            Donor donor = pair.getKey();
+            donations.add(String.format("[DonorId: %s][Fullname: %s %s][Gender: %s]",
+                    donor.getDonorID(),
+                    donor.getName(),
+                    donor.getSurname(),
+                    donor.getGender()
+            ));
+        });
+        
+        donorBloodListView.setItems(donations);
         BloodTypes.setItems(BLOOD_TYPES);
     }
+
 }
