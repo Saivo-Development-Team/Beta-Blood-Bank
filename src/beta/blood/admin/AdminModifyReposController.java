@@ -86,6 +86,58 @@ public class AdminModifyReposController implements Initializable {
     //Data for the recipient listview
     private final ObservableList<Recipient> recipientList = FXCollections
             .observableArrayList();
+    
+    @FXML
+    public void refreshAdmin() {
+        adminList.clear();
+        
+        Employee.getAll((employees) -> {
+            employees.forEach((employee) -> {
+                if (employee != null) {
+                    switch (employee.getPosition()) {
+                        case 0:
+                            adminList.add(employee);
+                            break;
+                        
+                    }
+                }
+            });
+        });
+        adminTableView.refresh();
+    }
+    
+    @FXML
+    public void refreshNurse() {
+        
+        nurseList.clear();
+        
+        Employee.getAll((employees) -> {
+            employees.forEach((employee) -> {
+                if (employee != null) {
+                    switch (employee.getPosition()) {
+                        case 1:
+                            nurseList.add(employee);
+                            break;
+                        
+                    }
+                }
+            });
+        });
+        nurseTableView.refresh();
+    }
+    
+    @FXML
+    public void refreshRecipient() {
+        Recipient.getAll((recipients) -> {
+            recipients.forEach((recipient) -> {
+                if (recipient != null) {
+                    recipientList.add(recipient);
+                }
+            });
+        });
+        
+        recipientTableView.refresh();
+    }
 
     @FXML
     public void deleteAdmin() {
