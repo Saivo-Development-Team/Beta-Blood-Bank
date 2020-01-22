@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -70,6 +71,7 @@
                         <ComboBox fx:id="bloodComboBox" layoutX="217.0" layoutY="37.0" prefWidth="150.0" />
                         <TextField fx:id="bloodamount" layoutX="217.0" layoutY="92.0" prefHeight="26.0" prefWidth="150.0" />
                         <Button layoutX="217.0" layoutY="144.0" mnemonicParsing="false" onAction="#deleteBlood" prefWidth="150.0" text="Delete Units" />
+                        <PieChart fx:id="currentBloodCount" layoutX="13.0" layoutY="208.0" prefHeight="400.0" prefWidth="355.0" title="Current Blood Count" />
                      </children>
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

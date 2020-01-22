@@ -20,10 +20,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
@@ -46,6 +49,9 @@ public class AdminModifyReposController implements Initializable {
     ComboBox<String> bloodComboBox;
 
     @FXML
+    PieChart currentBloodCount;
+
+    @FXML
     TextField bloodamount;
     @FXML
     TextField recChangeTel;
@@ -54,12 +60,20 @@ public class AdminModifyReposController implements Initializable {
     @FXML
     TextArea recChangeAddress;
 
+    ObservableList<String> bloodTypes = FXCollections
+            .observableArrayList();
+    int[] bloodTypeCount = {
+        0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+
     @FXML
     TableView<Employee> adminTableView;
     @FXML
     TableView<Employee> nurseTableView;
     @FXML
     TableView<Recipient> recipientTableView;
+
+    ObservableList<Data> bloodData = FXCollections.observableArrayList();
 
     //Data for the admin listview
     private final ObservableList<Employee> adminList = FXCollections
@@ -97,22 +111,22 @@ public class AdminModifyReposController implements Initializable {
         String bloodType = bloodComboBox.getSelectionModel().getSelectedItem();
         Blood.getByQuery(
                 String.format(
-                "SELECT * FROM `blood` WHERE `blood`.`Type` = '%s'", bloodType),
+                        "SELECT * FROM `blood` WHERE `blood`.`Type` = '%s'", bloodType),
                 RESULT, (Function<ResultSet>) (result) -> {
-                    ArrayList<Blood> list = Blood.resultToList(result);
-                    System.out.println(Arrays.toString(list.toArray()));
-                    System.out.println(list.size());
-                    System.out.println(amount);
-                    if (amount > list.size()) {
-                        JOptionPane.showMessageDialog(null, "You are deleting too much blood");
-                    } else {
-                        list.forEach((unit) -> {
-                            if(unit != null) {
-                            Blood.delete(unit.getBloodID());
+                            ArrayList<Blood> list = Blood.resultToList(result);
+                            System.out.println(Arrays.toString(list.toArray()));
+                            System.out.println(list.size());
+                            System.out.println(amount);
+                            if (amount > list.size()) {
+                                JOptionPane.showMessageDialog(null, "You are deleting too much blood");
+                            } else {
+                                list.forEach((unit) -> {
+                                    if (unit != null) {
+                                        Blood.delete(unit.getBloodID());
+                                    }
+                                });
                             }
-                        });
-                    }
-                }
+                        }
         );
     }
 
@@ -131,7 +145,7 @@ public class AdminModifyReposController implements Initializable {
 
     @FXML
     public void changeRecEmail() {
-         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
 
             String newEmail = recChangeEmail.getText();
             recipient.setEmail(newEmail);
@@ -185,6 +199,27 @@ public class AdminModifyReposController implements Initializable {
         bloodComboBox.setItems(BLOOD_TYPES);
         adminComboBox.setItems(BRANCH_OPTIONS);
         nurseComboBox.setItems(BRANCH_OPTIONS);
+        bloodTypes.addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-", "UN");
+
+        Blood.getAll((blood) -> {
+            blood.forEach((unit) -> {
+                int index = bloodTypes.indexOf(unit.getType());
+                bloodTypeCount[index]++;
+            });
+        });
+
+        bloodTypes.forEach((type) -> {
+            bloodData.add(new Data(type, bloodTypeCount[bloodTypes.indexOf(type)]));
+        });
+
+        bloodData.forEach((chartdata) -> {
+            chartdata.nameProperty().bind(Bindings.concat(
+                    chartdata.getName(), " ", chartdata.pieValueProperty(), " Units"
+            ));
+        });
+
+        currentBloodCount.setData(bloodData);
+        System.out.println(Arrays.toString(bloodTypeCount));
 
         Employee.getAll((employees) -> {
             employees.forEach((employee) -> {
