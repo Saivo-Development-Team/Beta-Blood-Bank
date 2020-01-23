@@ -5,18 +5,19 @@
  */
 package beta.blood;
 
-import beta.blood.model.Employee;
-import beta.blood.nurse.DonorQuestionController;
 import beta.blood.nurse.DonorQuestionController.Question;
 import beta.blood.nurse.DonorQuestionController.Questionnaire;
 import static beta.blood.nurse.DonorQuestionController.setQuestionBox;
 import static beta.blood.nurse.DonorQuestionController.setQuestionnaireBox;
 import java.lang.reflect.Field;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -63,6 +64,14 @@ public class Helper<T> {
         return result == JOptionPane.OK_OPTION;
     }
 
+    public static Optional<ButtonType> alertMessage(String message, String title, AlertType option, ButtonType... elements) {
+        Alert alert = new Alert(option);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.getButtonTypes().setAll(elements);
+        return alert.showAndWait();
+    }
+
     public static int randomInt(int size) {
         return (int) (Math.random() * size);
     }
@@ -84,7 +93,7 @@ public class Helper<T> {
     public static TableColumn createTableColumn(Field field) {
         TableColumn column = new TableColumn();
         column.setText(field.getName().toUpperCase());
-        column.setCellValueFactory((new PropertyValueFactory(field.getName())));
+        column.setCellValueFactory((new PropertyValueFactory<>(field.getName())));
         return column;
     }
 
@@ -101,8 +110,8 @@ public class Helper<T> {
 
     }
 
-    public static Question questionBox(String title, String question, String left, String right) {
-        return setQuestionBox(title, question, left, right);
+    public static Question questionBox(String title, String question, String left, String right, String answer) {
+        return setQuestionBox(title, question, left, right, answer);
     }
 
     public static Node questionnaireBox(String title) {
@@ -143,27 +152,22 @@ public class Helper<T> {
 
         public static final Node[] QUESTIONNAIRE_BOX = {
             questionnaireBox("Lifestyle Questionnaire (YES/NO)"),
-            questionnaireBox("More...")
+            questionnaireBox("Health Questionnaire")
         };
 
         public static final Question[][] QUESTION_BOX = {
-            {questionBox("Title 1", "Question 1", "Yes", "No"),
-                questionBox("", "Question 2", "Yes", "No"),
-                questionBox("", "Question 3", "Yes", "No"),
-                questionBox("", "Question 4", "Yes", "No"),
-                questionBox("Title 2", "Question 5", "Yes", "No"),
-                questionBox("", "Question 6", "Yes", "No"),
-                questionBox("", "Question 7", "Yes", "No"),
-                questionBox("", "Question 8", "Yes", "No"),
-                questionBox("", "Question 9", "Yes", "No"),
-                questionBox("Title 3", "Question 10", "Yes", "No"),
-                questionBox("", "Question 11", "Yes", "No"),
-                questionBox("", "Question 12", "Yes", "No"),
-                questionBox("", "Question 13", "Yes", "No")},
-            {questionBox("Title 4", "Question 1", "Yes", "No"),
-                questionBox("", "Question 2", "Yes", "No"),
-                questionBox("", "Question 3", "Yes", "No"),
-                questionBox("", "Question 4", "Yes", "No")}};
+            {questionBox("", "Do you consider your blood safe to be transfused to a patient?", "Yes", "No", "Yes"),
+                questionBox("", "Have you or your partner ever used recreational/street drugs by nose, mouth or injection needle?", "Yes", "No", "No"),
+                questionBox("In the past six months have you:", "Had a tattoo, body piercing or permanent makeup applied?", "Yes", "No", "No"),
+                questionBox("", "Had raatib, ritual scarring, ritual piercing, ritual circumcision, blood sharing or been stabbed?", "Yes", "No", "No"),
+                questionBox("For health care workers and their partners only, in the last six months have you:", "Have you or your sexual partner had a needle stick or skin penetrating injury; or had skin, eye or mouth contact with another person’s blood?", "Yes", "No", "No"),
+                questionBox("Questions of a sexual nature", "Do you have AIDS or are you HIV positive?", "Yes", "No", "No"),
+                questionBox("", "Have you ever had sexual contact with anyone who has AIDS or is HIV positive?", "Yes", "No", "No"),},
+            {questionBox("Health Questions", "In the past 4 hours have you had something to eat and drink?", "Yes", "No", "Yes"),
+                questionBox("", "Have you had a cold, flu, sore throat, fever, infection or allergies?", "Yes", "No", "No"),
+                questionBox("", "Have you taken any medication, injections or tablets?", "Yes", "No", "No"),
+                questionBox("", "Do you have any diseases", "Yes", "No", "No"),
+                questionBox("", "Have you ever injected or been injected with illegal steroids?", "Yes", "No", "No")}};
 
         public static final Questionnaire[] QUESTIONNAIRE_ARRAY = {
             new Questionnaire(QUESTIONNAIRE_BOX[0], QUESTION_BOX[0]),

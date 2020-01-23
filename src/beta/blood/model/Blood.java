@@ -76,8 +76,14 @@ public class Blood {
     public static ArrayList<Blood> resultToList(ResultSet result) {
         ArrayList<Blood> blood = new ArrayList();
         try {
-            while (!result.isAfterLast()) {
-                blood.add(resultToBlood(result));
+            while (result.next()) {
+                blood.add(new Blood(
+                        result.getInt("BloodID"),
+                        result.getInt("Quantity"),
+                        result.getLong("OfferedBy"),
+                        result.getString("Type"),
+                        result.getString("VerifiedBy")
+                ));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);

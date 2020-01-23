@@ -17,7 +17,6 @@ import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -25,8 +24,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.util.Pair;
 
 /**
@@ -37,36 +34,18 @@ import javafx.util.Pair;
 public class VerifyBloodController implements Initializable {
 
     @FXML
-    TableView<beta.blood.model.TableModel.donorTable> donorTable;
-    @FXML
-    TableColumn<beta.blood.model.TableModel.donorTable, String> col_id_ad;
-    @FXML
-    TableColumn<beta.blood.model.TableModel.donorTable, String> col_name_ad;
-    @FXML
-    TableColumn<beta.blood.model.TableModel.donorTable, String> col_surname_ad;
-    
-     //Data for the donor Tableview
-    private final ObservableList<beta.blood.model.TableModel.donorTable> donorList = FXCollections
-            .observableArrayList();
-    
-    
-    
-   
-    
-    
-    @FXML
     ComboBox<String> BloodTypes;
 
     @FXML
     ListView<String> donorBloodListView;
 
-    ObservableList<String> strings;
+    ObservableList<String> donations = FXCollections.observableArrayList();
+
     ObservableSet<Pair<Donor, Blood>> bloodDonors = FXCollections.observableSet(new HashSet());
 
     @FXML
-    private void verify()
-    {   
-        
+    private void back() {
+        Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
     }
 
     @FXML
@@ -74,20 +53,22 @@ public class VerifyBloodController implements Initializable {
         String type = BloodTypes.getSelectionModel().getSelectedItem();
         donorBloodListView.getSelectionModel().getSelectedItems().forEach((string) -> {
             bloodDonors.forEach((pair) -> {
-                Long id = pair.getKey().getDonorID();
-                if (string.contains(String.format("[Id: %d]", id))) {
-                    Blood.getByQuery(String.format(
-                            "UPDATE `betablooddatabase`.`blood` "
-                            + "SET `Type` = '%s' "
-                            + "WHERE `blood`.`OfferedBy` = %d",
-                            type, id), UPDATE, null);
-                    bloodDonors.remove(pair);
-                    strings.remove(string);
-                    donorBloodListView.refresh();
+                String id = pair.getKey().getDonorID();
+                if (type != null) {
+                    if (string.contains(id)) {
+                        Blood.getByQuery(String.format(
+                                "UPDATE `betablooddatabase`.`blood` "
+                                + "SET `Type` = '%s' "
+                                + "WHERE `blood`.`OfferedBy` = %d",
+                                type, Long.parseLong(id)), UPDATE, null);
+                        donations.remove(string);
+                    }
+                } else {
+
                 }
             });
         });
-
+        donorBloodListView.refresh();
     }
 
     @Override
@@ -96,45 +77,32 @@ public class VerifyBloodController implements Initializable {
                 RESULT, (Function<ResultSet>) (result)
                 -> Blood.resultToList(result).forEach((unit) -> {
                     if (unit != null) {
-//                        if (!bloodDonors.stream()
-//                        .findAny()
-//                        .filter((pair)
-//                                -> pair
-//                                .getValue()
-//                                .getBloodID() == unit.getBloodID())
-//                        .isPresent()) {
-                            Donor.getById(unit.getOfferedBy(), (donor) -> {
-                                if (donor != null) {
-                                    bloodDonors.removeIf((pair)
-                                            -> Objects.equals(
-                                                    pair.getKey().getDonorID(),
-                                                    donor.getDonorID())
-                                    );
-                                    bloodDonors.add(new Pair(donor, unit));
-                                }
-                            });
-//                        }
+                        Donor.getById(unit.getOfferedBy(), (donor) -> {
+                            if (donor != null) {
+                                bloodDonors.removeIf((pair)
+                                        -> Objects.equals(pair
+                                                .getKey().getDonorID(),
+                                                donor.getDonorID())
+                                );
+                                bloodDonors.add(new Pair(donor, unit));
+                            }
+                        });
                     }
                 })
         );
 
-        System.out.println(bloodDonors);
-        strings = FXCollections.observableArrayList(bloodDonors.stream()
-                .map((pair) -> String.format("[%s %s] [Id: %d] [Gender: %s]",
-                                pair.getKey().getName(),
-                                pair.getKey().getSurname(),
-                                pair.getKey().getDonorID(),
-                                pair.getKey().getGender()))
-                .collect(Collectors.toList()));
+        bloodDonors.forEach((pair) -> {
+            Donor donor = pair.getKey();
+            donations.add(String.format("[DonorId: %s][Fullname: %s %s][Gender: %s]",
+                    donor.getDonorID(),
+                    donor.getName(),
+                    donor.getSurname(),
+                    donor.getGender()
+            ));
+        });
         
-//        strings.addListener(null);
-        donorBloodListView.getItems().addAll(strings);
+        donorBloodListView.setItems(donations);
         BloodTypes.setItems(BLOOD_TYPES);
     }
 
-    public void back()
-    {
-    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-    }
-    
 }

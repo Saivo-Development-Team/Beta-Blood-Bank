@@ -20,13 +20,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 
@@ -45,7 +49,22 @@ public class AdminModifyReposController implements Initializable {
     ComboBox<String> bloodComboBox;
 
     @FXML
+    PieChart currentBloodCount;
+
+    @FXML
     TextField bloodamount;
+    @FXML
+    TextField recChangeTel;
+    @FXML
+    TextField recChangeEmail;
+    @FXML
+    TextArea recChangeAddress;
+
+    ObservableList<String> bloodTypes = FXCollections
+            .observableArrayList();
+    int[] bloodTypeCount = {
+        0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
 
     @FXML
     TableView<Employee> adminTableView;
@@ -53,6 +72,8 @@ public class AdminModifyReposController implements Initializable {
     TableView<Employee> nurseTableView;
     @FXML
     TableView<Recipient> recipientTableView;
+
+    ObservableList<Data> bloodData = FXCollections.observableArrayList();
 
     //Data for the admin listview
     private final ObservableList<Employee> adminList = FXCollections
@@ -65,6 +86,58 @@ public class AdminModifyReposController implements Initializable {
     //Data for the recipient listview
     private final ObservableList<Recipient> recipientList = FXCollections
             .observableArrayList();
+    
+    @FXML
+    public void refreshAdmin() {
+        adminList.clear();
+        
+        Employee.getAll((employees) -> {
+            employees.forEach((employee) -> {
+                if (employee != null) {
+                    switch (employee.getPosition()) {
+                        case 0:
+                            adminList.add(employee);
+                            break;
+                        
+                    }
+                }
+            });
+        });
+        adminTableView.refresh();
+    }
+    
+    @FXML
+    public void refreshNurse() {
+        
+        nurseList.clear();
+        
+        Employee.getAll((employees) -> {
+            employees.forEach((employee) -> {
+                if (employee != null) {
+                    switch (employee.getPosition()) {
+                        case 1:
+                            nurseList.add(employee);
+                            break;
+                        
+                    }
+                }
+            });
+        });
+        nurseTableView.refresh();
+    }
+    
+    @FXML
+    public void refreshRecipient() {
+        Recipient.getAll((recipients) -> {
+            recipients.forEach((recipient) -> {
+                if (recipient != null) {
+                    recipientList.add(recipient);
+                }
+            });
+        });
+        
+        recipientTableView.refresh();
+    }
 
     @FXML
     public void deleteAdmin() {
@@ -90,38 +163,62 @@ public class AdminModifyReposController implements Initializable {
         String bloodType = bloodComboBox.getSelectionModel().getSelectedItem();
         Blood.getByQuery(
                 String.format(
-                "SELECT * FROM `blood` WHERE `blood`.`Type` = '%s'", bloodType),
+                        "SELECT * FROM `blood` WHERE `blood`.`Type` = '%s'", bloodType),
                 RESULT, (Function<ResultSet>) (result) -> {
-                    ArrayList<Blood> list = Blood.resultToList(result);
-                    System.out.println(Arrays.toString(list.toArray()));
-                    System.out.println(list.size());
-                    System.out.println(amount);
-                    if (amount > list.size()) {
-                        JOptionPane.showMessageDialog(null, "You are deleting too much blood");
-                    } else {
-                        list.forEach((unit) -> {
-                            if(unit != null) {
-                            Blood.delete(unit.getBloodID());
+                            ArrayList<Blood> list = Blood.resultToList(result);
+                            System.out.println(Arrays.toString(list.toArray()));
+                            System.out.println(list.size());
+                            System.out.println(amount);
+                            if (amount > list.size()) {
+                                JOptionPane.showMessageDialog(null, "You are deleting too much blood");
+                            } else {
+                                list.forEach((unit) -> {
+                                    if (unit != null) {
+                                        Blood.delete(unit.getBloodID());
+                                    }
+                                });
                             }
-                        });
-                    }
-                }
+                        }
         );
     }
 
     @FXML
     public void changeRecTel() {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
 
+            String newTel = recChangeTel.getText();
+            recipient.setTelephone(newTel);
+            Recipient.update(recipient.getRecipientID(), recipient);
+
+        });
+        recChangeTel.clear();
+        recipientTableView.refresh();
     }
 
     @FXML
     public void changeRecEmail() {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
 
+            String newEmail = recChangeEmail.getText();
+            recipient.setEmail(newEmail);
+            Recipient.update(recipient.getRecipientID(), recipient);
+
+        });
+        recChangeEmail.clear();
+        recipientTableView.refresh();
     }
 
     @FXML
     public void changeRecAddress() {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
 
+            String newAddress = recChangeAddress.getText();
+            recipient.setAddress(newAddress);
+            Recipient.update(recipient.getRecipientID(), recipient);
+
+        });
+        recChangeAddress.clear();
+        recipientTableView.refresh();
     }
 
     @FXML
@@ -154,6 +251,27 @@ public class AdminModifyReposController implements Initializable {
         bloodComboBox.setItems(BLOOD_TYPES);
         adminComboBox.setItems(BRANCH_OPTIONS);
         nurseComboBox.setItems(BRANCH_OPTIONS);
+        bloodTypes.addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-", "UN");
+
+        Blood.getAll((blood) -> {
+            blood.forEach((unit) -> {
+                int index = bloodTypes.indexOf(unit.getType());
+                bloodTypeCount[index]++;
+            });
+        });
+
+        bloodTypes.forEach((type) -> {
+            bloodData.add(new Data(type, bloodTypeCount[bloodTypes.indexOf(type)]));
+        });
+
+        bloodData.forEach((chartdata) -> {
+            chartdata.nameProperty().bind(Bindings.concat(
+                    chartdata.getName(), " ", chartdata.pieValueProperty(), " Units"
+            ));
+        });
+
+        currentBloodCount.setData(bloodData);
+        System.out.println(Arrays.toString(bloodTypeCount));
 
         Employee.getAll((employees) -> {
             employees.forEach((employee) -> {

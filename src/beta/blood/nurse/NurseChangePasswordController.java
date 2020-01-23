@@ -17,67 +17,64 @@ import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
-
-
 public class NurseChangePasswordController implements Initializable {
- @FXML
+
+    @FXML
     TextField currpass;
     @FXML
     TextField newpass;
-    
-    
+
     String employeeID = LoginService.getCurrentUser().getEmployeeId();
     String password;
     String currentpass = LoginService.getCurrentUser().getPassword();
-    
-    
-@FXML
-private void back() {
-    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-}    
 
- @FXML
+    @FXML
+    private void back() {
+        Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+    }
+
+    @FXML
     private void change() {
-    int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to change your password?", "Alert", OK_CANCEL_OPTION);
-        if(result == JOptionPane.OK_OPTION)
-        {   if(currpass.getText().equals(currentpass))
-            {   if(isPasswordChangeCompleted()) 
-                {
-                Employee.update(employeeID ,newpass.getText());
-                JOptionPane.showMessageDialog(null, "Password Changed");
-                LoginService.getCurrentUser().setPassword(newpass.getText());
-                clearForm();
+        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to change your password?", "Alert", OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            if (currpass.getText().equals(currentpass)) {
+                if (isPasswordChangeCompleted()) {
+                    Employee.update(employeeID, newpass.getText());
+                    JOptionPane.showMessageDialog(null, "Password Changed");
+                    LoginService.getCurrentUser().setPassword(newpass.getText());
+                    clearForm();
                 }
                 Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-                Handler.getWindow().setMaximized(true); 
-            }
-            else 
+                Handler.getWindow().setMaximized(true);
+            } else {
                 JOptionPane.showMessageDialog(null, "Current Password is Incorrect");
-        clearForm();
-                    Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-                    Handler.getWindow().setMaximized(true); 
-        }
-        else{
+            }
+            clearForm();
             Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
-            Handler.getWindow().setMaximized(true);  
-        }}
-    
+            Handler.getWindow().setMaximized(true);
+        } else {
+            Handler.setScene(getClass(), "Nurse Home", "/beta/blood/nurse/NurseHome.fxml");
+            Handler.getWindow().setMaximized(true);
+        }
+    }
+
     private boolean isPasswordChangeCompleted() {
         return (setPassword());
     }
-    
-     private boolean setPassword() {
+
+    private boolean setPassword() {
         password = newpass.getText();
         return isNotEmpty(password);
     }
 
-      private void clearForm() {
+    private void clearForm() {
         currpass.setText("");
         newpass.setText("");
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

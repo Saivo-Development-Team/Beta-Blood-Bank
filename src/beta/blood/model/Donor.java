@@ -5,8 +5,6 @@
  */
 package beta.blood.model;
 
-import beta.blood.Handler;
-import beta.blood.database.DatabaseService;
 import static beta.blood.database.DatabaseService.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,13 +20,12 @@ import java.util.ArrayList;
  */
 public class Donor {
 
-    private final Long donorId;
     private final int age, answers;
-    private final String name, surname, address, month;
+    private final String donorId, name, surname, address, month;
     
     char gender;
 
-    public Donor(Long donorID, int age, int answers, String name, String surname, String address, char gender, String month) {
+    public Donor(String donorID, int age, int answers, String name, String surname, String address, char gender, String month) {
         this.donorId = donorID;
         this.age = age;
         this.answers = answers;
@@ -43,7 +40,7 @@ public class Donor {
         return month;
     }
 
-    public Long getDonorID() {
+    public String getDonorID() {
         return donorId;
     }
 
@@ -75,7 +72,7 @@ public class Donor {
         try {
             if (result.next()) {
                 return new Donor(
-                        result.getLong("DonorID"),
+                        result.getString("DonorID"),
                         result.getInt("Age"),
                         result.getInt("Answers"),
                         result.getString("Name"),
@@ -95,9 +92,9 @@ public class Donor {
     private static ArrayList<Donor> resultToDonors(ResultSet result) {
         ArrayList<Donor> donors = new ArrayList();
         try {
-            while (!result.isAfterLast()) {
+            do {
                 donors.add(resultToDonor(result));
-            }
+            } while (result.next());
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -137,8 +134,10 @@ public class Donor {
 
     public static void insert(Donor donor) {
         String query = String.format("INSERT INTO `donor` "
+
                 + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`, `Month`)"
                 + " VALUES ('%d','%s','%s','%s','%s','%d','%d', '%s')",
+
                 donor.donorId,
                 donor.name,
                 donor.surname,

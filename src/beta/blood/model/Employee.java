@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class Employee {
 
     private final int position;
-    private String employeeId, name, surname, telephone, branch, password;
+    private final String employeeId, name, surname, telephone;
+    private String branch, password;
     public static final String EMPLOYEE_AD = "AD-", EMPLOYEE_NU = "NU-";
     public static final String ADMIN = "admin", NURSE = "nurse";
 
@@ -37,9 +38,10 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public void setPassword(String newpass)
-    {this.password = newpass;}
-    
+    public void setPassword(String newpass) {
+        this.password = newpass;
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }
@@ -71,7 +73,7 @@ public class Employee {
     public void setBranch(String branch) {
         this.branch = branch;
     }
-    
+
     private static Employee resultToEmployee(ResultSet result) {
         try {
             if (result.next()) {
@@ -94,9 +96,9 @@ public class Employee {
     private static ArrayList<Employee> resultToEmployees(ResultSet result) {
         ArrayList<Employee> employees = new ArrayList();
         try {
-            while (!result.isAfterLast()) {
+            do {
                 employees.add(resultToEmployee(result));
-            }
+            } while (!result.isLast());
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,14 +160,9 @@ public class Employee {
         );
         service().executeUpdateQuery(query, null);
     }
-    
-     public static void update(String employeeID,String newpassword) {
-        String query = 
-                "UPDATE `employee` SET `Password` = '"+ newpassword+ "' WHERE `EmployeeID` ='"+employeeID+"'";
-        
-        
-        
-        //
+
+    public static void update(String employeeID, String newpassword) {
+        String query = "UPDATE `employee` SET `Password` = '" + newpassword + "' WHERE `EmployeeID` ='" + employeeID + "'";
         service().executeUpdateQuery(query, null);
     }
 }

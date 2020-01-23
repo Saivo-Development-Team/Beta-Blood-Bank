@@ -21,7 +21,7 @@ public class Recipient {
 
     public static int DEFAULT_ID = -1;
     private final String recipientId;
-    private final String name, address, telephone, email;
+    private String name, address, telephone, email;
 
     public Recipient(String recipientId, String name, String address, String telephone, String email) {
         this.recipientId = recipientId;
@@ -51,6 +51,22 @@ public class Recipient {
         return email;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     private static Recipient resultToRecipient(ResultSet result) {
         try {
             if (result.next()) {
@@ -68,12 +84,12 @@ public class Recipient {
         return null;
     }
 
-    private static ArrayList<Recipient> resultToEmployees(ResultSet result) {
+    private static ArrayList<Recipient> resultToRecipients(ResultSet result) {
         ArrayList<Recipient> employees = new ArrayList();
         try {
-            while (!result.isAfterLast()) {
+            do {
                 employees.add(resultToRecipient(result));
-            }
+            } while (result.next());
         } catch (SQLException ex) {
             Logger.getLogger(Recipient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,7 +108,7 @@ public class Recipient {
     public static void getAll(Handler.Function<ArrayList<Recipient>> function) {
         String query = "SELECT * FROM `recipient`";
         service().executeResultQuery(query, (result) -> {
-            function.cb(resultToEmployees(result));
+            function.cb(resultToRecipients(result));
         });
     }
 
@@ -114,10 +130,18 @@ public class Recipient {
         service().executeUpdateQuery(query, null);
     }
 
-    public static void update(String recipientID) {
+    public static void update(String recipientID, Recipient recipient) {
         String query = String.format(
-                "UPDATE `recipient` SET `RecipientID`=%d,`Name`= '%s',`Address`='%s',`Telephone`='%s',`Email`='%s' "
-                + "WHERE `RecipientID`= %d", Integer.parseInt(recipientID));
+                "UPDATE `recipient` "
+                + "SET `RecipientID`='%s',`Name`='%s',`Address`='%s',`Telephone`='%s',`Email`='%s' "
+                + "WHERE `RecipientID`= %d",
+                recipient.recipientId,
+                recipient.name,
+                recipient.address,
+                recipient.telephone,
+                recipient.email,
+                Integer.parseInt(recipientID)
+        );
 
         service().executeUpdateQuery(query, null);
 

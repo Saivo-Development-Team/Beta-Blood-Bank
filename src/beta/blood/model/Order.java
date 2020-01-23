@@ -5,7 +5,6 @@
  */
 package beta.blood.model;
 
-import beta.blood.database.DatabaseService;
 import static beta.blood.database.DatabaseService.service;
 import java.sql.Date;
 
