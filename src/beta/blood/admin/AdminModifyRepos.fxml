@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
    <children>
-      <Button layoutX="445.0" layoutY="683.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="200.0" text="Refresh" textFill="#19c32d" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Button layoutX="445.0" layoutY="685.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="200.0" text="Refresh" textFill="#19c32d" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
             <Tab text="Modify Admin">
@@ -53,11 +53,11 @@
                         <TextField fx:id="recChangeTel" layoutX="14.0" layoutY="302.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" />
                         <TextField fx:id="recChangeEmail" layoutX="14.0" layoutY="352.0" prefWidth="200.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="0.0" />
                         <TextArea fx:id="recChangeAddress" layoutX="14.0" layoutY="402.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-                        <Button layoutX="568.0" layoutY="348.0" mnemonicParsing="false" onAction="#changeRecTel" prefWidth="200.0" text="Change telephone number" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="230.0" />
-                        <Button layoutX="568.0" layoutY="398.0" mnemonicParsing="false" onAction="#changeRecEmail" prefWidth="200.0" text="Change email address" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="230.0" />
-                        <Button layoutX="568.0" layoutY="526.0" mnemonicParsing="false" onAction="#changeRecAddress" prefWidth="200.0" text="Change address" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" />
+                        <Button layoutX="565.0" layoutY="350.0" mnemonicParsing="false" onAction="#changeRecTel" prefWidth="200.0" text="Change telephone number" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="230.0" />
+                        <Button layoutX="565.0" layoutY="400.0" mnemonicParsing="false" onAction="#changeRecEmail" prefWidth="200.0" text="Change email address" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="230.0" />
+                        <Button layoutX="565.0" layoutY="450.0" mnemonicParsing="false" onAction="#deleteRecipient" prefWidth="200.0" text="Delete" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="230.0" />
+                        <Button layoutX="565.0" layoutY="530.0" mnemonicParsing="false" onAction="#changeRecAddress" prefWidth="200.0" text="Change address" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" />
                         <TableView fx:id="recipientTableView" layoutX="45.0" layoutY="45.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Button layoutX="230.0" layoutY="515.0" mnemonicParsing="false" onAction="#deleteRecipient" prefWidth="200.0" text="Delete" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="230.0" />
                      </children>
                      <padding>
                         <Insets bottom="15.0" top="15.0" />
