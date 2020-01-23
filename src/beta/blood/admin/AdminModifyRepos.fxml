@@ -73,7 +73,8 @@
                         <ComboBox fx:id="bloodComboBox" layoutX="245.0" layoutY="28.0" prefWidth="150.0" />
                         <TextField fx:id="bloodamount" layoutX="245.0" layoutY="83.0" prefHeight="26.0" prefWidth="150.0" />
                         <Button layoutX="245.0" layoutY="135.0" mnemonicParsing="false" onAction="#deleteBlood" prefWidth="150.0" text="Delete Units" />
-                        <PieChart fx:id="currentBloodCount" layoutX="41.0" layoutY="199.0" prefHeight="400.0" prefWidth="355.0" title="Current Blood Count" />
+                        <PieChart fx:id="currentBloodCount" layoutX="41.0" layoutY="255.0" prefHeight="344.0" prefWidth="355.0" title="Current Blood Count" />
+                        <TableView fx:id="bloodAmountTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="415.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
                      </children>
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

@@ -142,6 +142,11 @@ public class Helper<T> {
 
         public static final ObservableList<String> BLOOD_TYPES = FXCollections
                 .observableArrayList(
+                        "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-", "UN"
+                );
+
+        public static final ObservableList<String> VERIFIED_BLOOD_TYPES = FXCollections
+                .observableArrayList(
                         "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"
                 );
 
