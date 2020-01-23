@@ -7,7 +7,9 @@ package beta.blood.admin;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
 
 /**
  * FXML Controller class
@@ -16,6 +18,11 @@ import javafx.fxml.Initializable;
  */
 public class AdminRequestReportController implements Initializable {
 
+    @FXML
+    LineChart donorsChart;
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
