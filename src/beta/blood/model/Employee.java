@@ -98,7 +98,7 @@ public class Employee {
         try {
             do {
                 employees.add(resultToEmployee(result));
-            } while (result.next());
+            } while (!result.isLast());
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }

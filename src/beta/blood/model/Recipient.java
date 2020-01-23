@@ -85,15 +85,21 @@ public class Recipient {
     }
 
     private static ArrayList<Recipient> resultToRecipients(ResultSet result) {
-        ArrayList<Recipient> employees = new ArrayList();
+        ArrayList<Recipient> recipients = new ArrayList();
         try {
-            do {
-                employees.add(resultToRecipient(result));
-            } while (result.next());
+            while (result.next()) {
+                recipients.add(new Recipient(
+                        String.valueOf(result.getInt("RecipientID")),
+                        result.getString("Name"),
+                        result.getString("Address"),
+                        result.getString("Telephone"),
+                        result.getString("Email")
+                ));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Recipient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return employees;
+        return recipients;
     }
 
     public static void getById(int recipientId, Handler.Function<Recipient> function) {

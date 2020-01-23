@@ -5,7 +5,6 @@
  */
 package beta.blood.nurse;
 
-import beta.blood.Handler.Function;
 import static beta.blood.Handler.setScene;
 import static beta.blood.Helper.StaticData.QUESTIONNAIRE_ARRAY;
 import static beta.blood.Helper.StaticData.TITLE_OPTIONS;
@@ -39,14 +38,10 @@ import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
 import static beta.blood.nurse.DonorQuestionController.QUESTION_LABEL;
-import javafx.beans.value.ChangeListener;
-import javafx.scene.control.Alert;
-import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
 import static javafx.scene.control.Alert.AlertType.NONE;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  * FXML Controller class
@@ -85,7 +80,7 @@ public class NurseAddDonorController implements Initializable {
     @FXML
     RadioButton femaleRadioButton;
 
-    Long donorId;
+    String donorId;
     char gender = 'N';
     String name, surname, age, email, telephone, cellphone, homeAddress;
     String answers = "";
@@ -100,9 +95,9 @@ public class NurseAddDonorController implements Initializable {
 
     @FXML
     private void addDonor() {
-        donorId = Long.parseLong(isNotEmpty(donorIdTextField.getText())
+        donorId = isNotEmpty(donorIdTextField.getText())
                 ? donorIdTextField.getText()
-                : "");
+                : "";
 
         name = nameTextField.getText();
         surname = surnameTextField.getText();
@@ -127,7 +122,7 @@ public class NurseAddDonorController implements Initializable {
             Blood.insert(new Blood(
                     DEFULT_ID,
                     DEFULT_QUANTITY,
-                    donor.getDonorID(),
+                    Long.parseLong(donor.getDonorID()),
                     DEFULT_TYPE,
                     getCurrentUser().getEmployeeId()
             ));
