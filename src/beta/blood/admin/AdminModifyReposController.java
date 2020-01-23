@@ -120,6 +120,7 @@ public class AdminModifyReposController implements Initializable {
         nurseTableView.refresh();
         adminTableView.refresh();
     }
+    
 
     @FXML
     public void deleteAdmin() {
@@ -135,6 +136,15 @@ public class AdminModifyReposController implements Initializable {
         nurseTableView.getSelectionModel().getSelectedItems().forEach((nurse) -> {
             Employee.delete(nurse.getEmployeeId());
             nurseList.remove(nurse);
+        });
+        nurseTableView.refresh();
+    }
+    
+    @FXML
+    public void deleteRecipient() {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
+            Recipient.delete(Integer.parseInt(recipient.getRecipientId()));
+            recipientList.remove(recipient);
         });
         nurseTableView.refresh();
     }
@@ -275,6 +285,7 @@ public class AdminModifyReposController implements Initializable {
                 }
             });
         });
+        
 
         for (Field field : Employee.class.getDeclaredFields()) {
             switch (field.getName()) {
