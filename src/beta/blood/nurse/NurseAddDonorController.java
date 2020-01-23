@@ -182,14 +182,14 @@ public class NurseAddDonorController implements Initializable {
                 ToggleGroup toggle = left.getToggleGroup();
                 toggle.selectedToggleProperty().addListener((o, b, value) -> {
                     RadioButton selected = (RadioButton) value;
-                    String questionText = ((Label) question.view.lookup("#" + QUESTION_LABEL)).getText();
+                    String questionText = "Answering incorrectly to this questions means he/she cannot donate blood";
                     if (question.answer == null
                             ? selected.getText() != null
                             : !question.answer.equals(selected.getText())) {
                         addDonorButton.setDisable(true);
                         ButtonType result = alertMessage(
-                                questionText, "Incorrect, Set Correct Answer",
-                                NONE, new ButtonType("Yes"), new ButtonType("No")
+                                questionText, "Invalid Donor",
+                                NONE, new ButtonType("OK")
                         ).get();
                     } else {
                         addDonorButton.setDisable(false);

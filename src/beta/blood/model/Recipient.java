@@ -6,6 +6,7 @@
 package beta.blood.model;
 
 import beta.blood.Handler;
+import beta.blood.Handler.Function;
 import static beta.blood.database.DatabaseService.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -111,7 +112,7 @@ public class Recipient {
         });
     }
 
-    public static void getAll(Handler.Function<ArrayList<Recipient>> function) {
+    public static void getAll(Function<ArrayList<Recipient>> function) {
         String query = "SELECT * FROM `recipient`";
         service().executeResultQuery(query, (result) -> {
             function.cb(resultToRecipients(result));
