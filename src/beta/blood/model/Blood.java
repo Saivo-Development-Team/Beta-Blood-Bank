@@ -34,12 +34,20 @@ public class Blood {
         this.type = type;
         this.verifiedBy = verifiedBy;
     }
+    
+    public Blood(int quantity, String type) {
+        this.bloodID = -1;
+        this.quantity = quantity;
+        this.offeredBy = - Long.MAX_VALUE;
+        this.type = type;
+        this.verifiedBy = "";
+    }
 
     public int getBloodID() {
         return bloodID;
     }
 
-    public int getQuantity(String type) {
+    public int getQuantity() {
         return quantity;
     }
 

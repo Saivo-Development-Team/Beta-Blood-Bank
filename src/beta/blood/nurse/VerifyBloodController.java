@@ -9,7 +9,7 @@ import beta.blood.Handler;
 import beta.blood.Handler.Function;
 import static beta.blood.Handler.QueryType.RESULT;
 import static beta.blood.Handler.QueryType.UPDATE;
-import static beta.blood.Helper.StaticData.BLOOD_TYPES;
+import static beta.blood.Helper.StaticData.VERIFIED_BLOOD_TYPES;
 import beta.blood.model.Blood;
 import beta.blood.model.Donor;
 import java.net.URL;
@@ -102,7 +102,7 @@ public class VerifyBloodController implements Initializable {
         });
 
         donorBloodListView.setItems(donations);
-        BloodTypes.setItems(BLOOD_TYPES);
+        BloodTypes.setItems(VERIFIED_BLOOD_TYPES);
     }
 
 }

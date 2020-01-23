@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseHomeController">
    <children>
 
       <Button layoutX="476.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
@@ -18,20 +18,20 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      <AnchorPane layoutX="20.0" layoutY="51.0" prefHeight="389.0" prefWidth="620.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+      <Button layoutX="15.0" layoutY="100.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      <AnchorPane layoutX="10.0" layoutY="60.0" prefHeight="360.0" prefWidth="620.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="60.0">
          <children>
-            <Button layoutX="142.0" layoutY="280.0" mnemonicParsing="false" onAction="#donorNavigation" prefHeight="59.0" prefWidth="166.0" text="Add Donor" textFill="RED">
+            <Button layoutX="140.0" layoutY="280.0" mnemonicParsing="false" onAction="#donorNavigation" prefHeight="60.0" prefWidth="160.0" text="Add Donor" textFill="RED">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="332.0" layoutY="280.0" mnemonicParsing="false" onAction="#verifyBloodNavigation" prefHeight="59.0" prefWidth="166.0" text="Verify Blood" textFill="RED">
+            <Button layoutX="330.0" layoutY="280.0" mnemonicParsing="false" onAction="#verifyBloodNavigation" prefHeight="60.0" prefWidth="160.0" text="Verify Blood" textFill="RED">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <ImageView fitHeight="256.0" fitWidth="316.0" layoutX="225.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="250.0" fitWidth="350.0" layoutX="220.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="215.0" AnchorPane.topAnchor="25.0">
                <image>
                   <Image url="@../../../resources/sanbs.jpg" />
                </image>
