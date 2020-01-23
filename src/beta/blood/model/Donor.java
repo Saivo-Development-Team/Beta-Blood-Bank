@@ -126,7 +126,7 @@ public class Donor {
 
     public static void getLastInserted(Function<Donor> function) {
         String query = String.format(
-                "SELECT * FROM `donor` ORDER BY `DonorID` DESC LIMIT 1"
+                "SELECT * FROM `donor` ORDER BY `Answers` DESC LIMIT 1"
         );
         service().executeResultQuery(query, (Function<ResultSet>) (result) -> {
             function.cb(resultToDonor(result));

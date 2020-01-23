@@ -37,11 +37,9 @@ import beta.blood.model.Blood;
 import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
-import static beta.blood.nurse.DonorQuestionController.QUESTION_LABEL;
 import static javafx.scene.control.Alert.AlertType.NONE;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
