@@ -59,8 +59,8 @@ public class AdminModifyReposController implements Initializable {
     @FXML
     TextArea recChangeAddress;
 
-    ObservableList<String> bloodTypes = FXCollections
-            .observableArrayList();
+    ObservableList<String> bloodTypes = FXCollections.observableArrayList();
+
     int[] bloodTypeCount = {
         0, 0, 0, 0, 0, 0, 0, 0, 0
     };
@@ -107,7 +107,7 @@ public class AdminModifyReposController implements Initializable {
                 }
             });
         });
-        
+
         Recipient.getAll((recipients) -> {
             recipients.forEach((recipient) -> {
                 if (recipient != null) {
@@ -251,7 +251,6 @@ public class AdminModifyReposController implements Initializable {
                     chartdata.getName(), " ", chartdata.pieValueProperty(), " Units"
             ));
         });
-
 
         Employee.getAll((employees) -> {
             employees.forEach((employee) -> {
