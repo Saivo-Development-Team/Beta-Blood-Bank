@@ -170,7 +170,7 @@ public class AdminModifyReposController implements Initializable {
 
             String newTel = recChangeTel.getText();
             recipient.setTelephone(newTel);
-            Recipient.update(recipient.getRecipientID(), recipient);
+            Recipient.update(recipient.getRecipientId(), recipient);
 
         });
         recChangeTel.clear();
@@ -183,7 +183,7 @@ public class AdminModifyReposController implements Initializable {
 
             String newEmail = recChangeEmail.getText();
             recipient.setEmail(newEmail);
-            Recipient.update(recipient.getRecipientID(), recipient);
+            Recipient.update(recipient.getRecipientId(), recipient);
 
         });
         recChangeEmail.clear();
@@ -196,7 +196,7 @@ public class AdminModifyReposController implements Initializable {
 
             String newAddress = recChangeAddress.getText();
             recipient.setAddress(newAddress);
-            Recipient.update(recipient.getRecipientID(), recipient);
+            Recipient.update(recipient.getRecipientId(), recipient);
 
         });
         recChangeAddress.clear();

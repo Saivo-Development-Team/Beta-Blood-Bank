@@ -31,7 +31,7 @@ public class Recipient {
         this.email = email;
     }
 
-    public String getRecipientID() {
+    public String getRecipientId() {
         return recipientId;
     }
 
