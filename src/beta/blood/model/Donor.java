@@ -94,9 +94,18 @@ public class Donor {
     private static ArrayList<Donor> resultToDonors(ResultSet result) {
         ArrayList<Donor> donors = new ArrayList();
         try {
-            do {
-                donors.add(resultToDonor(result));
-            } while (result.next());
+            while (result.next()) {
+                donors.add(new Donor(
+                        result.getString("DonorID"),
+                        result.getInt("Age"),
+                        result.getInt("Answers"),
+                        result.getString("Name"),
+                        result.getString("Surname"),
+                        result.getString("Address"),
+                        result.getString("Gender").charAt(0),
+                        result.getString("Month")
+                ));
+            } 
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
