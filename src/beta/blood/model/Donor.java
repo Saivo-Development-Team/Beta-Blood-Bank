@@ -150,6 +150,8 @@ public class Donor {
         service().executeUpdateQuery(query, null);
     }
 
+  
+    
     public static void delete(int donorID) {
         String query = String.format(
                 "DELETE FROM `donor` WHERE `DonorID` = %d", donorID
