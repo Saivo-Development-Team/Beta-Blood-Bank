@@ -5,6 +5,8 @@
  */
 package beta.blood.model;
 
+import beta.blood.Handler;
+import beta.blood.database.DatabaseService;
 import static beta.blood.database.DatabaseService.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -134,10 +136,8 @@ public class Donor {
 
     public static void insert(Donor donor) {
         String query = String.format("INSERT INTO `donor` "
-
                 + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`, `Month`)"
                 + " VALUES ('%d','%s','%s','%s','%s','%d','%d', '%s')",
-
                 donor.donorId,
                 donor.name,
                 donor.surname,

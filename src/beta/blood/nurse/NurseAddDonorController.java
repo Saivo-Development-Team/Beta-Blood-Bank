@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -38,9 +38,6 @@ import beta.blood.model.Blood;
 import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
-import static beta.blood.nurse.DonorQuestionController.QUESTION_LABEL;
-import javafx.scene.control.*;
-import static javafx.scene.control.Alert.AlertType.NONE;
 
 
 /**
@@ -54,7 +51,6 @@ public class NurseAddDonorController implements Initializable {
     ScrollPane scrollpane;
     @FXML
     ComboBox<String> combobox;
-
     @FXML
     Button addDonorButton;
     @FXML
@@ -90,11 +86,7 @@ public class NurseAddDonorController implements Initializable {
     char gender = 'N';
     String name, surname, age, email, telephone, cellphone, homeAddress;
     String answers = "";
-
     String donorMonth;
-
-
-
 
     VBox mainVBox = new VBox();
     ToggleGroup genderToggle = new ToggleGroup();
@@ -143,6 +135,7 @@ public class NurseAddDonorController implements Initializable {
 
     }
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -195,19 +188,6 @@ public class NurseAddDonorController implements Initializable {
                 ToggleGroup toggle = left.getToggleGroup();
                 toggle.selectedToggleProperty().addListener((o, b, value) -> {
                     RadioButton selected = (RadioButton) value;
-                    String questionText = ((Label) question.view.lookup("#" + QUESTION_LABEL)).getText();
-                    if (question.answer == null
-                            ? selected.getText() != null
-                            : !question.answer.equals(selected.getText())) {
-                        addDonorButton.setDisable(true);
-                        ButtonType result = alertMessage(
-                                questionText, "Incorrect, Set Correct Answer",
-                                NONE, new ButtonType("Yes"), new ButtonType("No")
-                        ).get();
-                    } else {
-                        addDonorButton.setDisable(false);
-                    }
-
                     switch (selected.getId()) {
                         case LEFT_RADIO_BUTTON:
                             questionnaire.submitAnswer(question, selected.getText());
