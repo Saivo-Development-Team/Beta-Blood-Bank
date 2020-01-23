@@ -7,6 +7,7 @@ package beta.blood.nurse;
 
 import static beta.blood.Handler.setScene;
 import static beta.blood.Helper.StaticData.QUESTIONNAIRE_ARRAY;
+import static beta.blood.Helper.StaticData.MONTH_OPTIONS;
 import static beta.blood.Helper.StaticData.TITLE_OPTIONS;
 import static beta.blood.Helper.isNotEmpty;
 import beta.blood.model.Answers;
@@ -37,6 +38,7 @@ import beta.blood.model.Blood;
 import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
+
 
 /**
  * FXML Controller class
@@ -71,11 +73,18 @@ public class NurseAddDonorController implements Initializable {
     RadioButton maleRadioButton;
     @FXML
     RadioButton femaleRadioButton;
+    @FXML 
+    ComboBox month;
+    
+    
+    
+            
 
     Long donorId;
     char gender = 'N';
     String name, surname, age, email, telephone, cellphone, homeAddress;
     String answers = "";
+    String donorMonth;
 
     VBox mainVBox = new VBox();
     ToggleGroup genderToggle = new ToggleGroup();
@@ -98,6 +107,7 @@ public class NurseAddDonorController implements Initializable {
         telephone = telephoneTextField.getText();
         cellphone = cellhoneTextField.getText();
         homeAddress = homeAddressTextArea.getText();
+        donorMonth = month.getValue().toString();
 
         Answers.insert(new Answers(-1, answers));
 
@@ -106,7 +116,7 @@ public class NurseAddDonorController implements Initializable {
                     donorId,
                     Integer.parseInt(age),
                     answer.getAnswersId(),
-                    name, surname, homeAddress, gender
+                    name, surname, homeAddress, gender, donorMonth
             ));
         });
 
@@ -156,7 +166,7 @@ public class NurseAddDonorController implements Initializable {
                     break;
             }
         });
-
+        month.setItems(MONTH_OPTIONS);
         combobox.setItems(TITLE_OPTIONS);
         scrollpane.setContent(mainVBox);
         maleRadioButton.setToggleGroup(genderToggle);

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseAddDonorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.nurse.NurseAddDonorController">
     <children>
         <TextField fx:id="donorIdTextField" layoutX="235.0" layoutY="80.0" prefHeight="25.0" prefWidth="200.0" />
         <TextField fx:id="nameTextField" layoutX="235.0" layoutY="115.0" prefHeight="25.0" prefWidth="200.0" />
@@ -46,5 +46,7 @@
         <ScrollPane fx:id="scrollpane" layoutX="459.0" layoutY="55.0" prefHeight="550.0" prefWidth="550.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="459.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="55.0" />
         <Button layoutX="459.0" layoutY="619.6" mnemonicParsing="false" onAction="#addDonor" prefHeight="30.0" prefWidth="549.0" text="Add Donor" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="20.0" />
       <Button layoutX="924.0" layoutY="15.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="80.0" text="Back" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+      <Label layoutX="14.0" layoutY="513.0" prefHeight="17.0" prefWidth="186.0" text="Current Month added to system" />
+      <ComboBox fx:id="month" layoutX="236.0" layoutY="509.0" prefHeight="25.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

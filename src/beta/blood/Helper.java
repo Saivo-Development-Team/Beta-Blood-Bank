@@ -130,6 +130,11 @@ public class Helper<T> {
                         "Cape Town", "Durban", "Johanessburg", "Langebaan",
                         "Port Elizabeth", "Pretoria"
                 );
+        
+        public static final ObservableList<String> MONTH_OPTIONS = FXCollections
+                .observableArrayList(
+                        "January", "February", "March", "April","May", "June", "July", "August", "September", "October", "November", "December"
+                );
 
         public static final ObservableList<String> BLOOD_TYPES = FXCollections
                 .observableArrayList(

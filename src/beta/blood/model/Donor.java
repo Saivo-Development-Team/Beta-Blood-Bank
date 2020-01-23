@@ -24,10 +24,11 @@ public class Donor {
 
     private final Long donorId;
     private final int age, answers;
-    private final String name, surname, address;
+    private final String name, surname, address, month;
+    
     char gender;
 
-    public Donor(Long donorID, int age, int answers, String name, String surname, String address, char gender) {
+    public Donor(Long donorID, int age, int answers, String name, String surname, String address, char gender, String month) {
         this.donorId = donorID;
         this.age = age;
         this.answers = answers;
@@ -35,6 +36,11 @@ public class Donor {
         this.surname = surname;
         this.address = address;
         this.gender = gender;
+        this.month = month;
+    }
+
+    public String getMonth() {
+        return month;
     }
 
     public Long getDonorID() {
@@ -75,7 +81,8 @@ public class Donor {
                         result.getString("Name"),
                         result.getString("Surname"),
                         result.getString("Address"),
-                        result.getString("Gender").charAt(0)
+                        result.getString("Gender").charAt(0),
+                        result.getString("Month")
                 );
 
             }
@@ -130,15 +137,16 @@ public class Donor {
 
     public static void insert(Donor donor) {
         String query = String.format("INSERT INTO `donor` "
-                + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`)"
-                + " VALUES ('%d','%s','%s','%s','%s','%d','%d')",
+                + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`, `Month`)"
+                + " VALUES ('%d','%s','%s','%s','%s','%d','%d', '%s')",
                 donor.donorId,
                 donor.name,
                 donor.surname,
                 donor.address,
                 donor.gender,
                 donor.age,
-                donor.answers);
+                donor.answers,
+                donor.month);
         service().executeUpdateQuery(query, null);
     }
 
@@ -150,7 +158,7 @@ public class Donor {
     }
 
     public static void update(int donorId, Donor donor) {
-        String query = String.format("UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d WHERE `DonorID` = %d", donorId);
+        String query = String.format("UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d, `Month`=%s WHERE `DonorID` = %d", donorId);
         service().executeUpdateQuery(query, null);
     }
 

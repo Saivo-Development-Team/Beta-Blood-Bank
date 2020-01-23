@@ -80,6 +80,7 @@ public class AdminHomeController implements Initializable {
         add.setContent(Handler.loadFxml(getClass(), "AdminAddUser.fxml"));
         sysrep.setContent(Handler.loadFxml(getClass(), "AdminRequestReport.fxml"));
         modrep.setContent(Handler.loadFxml(getClass(), "AdminModifyRepos.fxml"));
+        
 
     }
 }
