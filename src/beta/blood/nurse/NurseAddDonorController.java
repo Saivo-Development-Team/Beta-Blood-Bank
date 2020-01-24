@@ -6,6 +6,7 @@
 package beta.blood.nurse;
 
 import static beta.blood.Handler.setScene;
+import beta.blood.Helper;
 import static beta.blood.Helper.StaticData.QUESTIONNAIRE_ARRAY;
 import static beta.blood.Helper.StaticData.MONTH_OPTIONS;
 import static beta.blood.Helper.StaticData.TITLE_OPTIONS;
@@ -38,6 +39,7 @@ import beta.blood.model.Blood;
 import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
+import java.util.ArrayList;
 import static javafx.scene.control.Alert.AlertType.NONE;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -88,6 +90,7 @@ public class NurseAddDonorController implements Initializable {
 
     VBox mainVBox = new VBox();
     ToggleGroup genderToggle = new ToggleGroup();
+    private final ArrayList<ToggleGroup> toggleArrayList = new ArrayList();
 
     @FXML
     private void back() {
@@ -120,41 +123,64 @@ public class NurseAddDonorController implements Initializable {
                     getCurrentUser().getEmployeeId()));
         });
 
+        clearForm();
+
+        Helper.popup();
+    }
+
+    private void clearForm() {
+        ageTextField.clear();
+        nameTextField.clear();
+        emailTextField.clear();
+        surnameTextField.clear();
+        donorIdTextField.clear();
+        cellhoneTextField.clear();
+        telephoneTextField.clear();
+        homeAddressTextArea.clear();
+        dataOfBirthDatePicker.getEditor().clear();
+        month.getSelectionModel().clearSelection();
+        combobox.getSelectionModel().clearSelection();
+        genderToggle.getSelectedToggle().setSelected(false);
+        toggleArrayList.forEach(group -> group.getSelectedToggle().setSelected(false));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            inputControl(ageTextField, (input, event) -> {
+                if (input.getText().matches("^[0-9]{3}$")) {
+                    event.consume();
+                } else if (!event.getCharacter().matches("^[0-9]{1}$")) {
+                    event.consume();
+                }
+            });
 
-        inputControl(ageTextField, (input, event) -> {
-            if (input.getText().matches("^[0-9]{3}$")) {
-                event.consume();
-            } else if (!event.getCharacter().matches("^[0-9]{1}$")) {
-                event.consume();
-            }
-        });
+            inputControl(donorIdTextField, (input, event) -> {
+                if (input.getText().matches("^[0-9]{13}$")) {
+                    event.consume();
+                } else if (!event.getCharacter().matches("^[0-9]{1}$")) {
+                    event.consume();
+                }
+            });
 
-        inputControl(donorIdTextField, (input, event) -> {
-            if (input.getText().matches("^[0-9]{13}$")) {
-                event.consume();
-            } else if (!event.getCharacter().matches("^[0-9]{1}$")) {
-                event.consume();
-            }
-        });
+            initializeQuestionnaire();
+            initializeDonorIdTextField();
 
-        initializeQuestionnaire();
-        initializeDonorIdTextField();
+            genderToggle.selectedToggleProperty().addListener((a, b, value) -> {
+                RadioButton selected = (RadioButton) value;
+                switch (selected.getText().toLowerCase()) {
+                    case "male":
+                        gender = 'M';
+                        break;
+                    case "female":
+                        gender = 'F';
+                        break;
+                }
+            });
+        } catch (Exception e) {
 
-        genderToggle.selectedToggleProperty().addListener((a, b, value) -> {
-            RadioButton selected = (RadioButton) value;
-            switch (selected.getText().toLowerCase()) {
-            case "male":
-                gender = 'M';
-                break;
-            case "female":
-                gender = 'F';
-                break;
-            }
-        });
+        }
+
         month.setItems(MONTH_OPTIONS);
         combobox.setItems(TITLE_OPTIONS);
         scrollpane.setContent(mainVBox);
@@ -172,6 +198,7 @@ public class NurseAddDonorController implements Initializable {
             for (Question question : questionnaire.getQuestions()) {
                 RadioButton left = (RadioButton) question.view.lookup("#" + LEFT_RADIO_BUTTON);
                 ToggleGroup toggle = left.getToggleGroup();
+                toggleArrayList.add(toggle);
                 toggle.selectedToggleProperty().addListener((o, b, value) -> {
                     RadioButton selected = (RadioButton) value;
                     String questionText = "Answering incorrectly to this questions means he/she cannot donate blood";
@@ -184,12 +211,12 @@ public class NurseAddDonorController implements Initializable {
                     }
 
                     switch (selected.getId()) {
-                    case LEFT_RADIO_BUTTON:
-                        questionnaire.submitAnswer(question, selected.getText());
-                        break;
-                    case RIGHT_RADIO_BUTTON:
-                        questionnaire.submitAnswer(question, selected.getText());
-                        break;
+                        case LEFT_RADIO_BUTTON:
+                            questionnaire.submitAnswer(question, selected.getText());
+                            break;
+                        case RIGHT_RADIO_BUTTON:
+                            questionnaire.submitAnswer(question, selected.getText());
+                            break;
                     }
                 });
             }
@@ -216,16 +243,16 @@ public class NurseAddDonorController implements Initializable {
                     }
                     ds = ds + array[i];
                     switch (i + 1) {
-                    case 2:
-                        y = Integer.parseInt(ds);
-                        y += y <= 50 ? 2000 : 1900;
-                        break;
-                    case 4:
-                        m = Integer.parseInt(ds);
-                        break;
-                    case 6:
-                        d = Integer.parseInt(ds);
-                        break;
+                        case 2:
+                            y = Integer.parseInt(ds);
+                            y += y <= 50 ? 2000 : 1900;
+                            break;
+                        case 4:
+                            m = Integer.parseInt(ds);
+                            break;
+                        case 6:
+                            d = Integer.parseInt(ds);
+                            break;
                     }
                 }
                 dataOfBirthDatePicker.setValue(LocalDate.of(y, m, d));

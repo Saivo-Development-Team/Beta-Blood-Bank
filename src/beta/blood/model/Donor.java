@@ -24,8 +24,9 @@ public class Donor {
     private final int age, answers;
     private final String donorId, name, surname, address, month;
 
-    public Donor(final String donorID, final int age, final int answers, final String name, final String surname,
-            final String address, final char gender, final String month) {
+    public Donor(String donorID, int age,
+            int answers, String name, String surname,
+            String address, char gender, String month) {
         this.donorId = donorID;
         this.age = age;
         this.answers = answers;
@@ -126,8 +127,8 @@ public class Donor {
     public static void insert(final Donor donor) {
         final String query = String.format(
                 "INSERT INTO `donor` "
-                        + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`, `Month`)"
-                        + " VALUES ('%d','%s','%s','%s','%s','%d','%d', '%s')",
+                + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`, `Month`)"
+                + " VALUES ('%s','%s','%s','%s','%s','%d','%d', '%s')",
                 donor.donorId, donor.name, donor.surname, donor.address, donor.gender, donor.age, donor.answers,
                 donor.month);
         service().executeUpdateQuery(query, null);

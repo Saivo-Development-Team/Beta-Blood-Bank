@@ -50,12 +50,12 @@ public class DatabaseService {
     }
 
     private Statement getStatement() {
-        if (this.statement == null) {
-            try {
+        try {
+            if (this.statement == null | this.statement.isClosed()) {
                 this.statement = this.connection.createStatement();
-            } catch (SQLException ex) {
-                System.out.println(ex);
             }
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
         return this.statement;
     }
