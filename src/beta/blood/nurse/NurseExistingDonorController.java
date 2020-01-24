@@ -4,7 +4,6 @@ import beta.blood.Handler;
 import beta.blood.Helper;
 import static beta.blood.Helper.createTableColumn;
 import beta.blood.model.Donor;
-import beta.blood.model.Employee;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
