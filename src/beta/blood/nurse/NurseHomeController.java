@@ -36,6 +36,11 @@ public class NurseHomeController implements Initializable {
     private void donorNavigation() {
         Handler.setScene(getClass(), "Add Donor", "NurseAddDonor.fxml");
     }
+    
+    @FXML
+    private void existingDonorNavigation() {
+        Handler.setScene(getClass(), "Existing Donor", "NurseExistingDonor.fxml");
+    }
 
     @FXML
     private void verifyBloodNavigation() {

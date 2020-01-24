@@ -109,10 +109,9 @@ public class NurseAddDonorController implements Initializable {
 
         Answers.getLastInserted((answer) -> {
             Donor.insert(new Donor(
-                    donorId,
+                    donorId, name, surname, homeAddress, gender, 
                     Integer.parseInt(age),
-                    answer.getAnswersId(),
-                    name, surname, homeAddress, gender
+                    answer.getAnswersId()
             ));
         });
 
@@ -120,7 +119,7 @@ public class NurseAddDonorController implements Initializable {
             Blood.insert(new Blood(
                     DEFULT_ID,
                     DEFULT_QUANTITY,
-                    Long.parseLong(donor.getDonorID()),
+                    Long.parseLong(donor.getDonorId()),
                     DEFULT_TYPE,
                     getCurrentUser().getEmployeeId()
             ));

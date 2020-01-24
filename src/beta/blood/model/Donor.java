@@ -20,11 +20,12 @@ import java.util.ArrayList;
  */
 public class Donor {
 
-    private final int age, answers;
+  
     private final String donorId, name, surname, address;
     char gender;
+    private final int age, answers;
 
-    public Donor(String donorID, int age, int answers, String name, String surname, String address, char gender) {
+    public Donor(String donorID, String name, String surname, String address, char gender ,int age, int answers) {
         this.donorId = donorID;
         this.age = age;
         this.answers = answers;
@@ -34,7 +35,7 @@ public class Donor {
         this.gender = gender;
     }
 
-    public String getDonorID() {
+    public String getDonorId() {
         return donorId;
     }
 
@@ -67,12 +68,13 @@ public class Donor {
             if (result.next()) {
                 return new Donor(
                         result.getString("DonorID"),
-                        result.getInt("Age"),
-                        result.getInt("Answers"),
                         result.getString("Name"),
                         result.getString("Surname"),
                         result.getString("Address"),
-                        result.getString("Gender").charAt(0)
+                        result.getString("Gender").charAt(0),
+                        result.getInt("Age"),
+                        result.getInt("Answers")
+         
                 );
 
             }
@@ -88,12 +90,12 @@ public class Donor {
             while (result.next()) {
                 donors.add(new Donor(
                         result.getString("DonorID"),
-                        result.getInt("Age"),
-                        result.getInt("Answers"),
                         result.getString("Name"),
                         result.getString("Surname"),
                         result.getString("Address"),
-                        result.getString("Gender").charAt(0)
+                        result.getString("Gender").charAt(0),
+                        result.getInt("Age"),
+                        result.getInt("Answers")
                 ));
             }
         } catch (SQLException ex) {

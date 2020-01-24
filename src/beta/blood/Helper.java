@@ -56,9 +56,17 @@ public class Helper<T> {
         return !text.isEmpty();
     }
 
-    public static boolean isInfoCorret() {
+    public static boolean isInfoCorrect() {
         int result = JOptionPane.showConfirmDialog(
                 null, "Please ensure information is correct", "Alert",
+                OK_CANCEL_OPTION
+        );
+        return result == JOptionPane.OK_OPTION;
+    }
+    
+    public static boolean popup() {
+        int result = JOptionPane.showConfirmDialog(
+                null, "Thank you for donating blood", "Well done",
                 OK_CANCEL_OPTION
         );
         return result == JOptionPane.OK_OPTION;
