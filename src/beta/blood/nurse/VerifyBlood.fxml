@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -17,12 +16,9 @@
       </Label>
       <Button layoutX="530.0" layoutY="125.0" mnemonicParsing="false" onAction="#changeBloodType" prefHeight="25.0" prefWidth="250.0" text="Verify Donor Blood" AnchorPane.rightAnchor="15.0" />
       <ComboBox fx:id="BloodTypes" layoutX="450.0" layoutY="100.0" prefWidth="150.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0" />
-      <Button layoutX="529.6" layoutY="235.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0" text="Remove Donor From System" AnchorPane.rightAnchor="15.0" />
       <Label layoutX="375.0" layoutY="100.0" prefHeight="18.0" prefWidth="80.0" text="Blood Type" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="85.0" />
       <Label layoutX="15.0" layoutY="73.0" text="List of Unverified Donors " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0" />
       <Button layoutX="483.0" layoutY="37.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="99.0" text="Back" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
       <ListView fx:id="donorBloodListView" layoutX="10.0" layoutY="99.0" prefWidth="500.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="80.0" />
-      <TextField layoutX="529.6" layoutY="195.0" prefHeight="25.0" prefWidth="250.0" AnchorPane.rightAnchor="15.0" />
-      <Label layoutX="529.6" layoutY="165.0" prefWidth="250.0" text="Search For Donor" AnchorPane.rightAnchor="15.0" />
    </children>
 </AnchorPane>
