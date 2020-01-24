@@ -7,21 +7,21 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171"  fx:controller="beta.blood.admin.AdminRequestReportController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminRequestReportController">
    <children>
-      <TabPane layoutX="3.0" layoutY="2.0" prefHeight="464.0" prefWidth="634.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="3.0" layoutY="2.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Donors Added Monthly for 2019 Dec to 2020 Dec">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <LineChart fx:id="donorsChart" layoutX="54.0" layoutY="18.0" title="Donors Acquired (Monthly)">
+                        <LineChart fx:id="donorsChart" layoutX="54.0" layoutY="18.0" title="Donors Acquired (Monthly)" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <xAxis>
-                            <CategoryAxis side="BOTTOM" label="Months"  />
+                            <CategoryAxis label="Months" side="BOTTOM" />
                           </xAxis>
                             
                           <yAxis>
-                            <NumberAxis side="LEFT" label="Donations"  />
+                            <NumberAxis label="Donations" side="LEFT" />
                           </yAxis>
                         </LineChart>
                      </children>
