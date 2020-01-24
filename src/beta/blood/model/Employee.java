@@ -5,12 +5,13 @@
  */
 package beta.blood.model;
 
-import beta.blood.auth.LoginService;
-import beta.blood.database.DatabaseService;
+import beta.blood.Handler.Function;
+import static beta.blood.database.DatabaseService.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,17 +19,27 @@ import java.util.logging.Logger;
  */
 public class Employee {
 
-    private final String employeeId, name, surname, telephone, branch, password;
     private final int position;
+    private final String employeeId, name, surname, telephone;
+    private String branch, password;
+    public static final String EMPLOYEE_AD = "AD-", EMPLOYEE_NU = "NU-";
+    public static final String ADMIN = "admin", NURSE = "nurse";
 
-    public Employee(String employeeId, String name, String surname, String telephone, String branch, String password, int position) {
-        this.employeeId = employeeId;
+    public Employee(
+            String employeeId, String name, String surname,
+            String telephone, String branch, String password, int position
+    ) {
         this.name = name;
-        this.surname = surname;
-        this.telephone = telephone;
         this.branch = branch;
+        this.surname = surname;
         this.password = password;
         this.position = position;
+        this.telephone = telephone;
+        this.employeeId = employeeId;
+    }
+
+    public void setPassword(String newpass) {
+        this.password = newpass;
     }
 
     public String getEmployeeId() {
@@ -59,16 +70,15 @@ public class Employee {
         return position;
     }
 
-    public static Employee getById(String employeeId) {
-        try {
-            String query = String.format(
-                    "select * from employee where employeeId='%s'", employeeId
-            );
-            ResultSet result = DatabaseService.service().executeResultQuery(query);
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
 
+    private static Employee resultToEmployee(ResultSet result) {
+        try {
             if (result.next()) {
                 return new Employee(
-                        result.getString("EmployeeId"),
+                        result.getString("EmployeeID"),
                         result.getString("Name"),
                         result.getString("Surname"),
                         result.getString("Telephone"),
@@ -77,28 +87,82 @@ public class Employee {
                         result.getInt("Position")
                 );
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(
-                    LoginService.class.getName()).log(Level.SEVERE, null, ex
-            );
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
+    private static ArrayList<Employee> resultToEmployees(ResultSet result) {
+        ArrayList<Employee> employees = new ArrayList();
+        try {
+            do {
+                employees.add(resultToEmployee(result));
+            } while (!result.isLast());
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return employees;
+    }
+
+    public static void getById(String employeeId, Function<Employee> function) {
+        String query = String.format(
+                "SELECT * FROM `employee` WHERE `EmployeeID`='%s'", employeeId
+        );
+        service().executeResultQuery(query, (result) -> {
+            function.cb(resultToEmployee(result));
+        });
+    }
+
+    public static void getAll(Function<ArrayList<Employee>> function) {
+        String query = "SELECT * FROM `employee`";
+        service().executeResultQuery(query, (result) -> {
+            function.cb(resultToEmployees(result));
+        });
+    }
+
     public static void insert(Employee employee) {
         String query = String.format(
-                "insert into employee "
-                + "(employeeId,name,surname,telephone,branch,password,position)"
-                + " values ('%s','%s','%s','%s','%s','%s','%d')",
+                "INSERT INTO `employee` "
+                + "(`EmployeeID`,`Name`,`Surname`,`Telephone`,`Branch`,`Position`,`Password`) "
+                + "VALUES ('%s','%s','%s','%s','%s','%d','%s')",
                 employee.employeeId,
                 employee.name,
                 employee.surname,
                 employee.telephone,
                 employee.branch,
-                employee.password,
-                employee.position
+                employee.position,
+                employee.password
         );
-        DatabaseService.service().executeUpdateQuery(query);
+        service().executeUpdateQuery(query, null);
+    }
+
+    public static void delete(String employeeID) {
+        String query = String.format(
+                "DELETE FROM `employee` WHERE `EmployeeID` = '%s'", employeeID
+        );
+        service().executeUpdateQuery(query, null);
+    }
+
+    public static void update(String employeeId, Employee employee) {
+        String query = String.format(
+                "UPDATE `employee` "
+                + "SET `EmployeeID`='%s',`Name`='%s',`Surname`='%s',`Telephone`='%s',`Branch`='%s',`Position`=%d,`Password`='%s' "
+                + "WHERE `EmployeeID`= '%s'",
+                employee.employeeId,
+                employee.name,
+                employee.surname,
+                employee.telephone,
+                employee.branch,
+                employee.position,
+                employee.password,
+                employeeId
+        );
+        service().executeUpdateQuery(query, null);
+    }
+
+    public static void update(String employeeID, String newpassword) {
+        String query = "UPDATE `employee` SET `Password` = '" + newpassword + "' WHERE `EmployeeID` ='" + employeeID + "'";
+        service().executeUpdateQuery(query, null);
     }
 }

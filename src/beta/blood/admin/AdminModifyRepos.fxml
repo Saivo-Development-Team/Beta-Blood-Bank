@@ -1,11 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
-    
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.admin.AdminModifyReposController">
+   <children>
+      <Button layoutX="445.0" layoutY="685.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="200.0" text="Refresh" textFill="#19c32d" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab text="Modify Admin">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <Button layoutX="177.0" layoutY="480.0" mnemonicParsing="false" onAction="#deleteAdmin" prefWidth="160.0" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" />
+                        <Button layoutX="14.0" layoutY="480.0" mnemonicParsing="false" onAction="#changeAdminBranch" prefWidth="160.0" text="Change branch" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                        <ComboBox fx:id="adminComboBox" layoutX="14.0" layoutY="441.0" prefWidth="160.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" />
+                        <TableView fx:id="adminTableView" layoutX="293.0" layoutY="-38.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                     </padding>
+                  </AnchorPane>
+              </content>
+            </Tab>
+          <Tab fx:id="modu" text="Modify Nurse">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <Button layoutX="14.0" layoutY="496.0" mnemonicParsing="false" onAction="#changeNurseBranch" prefWidth="160.0" text="Change branch" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                        <Button layoutX="177.0" layoutY="496.0" mnemonicParsing="false" onAction="#deleteNurse" prefWidth="160.0" text="Delete" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" />
+                        <ComboBox fx:id="nurseComboBox" layoutX="14.0" layoutY="457.0" prefWidth="160.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" />
+                        <TableView fx:id="nurseTableView" layoutX="14.0" layoutY="14.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                     </padding></AnchorPane>
+               </content>
+            </Tab>
+          <Tab fx:id="modb" text="Modify Recipient">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <TextField fx:id="recChangeTel" layoutX="14.0" layoutY="302.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" />
+                        <TextField fx:id="recChangeEmail" layoutX="14.0" layoutY="352.0" prefWidth="200.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="0.0" />
+                        <TextArea fx:id="recChangeAddress" layoutX="14.0" layoutY="402.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                        <Button layoutX="565.0" layoutY="350.0" mnemonicParsing="false" onAction="#changeRecTel" prefWidth="200.0" text="Change telephone number" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="230.0" />
+                        <Button layoutX="565.0" layoutY="400.0" mnemonicParsing="false" onAction="#changeRecEmail" prefWidth="200.0" text="Change email address" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="230.0" />
+                        <Button layoutX="565.0" layoutY="450.0" mnemonicParsing="false" onAction="#deleteRecipient" prefWidth="200.0" text="Delete" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="230.0" />
+                        <Button layoutX="565.0" layoutY="530.0" mnemonicParsing="false" onAction="#changeRecAddress" prefWidth="200.0" text="Change address" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" />
+                        <TableView fx:id="recipientTableView" layoutX="45.0" layoutY="45.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button layoutX="230.0" layoutY="515.0" mnemonicParsing="false" onAction="#deleteRecipient" prefWidth="200.0" text="Delete" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="230.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                     </padding></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Modify Blood">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <Label layoutX="41.0" layoutY="88.0" prefWidth="150.0" text="Amount of Units" />
+                        <Label layoutX="42.0" layoutY="30.0" prefHeight="16.0" prefWidth="150.0" text="Blood Type" />
+                        <ComboBox fx:id="bloodComboBox" layoutX="245.0" layoutY="28.0" prefWidth="150.0" />
+                        <TextField fx:id="bloodamount" layoutX="245.0" layoutY="83.0" prefHeight="26.0" prefWidth="150.0" />
+                        <Button layoutX="245.0" layoutY="135.0" mnemonicParsing="false" onAction="#deleteBlood" prefWidth="150.0" text="Delete Units" />
+                        <PieChart fx:id="currentBloodCount" layoutX="41.0" layoutY="255.0" prefHeight="344.0" prefWidth="355.0" title="Current Blood Count" />
+                        <TableView fx:id="bloodAmountTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="415.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <padding>
+      <Insets top="15.0" />
+   </padding>
 </AnchorPane>

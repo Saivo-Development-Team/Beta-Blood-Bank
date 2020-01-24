@@ -10,31 +10,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" accessibleText="loginchoice" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.auth.LoginController">
+
+<AnchorPane id="AnchorPane" accessibleText="loginchoice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beta.blood.auth.LoginController">
     <children>
-        <Label layoutX="160.0" layoutY="118.0" prefHeight="17.0" prefWidth="140.0" text="Employee Number" textFill="#f80000">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Label>
-        <Label layoutX="160.0" layoutY="163.0" prefHeight="17.0" prefWidth="140.0" text="Password" textFill="#f20000">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Label>
-        <Button fx:id="login_btn" layoutX="300.0" layoutY="221.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="84.0" text="Login" />
-        <TextField fx:id="number" layoutX="300.0" layoutY="114.0" />
-        <PasswordField fx:id="password" layoutX="300.0" layoutY="159.0" />
-        <Button layoutX="414.0" layoutY="221.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
-        <Button layoutX="545.0" layoutY="14.0" mnemonicParsing="false" onAction="#help" text="Help" />
-        <Label fx:id="message" layoutX="300.0" layoutY="192.0" prefHeight="17.0" prefWidth="200.0" />
-        <Separator layoutX="135.0" layoutY="14.0" orientation="VERTICAL" prefHeight="369.0" prefWidth="0.0" />
-        <Label alignment="CENTER" layoutX="11.0" layoutY="31.0" prefHeight="86.0" prefWidth="113.0" text="Welcome to Beta Blood" textAlignment="CENTER" textFill="#fc0000" wrapText="true">
+      <AnchorPane layoutX="235.0" layoutY="140.0" prefHeight="275.0" prefWidth="275.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="140.0">
+         <children>
+              <Label layoutY="10.0" text="Employee Number" textFill="#f80000" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+              <TextField fx:id="number" layoutY="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+              <Label layoutY="75.0" text="Password" textFill="#f20000" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+              <PasswordField fx:id="password" layoutY="99.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+              <Button fx:id="login_btn" layoutY="151.0" mnemonicParsing="false" onAction="#login" text="Login" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+              <Button layoutY="195.0" mnemonicParsing="false" onAction="#exit" text="Exit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+        <Button layoutX="510.0" layoutY="11.0" mnemonicParsing="false" onAction="#help" prefWidth="120.0" text="Help" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+        <Separator layoutX="138.0" orientation="VERTICAL" prefHeight="480.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <Label alignment="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="96.0" prefWidth="130.0" text="Welcome to Beta Blood" textAlignment="CENTER" textFill="#fc0000" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <ImageView fitHeight="150.0" fitWidth="113.0" layoutX="11.0" layoutY="221.0" onMouseClicked="#openWebpage" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="185.0" fitWidth="140.0" layoutX="2.0" layoutY="294.0" onMouseClicked="#openWebpage" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
             <image>
                 <Image url="@../../../resources/sanbs.jpg" />
             </image>

@@ -7,12 +7,13 @@ package beta.blood.admin;
 
 import beta.blood.Handler;
 import static beta.blood.Helper.*;
+import static beta.blood.Helper.StaticData.BRANCH_OPTIONS;
 import beta.blood.model.Employee;
+import static beta.blood.model.Employee.*;
 import beta.blood.model.Recipient;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -43,11 +44,11 @@ public class AdminAddUserController implements Initializable {
             employeeId;
 
     @FXML
-    TextField recipientName,
-            recipientEmail,
-            recipientPhone,
-            employeeNameTextField,
-            employeeSurnameTextField;
+    TextField   recipientName,
+                recipientEmail,
+                recipientPhone,
+                employeeNameTextField,
+                employeeSurnameTextField;
 
     @FXML
     TextArea recipientAddress;
@@ -58,24 +59,17 @@ public class AdminAddUserController implements Initializable {
     @FXML
     Label employeeIdLabel;
 
-    private final ObservableList<String> branchList = FXCollections
-            .observableArrayList(
-                    "Cape Town", "Durban", "Johanessburg", "Langebaan",
-                    "Port Elizabeth",
-                    "Pretoria"
-            );
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         employeeTypeComboBox.setItems(
                 FXCollections.observableArrayList("Admin", "Nurse")
         );
-        branchComboBox.setItems(branchList);
+        branchComboBox.setItems(BRANCH_OPTIONS);
     }
 
     @FXML
     private void back() {
-        Handler.setScene(getClass(), "Verify Blood", "/beta/blood/admin/AdminHome.fxml");
+        Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
     }
 
     @FXML
@@ -83,12 +77,12 @@ public class AdminAddUserController implements Initializable {
         String type = employeeTypeComboBox.getSelectionModel().getSelectedItem();
         if (type != null) {
             switch (type.toLowerCase()) {
-                case "admin":
-                    employeeIdLabel.setText("AD-" + (int) (Math.random() * 10000));
+                case ADMIN:
+                    employeeIdLabel.setText(EMPLOYEE_AD + randomInt(10000));
                     position = 0;
                     break;
-                case "nurse":
-                    employeeIdLabel.setText("NU-" + (int) (Math.random() * 10000));
+                case NURSE:
+                    employeeIdLabel.setText(EMPLOYEE_NU + randomInt(10000));
                     position = 1;
                     break;
             }
@@ -98,7 +92,7 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void addEmployee() {
-        if (isEmployeeFormCompleted()) {
+        if (isEmployeeFormCompleted() & isInfoCorrect()) {
             Employee.insert(
                     new Employee(
                             employeeId,
@@ -116,8 +110,8 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void addRecipient() {
-        if (isRecipientFormCompleted()) {
-            Recipient.insert(new Recipient(Recipient.DEFAULT_ID,
+        if (isRecipientFormCompleted() & isInfoCorrect()) {
+            Recipient.insert(new Recipient("-1",
                     getRecipientName(),
                     getRecipientAddress(),
                     getRecipientTelephone(),
@@ -177,7 +171,7 @@ public class AdminAddUserController implements Initializable {
 
     private boolean setBranch() {
         branch = branchComboBox.getSelectionModel().getSelectedItem();
-        return branch != null & branchList.contains(branch);
+        return branch != null & BRANCH_OPTIONS.contains(branch);
     }
 
     private boolean setPassword() {
@@ -193,6 +187,7 @@ public class AdminAddUserController implements Initializable {
         employeeNameTextField.setText("");
         employeeSurnameTextField.setText("");
         employeePasswordField.setText("");
+
     }
 
     private void clearRecipientForm() {
@@ -201,5 +196,4 @@ public class AdminAddUserController implements Initializable {
         recipientPhone.setText("");
         recipientAddress.setText("");
     }
-
 }

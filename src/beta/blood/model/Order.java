@@ -5,6 +5,7 @@
  */
 package beta.blood.model;
 
+import static beta.blood.database.DatabaseService.service;
 import java.sql.Date;
 
 /**
@@ -13,9 +14,10 @@ import java.sql.Date;
  */
 public class Order {
 
-    private int orderId, orderedBy;
-    private Date date;
-    private String processedBy;
+    private final int orderId;
+    private final int orderedBy;
+    private final Date date;
+    private final String processedBy;
 
     public Order(int orderId, int orderedBy, Date date, String processedBy) {
         this.orderId = orderId;
@@ -39,6 +41,31 @@ public class Order {
     public String getProcessedBy() {
         return processedBy;
     }
-    
-   
+
+    public static void insert(Order order) {
+        String query = String.format(
+                "INSERT INTO `order` "
+                + "(`OrderID`, `Date`, `ProcessedBy`, `OrderedBy`) "
+                + "VALUES ('%d','%d','%s','%d')",
+                order.orderId,
+                order.date,
+                order.processedBy,
+                order.orderedBy);
+        service().executeUpdateQuery(query, null);
+    }
+
+    public static void delete(int orderID) {
+        String query = String.format(
+                "DELETE FROM `order` WHERE `OrderID` = %d ", orderID
+        );
+        service().executeUpdateQuery(query, null);
+    }
+
+    public static void update(int orderID) {
+        String query = String.format(
+                "UPDATE `order` SET `OrderID`= %d,`Date`= %d,`ProcessedBy`= %s,`OrderedBy`= %d "
+                + "WHERE `OrderID`= %d", orderID);
+
+        service().executeUpdateQuery(query, null);
+    }
 }
