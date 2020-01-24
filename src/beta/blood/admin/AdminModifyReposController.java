@@ -135,16 +135,18 @@ public class AdminModifyReposController implements Initializable {
     @FXML
     public void deleteBlood() {
         int amount = Integer.parseInt(bloodamount.getText());
-        String bloodType = bloodComboBox.getSelectionModel().getSelectedItem();
-        if (amount > unitTypeCount[BLOOD_TYPES.indexOf(bloodType)]) {
-            JOptionPane.showMessageDialog(null, "You are deleting too much blood");
-        } else {
-            bloodUnits.stream().filter((it) -> (it.getType() == null
-                    ? bloodType == null
-                    : it.getType().equals(bloodType))
-            ).limit(amount).forEach((it) -> {
-                Blood.delete(it.getBloodID());
-            });
+        String type = bloodComboBox.getSelectionModel().getSelectedItem();
+        if (type != null) {
+            if (amount <= unitTypeCount[BLOOD_TYPES.indexOf(type)]) {
+                bloodUnits.stream().filter((unit) -> {
+                    return unit.getType().equals(type);
+                }).limit(amount).forEach((it) -> {
+                    Blood.delete(it.getBloodID());
+                });
+                bloodComboBox.getSelectionModel().clearSelection();
+            } else {
+                JOptionPane.showMessageDialog(null, "You are deleting too much blood");
+            }
         }
         refresh();
     }
