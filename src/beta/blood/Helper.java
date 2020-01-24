@@ -56,9 +56,17 @@ public class Helper<T> {
         return !text.isEmpty();
     }
 
-    public static boolean isInfoCorret() {
+    public static boolean isInfoCorrect() {
         int result = JOptionPane.showConfirmDialog(
                 null, "Please ensure information is correct", "Alert",
+                OK_CANCEL_OPTION
+        );
+        return result == JOptionPane.OK_OPTION;
+    }
+    
+    public static boolean popup() {
+        int result = JOptionPane.showConfirmDialog(
+                null, "Thank you for donating blood", "Well done",
                 OK_CANCEL_OPTION
         );
         return result == JOptionPane.OK_OPTION;
@@ -141,6 +149,11 @@ public class Helper<T> {
                 );
 
         public static final ObservableList<String> BLOOD_TYPES = FXCollections
+                .observableArrayList(
+                        "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-", "UN"
+                );
+
+        public static final ObservableList<String> VERIFIED_BLOOD_TYPES = FXCollections
                 .observableArrayList(
                         "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"
                 );

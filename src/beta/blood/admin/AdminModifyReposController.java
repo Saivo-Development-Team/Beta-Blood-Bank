@@ -5,21 +5,17 @@
  */
 package beta.blood.admin;
 
-import beta.blood.Handler.Function;
-import static beta.blood.Handler.QueryType.RESULT;
 import static beta.blood.Helper.StaticData.BLOOD_TYPES;
 import static beta.blood.Helper.StaticData.BRANCH_OPTIONS;
+import static beta.blood.Helper.StaticData.VERIFIED_BLOOD_TYPES;
 import static beta.blood.Helper.createTableColumn;
 import beta.blood.model.Blood;
 import beta.blood.model.Employee;
 import beta.blood.model.Recipient;
 import java.lang.reflect.Field;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,11 +56,12 @@ public class AdminModifyReposController implements Initializable {
     @FXML
     TextArea recChangeAddress;
 
-    ObservableList<String> bloodTypes = FXCollections
-            .observableArrayList();
-    int[] bloodTypeCount = {
+    int[] unitTypeCount = {
         0, 0, 0, 0, 0, 0, 0, 0, 0
     };
+
+    Blood[] bloodCounts = new Blood[unitTypeCount.length];
+    ObservableList<Blood> bloodCountList = FXCollections.observableArrayList();
 
     @FXML
     TableView<Employee> adminTableView;
@@ -72,8 +69,11 @@ public class AdminModifyReposController implements Initializable {
     TableView<Employee> nurseTableView;
     @FXML
     TableView<Recipient> recipientTableView;
+    @FXML
+    TableView<Blood> bloodAmountTableView;
 
     ObservableList<Data> bloodData = FXCollections.observableArrayList();
+    ObservableList<Blood> bloodUnits = FXCollections.observableArrayList();
 
     //Data for the admin listview
     private final ObservableList<Employee> adminList = FXCollections
@@ -86,57 +86,23 @@ public class AdminModifyReposController implements Initializable {
     //Data for the recipient listview
     private final ObservableList<Recipient> recipientList = FXCollections
             .observableArrayList();
-    
+
     @FXML
-    public void refreshAdmin() {
+    public void refresh() {
+        bloodData.clear();
         adminList.clear();
-        
-        Employee.getAll((employees) -> {
-            employees.forEach((employee) -> {
-                if (employee != null) {
-                    switch (employee.getPosition()) {
-                        case 0:
-                            adminList.add(employee);
-                            break;
-                        
-                    }
-                }
-            });
-        });
-        adminTableView.refresh();
-    }
-    
-    @FXML
-    public void refreshNurse() {
-        
         nurseList.clear();
-        
-        Employee.getAll((employees) -> {
-            employees.forEach((employee) -> {
-                if (employee != null) {
-                    switch (employee.getPosition()) {
-                        case 1:
-                            nurseList.add(employee);
-                            break;
-                        
-                    }
-                }
-            });
-        });
+        recipientList.clear();
+        bloodCountList.clear();
+        bloodCounts = new Blood[bloodCounts.length];
+        unitTypeCount = new int[unitTypeCount.length];
+        loadBloodData();
+        loadEmployeeData();
+        loadRecipientData();
         nurseTableView.refresh();
-    }
-    
-    @FXML
-    public void refreshRecipient() {
-        Recipient.getAll((recipients) -> {
-            recipients.forEach((recipient) -> {
-                if (recipient != null) {
-                    recipientList.add(recipient);
-                }
-            });
-        });
-        
+        adminTableView.refresh();
         recipientTableView.refresh();
+        bloodAmountTableView.refresh();
     }
 
     @FXML
@@ -158,38 +124,37 @@ public class AdminModifyReposController implements Initializable {
     }
 
     @FXML
+    public void deleteRecipient() {
+        recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
+            Recipient.delete(Integer.parseInt(recipient.getRecipientId()));
+            recipientList.remove(recipient);
+        });
+        nurseTableView.refresh();
+    }
+
+    @FXML
     public void deleteBlood() {
         int amount = Integer.parseInt(bloodamount.getText());
         String bloodType = bloodComboBox.getSelectionModel().getSelectedItem();
-        Blood.getByQuery(
-                String.format(
-                        "SELECT * FROM `blood` WHERE `blood`.`Type` = '%s'", bloodType),
-                RESULT, (Function<ResultSet>) (result) -> {
-                            ArrayList<Blood> list = Blood.resultToList(result);
-                            System.out.println(Arrays.toString(list.toArray()));
-                            System.out.println(list.size());
-                            System.out.println(amount);
-                            if (amount > list.size()) {
-                                JOptionPane.showMessageDialog(null, "You are deleting too much blood");
-                            } else {
-                                list.forEach((unit) -> {
-                                    if (unit != null) {
-                                        Blood.delete(unit.getBloodID());
-                                    }
-                                });
-                            }
-                        }
-        );
+        if (amount > unitTypeCount[BLOOD_TYPES.indexOf(bloodType)]) {
+            JOptionPane.showMessageDialog(null, "You are deleting too much blood");
+        } else {
+            bloodUnits.stream().filter((it) -> (it.getType() == null
+                    ? bloodType == null
+                    : it.getType().equals(bloodType))
+            ).limit(amount).forEach((it) -> {
+                Blood.delete(it.getBloodID());
+            });
+        }
+        refresh();
     }
 
     @FXML
     public void changeRecTel() {
         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
-
             String newTel = recChangeTel.getText();
             recipient.setTelephone(newTel);
-            Recipient.update(recipient.getRecipientID(), recipient);
-
+            Recipient.update(recipient.getRecipientId(), recipient);
         });
         recChangeTel.clear();
         recipientTableView.refresh();
@@ -201,7 +166,7 @@ public class AdminModifyReposController implements Initializable {
 
             String newEmail = recChangeEmail.getText();
             recipient.setEmail(newEmail);
-            Recipient.update(recipient.getRecipientID(), recipient);
+            Recipient.update(recipient.getRecipientId(), recipient);
 
         });
         recChangeEmail.clear();
@@ -211,10 +176,9 @@ public class AdminModifyReposController implements Initializable {
     @FXML
     public void changeRecAddress() {
         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
-
             String newAddress = recChangeAddress.getText();
             recipient.setAddress(newAddress);
-            Recipient.update(recipient.getRecipientID(), recipient);
+            Recipient.update(recipient.getRecipientId(), recipient);
 
         });
         recChangeAddress.clear();
@@ -248,53 +212,13 @@ public class AdminModifyReposController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        bloodComboBox.setItems(BLOOD_TYPES);
         adminComboBox.setItems(BRANCH_OPTIONS);
         nurseComboBox.setItems(BRANCH_OPTIONS);
-        bloodTypes.addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-", "UN");
+        bloodComboBox.setItems(VERIFIED_BLOOD_TYPES);
 
-        Blood.getAll((blood) -> {
-            blood.forEach((unit) -> {
-                int index = bloodTypes.indexOf(unit.getType());
-                bloodTypeCount[index]++;
-            });
-        });
-
-        bloodTypes.forEach((type) -> {
-            bloodData.add(new Data(type, bloodTypeCount[bloodTypes.indexOf(type)]));
-        });
-
-        bloodData.forEach((chartdata) -> {
-            chartdata.nameProperty().bind(Bindings.concat(
-                    chartdata.getName(), " ", chartdata.pieValueProperty(), " Units"
-            ));
-        });
-
-        currentBloodCount.setData(bloodData);
-        System.out.println(Arrays.toString(bloodTypeCount));
-
-        Employee.getAll((employees) -> {
-            employees.forEach((employee) -> {
-                if (employee != null) {
-                    switch (employee.getPosition()) {
-                        case 0:
-                            adminList.add(employee);
-                            break;
-                        case 1:
-                            nurseList.add(employee);
-                            break;
-                    }
-                }
-            });
-        });
-
-        Recipient.getAll((recipients) -> {
-            recipients.forEach((recipient) -> {
-                if (recipient != null) {
-                    recipientList.add(recipient);
-                }
-            });
-        });
+        loadBloodData();
+        loadEmployeeData();
+        loadRecipientData();
 
         for (Field field : Employee.class.getDeclaredFields()) {
             switch (field.getName()) {
@@ -319,11 +243,81 @@ public class AdminModifyReposController implements Initializable {
             }
         }
 
+        for (Field field : Blood.class.getDeclaredFields()) {
+            switch (field.getName()) {
+                case "quantity":
+                case "type":
+                    bloodAmountTableView.getColumns().add(createTableColumn(field));
+                    break;
+            }
+        }
+
         nurseTableView.setItems(nurseList);
         adminTableView.setItems(adminList);
+        currentBloodCount.setData(bloodData);
         recipientTableView.setItems(recipientList);
+        bloodAmountTableView.setItems(bloodCountList);
         adminTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         nurseTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         recipientTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    private void loadEmployeeData() {
+        Employee.getAll((employees) -> {
+            employees.forEach((employee) -> {
+                if (employee != null) {
+                    switch (employee.getPosition()) {
+                        case 0:
+                            adminList.add(employee);
+                            break;
+                        case 1:
+                            nurseList.add(employee);
+                            break;
+                    }
+                }
+            });
+        });
+    }
+
+    private void loadRecipientData() {
+        Recipient.getAll((recipients) -> {
+            recipients.forEach((recipient) -> {
+                if (recipient != null) {
+                    recipientList.add(recipient);
+                }
+            });
+        });
+    }
+
+    private void loadBloodData() {
+        Blood.getAll((blood) -> {
+            bloodUnits.addAll(blood);
+            blood.forEach((unit) -> {
+                if (!"UN".equals(unit.getType())) {
+                    int index = VERIFIED_BLOOD_TYPES.indexOf(unit.getType());
+                    unitTypeCount[index]++;
+                    bloodCounts[index] = new Blood(unitTypeCount[index], VERIFIED_BLOOD_TYPES.get(index));
+                }
+            });
+            bloodCountList.setAll(bloodCounts);
+            bloodCountList.retainAll(bloodCountList.stream().filter(
+                    (unit) -> unit != null).collect(Collectors.toList())
+            );
+        });
+
+        VERIFIED_BLOOD_TYPES.forEach((type) -> {
+            int count = unitTypeCount[VERIFIED_BLOOD_TYPES.indexOf(type)];
+            if (count > 0) {
+                bloodData.add(new Data(type, count));
+            }
+        });
+
+        bloodData.forEach((chartdata) -> {
+            int value = (int) chartdata.pieValueProperty().get();
+            chartdata.nameProperty().bind(Bindings.concat(
+                    chartdata.getName(), " ", value,
+                    " Unit" + (value > 1 | value <= 0 ? "s" : "")
+            ));
+        });
     }
 }

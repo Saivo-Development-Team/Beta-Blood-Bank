@@ -9,7 +9,7 @@ import beta.blood.Handler;
 import beta.blood.Handler.Function;
 import static beta.blood.Handler.QueryType.RESULT;
 import static beta.blood.Handler.QueryType.UPDATE;
-import static beta.blood.Helper.StaticData.BLOOD_TYPES;
+import static beta.blood.Helper.StaticData.VERIFIED_BLOOD_TYPES;
 import beta.blood.model.Blood;
 import beta.blood.model.Donor;
 import java.net.URL;
@@ -93,16 +93,16 @@ public class VerifyBloodController implements Initializable {
 
         bloodDonors.forEach((pair) -> {
             Donor donor = pair.getKey();
-            donations.add(String.format("[DonorId: %s][Fullname: %s %s][Gender: %s]",
+            donations.add(String.format("Gender: %s\tDonorId: %s\tFullname: %s %s",
+                    donor.getGender() == 'M' ? "Male": "Female",
                     donor.getDonorID(),
                     donor.getName(),
-                    donor.getSurname(),
-                    donor.getGender()
+                    donor.getSurname()
             ));
         });
-        
+
         donorBloodListView.setItems(donations);
-        BloodTypes.setItems(BLOOD_TYPES);
+        BloodTypes.setItems(VERIFIED_BLOOD_TYPES);
     }
 
 }

@@ -92,7 +92,7 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void addEmployee() {
-        if (isEmployeeFormCompleted() & isInfoCorret()) {
+        if (isEmployeeFormCompleted() & isInfoCorrect()) {
             Employee.insert(
                     new Employee(
                             employeeId,
@@ -110,7 +110,7 @@ public class AdminAddUserController implements Initializable {
 
     @FXML
     private void addRecipient() {
-        if (isRecipientFormCompleted() & isInfoCorret()) {
+        if (isRecipientFormCompleted() & isInfoCorrect()) {
             Recipient.insert(new Recipient("-1",
                     getRecipientName(),
                     getRecipientAddress(),

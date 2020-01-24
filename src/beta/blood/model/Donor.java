@@ -20,11 +20,12 @@ import java.util.ArrayList;
  */
 public class Donor {
 
-    private final int age, answers;
+  
     private final String donorId, name, surname, address;
     char gender;
+    private final int age, answers;
 
-    public Donor(String donorID, int age, int answers, String name, String surname, String address, char gender) {
+    public Donor(String donorID, String name, String surname, String address, char gender ,int age, int answers) {
         this.donorId = donorID;
         this.age = age;
         this.answers = answers;
@@ -67,12 +68,13 @@ public class Donor {
             if (result.next()) {
                 return new Donor(
                         result.getString("DonorID"),
-                        result.getInt("Age"),
-                        result.getInt("Answers"),
                         result.getString("Name"),
                         result.getString("Surname"),
                         result.getString("Address"),
-                        result.getString("Gender").charAt(0)
+                        result.getString("Gender").charAt(0),
+                        result.getInt("Age"),
+                        result.getInt("Answers")
+         
                 );
 
             }
@@ -85,9 +87,17 @@ public class Donor {
     private static ArrayList<Donor> resultToDonors(ResultSet result) {
         ArrayList<Donor> donors = new ArrayList();
         try {
-            do {
-                donors.add(resultToDonor(result));
-            } while (result.next());
+            while (result.next()) {
+                donors.add(new Donor(
+                        result.getString("DonorID"),
+                        result.getString("Name"),
+                        result.getString("Surname"),
+                        result.getString("Address"),
+                        result.getString("Gender").charAt(0),
+                        result.getInt("Age"),
+                        result.getInt("Answers")
+                ));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,7 +128,7 @@ public class Donor {
 
     public static void getLastInserted(Function<Donor> function) {
         String query = String.format(
-                "SELECT * FROM `donor` ORDER BY `DonorID` DESC LIMIT 1"
+                "SELECT * FROM `donor` ORDER BY `Answers` DESC LIMIT 1"
         );
         service().executeResultQuery(query, (Function<ResultSet>) (result) -> {
             function.cb(resultToDonor(result));

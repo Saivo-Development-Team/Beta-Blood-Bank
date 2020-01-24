@@ -6,6 +6,7 @@
 package beta.blood.model;
 
 import beta.blood.Handler;
+import beta.blood.Handler.Function;
 import static beta.blood.database.DatabaseService.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class Recipient {
         this.email = email;
     }
 
-    public String getRecipientID() {
+    public String getRecipientId() {
         return recipientId;
     }
 
@@ -85,15 +86,21 @@ public class Recipient {
     }
 
     private static ArrayList<Recipient> resultToRecipients(ResultSet result) {
-        ArrayList<Recipient> employees = new ArrayList();
+        ArrayList<Recipient> recipients = new ArrayList();
         try {
-            do {
-                employees.add(resultToRecipient(result));
-            } while (result.next());
+            while (result.next()) {
+                recipients.add(new Recipient(
+                        String.valueOf(result.getInt("RecipientID")),
+                        result.getString("Name"),
+                        result.getString("Address"),
+                        result.getString("Telephone"),
+                        result.getString("Email")
+                ));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Recipient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return employees;
+        return recipients;
     }
 
     public static void getById(int recipientId, Handler.Function<Recipient> function) {
@@ -105,7 +112,7 @@ public class Recipient {
         });
     }
 
-    public static void getAll(Handler.Function<ArrayList<Recipient>> function) {
+    public static void getAll(Function<ArrayList<Recipient>> function) {
         String query = "SELECT * FROM `recipient`";
         service().executeResultQuery(query, (result) -> {
             function.cb(resultToRecipients(result));

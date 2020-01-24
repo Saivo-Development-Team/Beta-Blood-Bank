@@ -37,11 +37,9 @@ import beta.blood.model.Blood;
 import static beta.blood.model.Blood.DEFULT_ID;
 import static beta.blood.model.Blood.DEFULT_QUANTITY;
 import static beta.blood.model.Blood.DEFULT_TYPE;
-import static beta.blood.nurse.DonorQuestionController.QUESTION_LABEL;
 import static javafx.scene.control.Alert.AlertType.NONE;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -111,10 +109,9 @@ public class NurseAddDonorController implements Initializable {
 
         Answers.getLastInserted((answer) -> {
             Donor.insert(new Donor(
-                    donorId,
+                    donorId, name, surname, homeAddress, gender, 
                     Integer.parseInt(age),
-                    answer.getAnswersId(),
-                    name, surname, homeAddress, gender
+                    answer.getAnswersId()
             ));
         });
 
@@ -182,14 +179,14 @@ public class NurseAddDonorController implements Initializable {
                 ToggleGroup toggle = left.getToggleGroup();
                 toggle.selectedToggleProperty().addListener((o, b, value) -> {
                     RadioButton selected = (RadioButton) value;
-                    String questionText = ((Label) question.view.lookup("#" + QUESTION_LABEL)).getText();
+                    String questionText = "Answering incorrectly to this questions means he/she cannot donate blood";
                     if (question.answer == null
                             ? selected.getText() != null
                             : !question.answer.equals(selected.getText())) {
                         addDonorButton.setDisable(true);
                         ButtonType result = alertMessage(
-                                questionText, "Incorrect, Set Correct Answer",
-                                NONE, new ButtonType("Yes"), new ButtonType("No")
+                                questionText, "Invalid Donor",
+                                NONE, new ButtonType("OK")
                         ).get();
                     } else {
                         addDonorButton.setDisable(false);
