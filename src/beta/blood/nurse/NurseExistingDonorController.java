@@ -1,5 +1,6 @@
 package beta.blood.nurse;
 
+import beta.blood.Handler;
 import beta.blood.Helper;
 import static beta.blood.Helper.createTableColumn;
 import beta.blood.model.Donor;
@@ -30,45 +31,33 @@ public class NurseExistingDonorController implements Initializable {
     public void donorSearch() {
 
         String donorId = id.getText();
-                
-        //Donor.getById(Long.parseLong(donorId), e -> donor = e);
 
-        Donor.getAll((donors) -> {
-            donors.forEach((donor) -> {
-                if (donor != null) {
-                    if (donor.getDonorID().equals(donorId)) {
-                        donorList.add(donor);
-                    }
-                } else {
-                    System.out.println("Donor does not exist");
-                }
-            });
-        });
+        Donor.getById(Long.parseLong(donorId), donor -> donorList.add(donor));
+
+        existingDonorTableView.refresh();
     }
-    
+
     @FXML
     public void donateBlood() {
         Helper.popup();
+    }
+    
+    @FXML
+    public void back() {
+        Handler.setScene(getClass(), "Nurse Home", "NurseHome.fxml");
+        Handler.getWindow().setMaximized(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         for (Field field : Donor.class.getDeclaredFields()) {
-            switch (field.getName()) {
-                case "DonorId":
-                case "Name":
-                case "Surname":
-                case "Address":
-                case "Gender":
-                case "Age":
-                    break;
-                default:
-                    existingDonorTableView.getColumns().add(createTableColumn(field));
-                    break;
-            }
+
+            existingDonorTableView.getColumns().add(createTableColumn(field));
+
         }
-        
-        donorSearch();
+
+        existingDonorTableView.setItems(donorList);
+
     }
 
 }

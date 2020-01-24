@@ -36,17 +36,17 @@ import javax.swing.JOptionPane;
  * @author Daniel
  */
 public class AdminModifyReposController implements Initializable {
-
+    
     @FXML
     ComboBox<String> adminComboBox;
     @FXML
     ComboBox<String> nurseComboBox;
     @FXML
     ComboBox<String> bloodComboBox;
-
+    
     @FXML
     PieChart currentBloodCount;
-
+    
     @FXML
     TextField bloodamount;
     @FXML
@@ -86,7 +86,7 @@ public class AdminModifyReposController implements Initializable {
     //Data for the recipient listview
     private final ObservableList<Recipient> recipientList = FXCollections
             .observableArrayList();
-
+    
     @FXML
     public void refresh() {
         bloodData.clear();
@@ -104,7 +104,7 @@ public class AdminModifyReposController implements Initializable {
         recipientTableView.refresh();
         bloodAmountTableView.refresh();
     }
-
+    
     @FXML
     public void deleteAdmin() {
         adminTableView.getSelectionModel().getSelectedItems().forEach((admin) -> {
@@ -113,7 +113,7 @@ public class AdminModifyReposController implements Initializable {
         });
         adminTableView.refresh();
     }
-
+    
     @FXML
     public void deleteNurse() {
         nurseTableView.getSelectionModel().getSelectedItems().forEach((nurse) -> {
@@ -122,7 +122,9 @@ public class AdminModifyReposController implements Initializable {
         });
         nurseTableView.refresh();
     }
-
+    
+    
+    
     @FXML
     public void deleteRecipient() {
         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
@@ -148,7 +150,7 @@ public class AdminModifyReposController implements Initializable {
         }
         refresh();
     }
-
+    
     @FXML
     public void changeRecTel() {
         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
@@ -159,56 +161,56 @@ public class AdminModifyReposController implements Initializable {
         recChangeTel.clear();
         recipientTableView.refresh();
     }
-
+    
     @FXML
     public void changeRecEmail() {
         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
-
+            
             String newEmail = recChangeEmail.getText();
             recipient.setEmail(newEmail);
             Recipient.update(recipient.getRecipientId(), recipient);
-
+            
         });
         recChangeEmail.clear();
         recipientTableView.refresh();
     }
-
+    
     @FXML
     public void changeRecAddress() {
         recipientTableView.getSelectionModel().getSelectedItems().forEach((recipient) -> {
             String newAddress = recChangeAddress.getText();
             recipient.setAddress(newAddress);
             Recipient.update(recipient.getRecipientId(), recipient);
-
+            
         });
         recChangeAddress.clear();
         recipientTableView.refresh();
     }
-
+    
     @FXML
     public void changeAdminBranch() {
         adminTableView.getSelectionModel().getSelectedItems().forEach((admin) -> {
-
+            
             String newBranch = adminComboBox.getSelectionModel().getSelectedItem();
             admin.setBranch(newBranch);
             Employee.update(admin.getEmployeeId(), admin);
-
+            
         });
         adminTableView.refresh();
     }
-
+    
     @FXML
     public void changeNurseBranch() {
         nurseTableView.getSelectionModel().getSelectedItems().forEach((nurse) -> {
-
+            
             String newBranch = nurseComboBox.getSelectionModel().getSelectedItem();
             nurse.setBranch(newBranch);
             Employee.update(nurse.getEmployeeId(), nurse);
-
+            
         });
         nurseTableView.refresh();
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -232,7 +234,7 @@ public class AdminModifyReposController implements Initializable {
                     break;
             }
         }
-
+        
         for (Field field : Recipient.class.getDeclaredFields()) {
             switch (field.getName()) {
                 case "DEFAULT_ID":

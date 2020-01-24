@@ -19,10 +19,12 @@
       <Separator layoutX="-17.0" layoutY="55.0" prefHeight="0.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" />
       <Label layoutX="14.0" layoutY="85.0" text="Enter Donor ID Number" />
       <TextField fx:id="id" layoutX="225.0" layoutY="81.0" />
-      <Button fx:id="search" layoutX="225.0" layoutY="120.0" mnemonicParsing="false" onAction="#donorSearch" text="Search" />
+      <Button fx:id="search" onAction="#donorSearch" layoutX="225.0" layoutY="120.0" mnemonicParsing="false" text="Search" />
       <TableView fx:id="existingDonorTableView" layoutX="14.0" layoutY="163.0" prefHeight="63.0" prefWidth="613.0" />
       <TextArea layoutX="14.0" layoutY="240.0" prefHeight="72.0" prefWidth="149.0" />
       <Button layoutX="181.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Change Address" />
       <Button layoutX="520.0" layoutY="81.0" mnemonicParsing="false" onAction="#donateBlood" prefHeight="25.0" prefWidth="106.0" text="Donate Blood" />
+      <Button layoutX="520.0" layoutY="6.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="106.0" text="Back" AnchorPane.rightAnchor="0.0"/>
+
    </children>
 </AnchorPane>

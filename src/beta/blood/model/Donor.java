@@ -35,7 +35,7 @@ public class Donor {
         this.gender = gender;
     }
 
-    public String getDonorID() {
+    public String getDonorId() {
         return donorId;
     }
 

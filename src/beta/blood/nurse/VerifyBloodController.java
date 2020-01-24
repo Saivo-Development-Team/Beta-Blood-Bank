@@ -53,7 +53,7 @@ public class VerifyBloodController implements Initializable {
         String type = BloodTypes.getSelectionModel().getSelectedItem();
         donorBloodListView.getSelectionModel().getSelectedItems().forEach((string) -> {
             bloodDonors.forEach((pair) -> {
-                String id = pair.getKey().getDonorID();
+                String id = pair.getKey().getDonorId();
                 if (type != null) {
                     if (string.contains(id)) {
                         Blood.getByQuery(String.format(
@@ -81,8 +81,8 @@ public class VerifyBloodController implements Initializable {
                             if (donor != null) {
                                 bloodDonors.removeIf((pair)
                                         -> Objects.equals(pair
-                                                .getKey().getDonorID(),
-                                                donor.getDonorID())
+                                                .getKey().getDonorId(),
+                                                donor.getDonorId())
                                 );
                                 bloodDonors.add(new Pair(donor, unit));
                             }
@@ -95,7 +95,7 @@ public class VerifyBloodController implements Initializable {
             Donor donor = pair.getKey();
             donations.add(String.format("Gender: %s\tDonorId: %s\tFullname: %s %s",
                     donor.getGender() == 'M' ? "Male": "Female",
-                    donor.getDonorID(),
+                    donor.getDonorId(),
                     donor.getName(),
                     donor.getSurname()
             ));

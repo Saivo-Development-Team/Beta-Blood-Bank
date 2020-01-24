@@ -119,7 +119,7 @@ public class NurseAddDonorController implements Initializable {
             Blood.insert(new Blood(
                     DEFULT_ID,
                     DEFULT_QUANTITY,
-                    Long.parseLong(donor.getDonorID()),
+                    Long.parseLong(donor.getDonorId()),
                     DEFULT_TYPE,
                     getCurrentUser().getEmployeeId()
             ));
