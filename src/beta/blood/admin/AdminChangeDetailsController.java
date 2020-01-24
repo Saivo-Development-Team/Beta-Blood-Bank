@@ -3,29 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beta.blood;
+package beta.blood.admin;
 
+import beta.blood.Handler;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 /**
+ * FXML Controller class
  *
- * @author perso
+ * @author Admin
  */
-public class FXMLInterfaceController implements Initializable {
-    
-    @FXML
-    private Label label;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+public class AdminChangeDetailsController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
+@FXML
+private void back() {
+    Handler.setScene(getClass(), "Admin Home", "/beta/blood/admin/AdminHome.fxml");
+}
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
