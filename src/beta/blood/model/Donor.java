@@ -20,12 +20,12 @@ import java.util.ArrayList;
  */
 public class Donor {
 
-  
-    private final String donorId, name, surname, address;
     char gender;
     private final int age, answers;
+    private final String donorId, name, surname, address, month;
 
-    public Donor(String donorID, String name, String surname, String address, char gender ,int age, int answers) {
+    public Donor(final String donorID, final int age, final int answers, final String name, final String surname,
+            final String address, final char gender, final String month) {
         this.donorId = donorID;
         this.age = age;
         this.answers = answers;
@@ -33,6 +33,11 @@ public class Donor {
         this.surname = surname;
         this.address = address;
         this.gender = gender;
+        this.month = month;
+    }
+
+    public String getMonth() {
+        return month;
     }
 
     public String getDonorId() {
@@ -63,101 +68,80 @@ public class Donor {
         return gender;
     }
 
-    private static Donor resultToDonor(ResultSet result) {
+    private static Donor resultToDonor(final ResultSet result) {
         try {
             if (result.next()) {
-                return new Donor(
-                        result.getString("DonorID"),
-                        result.getString("Name"),
-                        result.getString("Surname"),
-                        result.getString("Address"),
-                        result.getString("Gender").charAt(0),
-                        result.getInt("Age"),
-                        result.getInt("Answers")
-         
-                );
+                return new Donor(result.getString("DonorID"), result.getInt("Age"), result.getInt("Answers"),
+                        result.getString("Name"), result.getString("Surname"), result.getString("Address"),
+                        result.getString("Gender").charAt(0), result.getString("Month"));
 
             }
-        } catch (SQLException ex) {
+        } catch (final SQLException ex) {
             Logger.getLogger(Answers.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    private static ArrayList<Donor> resultToDonors(ResultSet result) {
-        ArrayList<Donor> donors = new ArrayList();
+    private static ArrayList<Donor> resultToDonors(final ResultSet result) {
+        final ArrayList<Donor> donors = new ArrayList();
         try {
             while (result.next()) {
-                donors.add(new Donor(
-                        result.getString("DonorID"),
-                        result.getString("Name"),
-                        result.getString("Surname"),
-                        result.getString("Address"),
-                        result.getString("Gender").charAt(0),
-                        result.getInt("Age"),
-                        result.getInt("Answers")
-                ));
+                donors.add(new Donor(result.getString("DonorID"), result.getInt("Age"), result.getInt("Answers"),
+                        result.getString("Name"), result.getString("Surname"), result.getString("Address"),
+                        result.getString("Gender").charAt(0), result.getString("Month")));
             }
-        } catch (SQLException ex) {
+        } catch (final SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
         return donors;
     }
 
-    public static void getById(Long donorId, Function<Donor> function) {
-        String query = String.format(
-                "SELECT * FROM `donor` WHERE `DonorID` = %d", donorId
-        );
+    public static void getById(final Long donorId, final Function<Donor> function) {
+        final String query = String.format("SELECT * FROM `donor` WHERE `DonorID` = %d", donorId);
         service().executeResultQuery(query, (result) -> {
             function.cb(resultToDonor(result));
         });
     }
 
-    public static void getAll(Function<ArrayList<Donor>> function) {
-        String query = "SELECT * FROM `donor`";
+    public static void getAll(final Function<ArrayList<Donor>> function) {
+        final String query = "SELECT * FROM `donor`";
         service().executeResultQuery(query, (result) -> {
             function.cb(resultToDonors(result));
         });
     }
 
-    public static void getByQuery(String query, QueryType type, Function function) {
+    public static void getByQuery(final String query, final QueryType type, final Function function) {
         service().executeQuery(query, type, (result) -> {
             function.cb(result);
         });
     }
 
-    public static void getLastInserted(Function<Donor> function) {
-        String query = String.format(
-                "SELECT * FROM `donor` ORDER BY `Answers` DESC LIMIT 1"
-        );
+    public static void getLastInserted(final Function<Donor> function) {
+        final String query = String.format("SELECT * FROM `donor` ORDER BY `Answers` DESC LIMIT 1");
         service().executeResultQuery(query, (Function<ResultSet>) (result) -> {
             function.cb(resultToDonor(result));
         });
     }
 
-    public static void insert(Donor donor) {
-        String query = String.format("INSERT INTO `donor` "
-                + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`)"
-                + " VALUES ('%s','%s','%s','%s','%s','%d','%d')",
-                donor.donorId,
-                donor.name,
-                donor.surname,
-                donor.address,
-                donor.gender,
-                donor.age,
-                donor.answers);
+    public static void insert(final Donor donor) {
+        final String query = String.format(
+                "INSERT INTO `donor` "
+                        + "(`DonorID`, `Name`, `Surname`, `Address`, `Gender`, `Age`, `Answers`, `Month`)"
+                        + " VALUES ('%d','%s','%s','%s','%s','%d','%d', '%s')",
+                donor.donorId, donor.name, donor.surname, donor.address, donor.gender, donor.age, donor.answers,
+                donor.month);
         service().executeUpdateQuery(query, null);
     }
 
-    public static void delete(int donorID) {
-        String query = String.format(
-                "DELETE FROM `donor` WHERE `DonorID` = %d", donorID
-        );
+    public static void delete(final int donorID) {
+        final String query = String.format("DELETE FROM `donor` WHERE `DonorID` = %d", donorID);
         service().executeUpdateQuery(query, null);
     }
 
-    public static void update(int donorId, Donor donor) {
-        String query = String.format("UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d WHERE `DonorID` = %d", donorId);
+    public static void update(final int donorId, final Donor donor) {
+        final String query = String.format(
+                "UPDATE `donor` SET `DonorID`=%d,`Name`=%s,`Surname`=%s,`Address`=%s,`Gender`=%s,`Age`=%d,`Answers`=%d, `Month`=%s WHERE `DonorID` = %d",
+                donorId);
         service().executeUpdateQuery(query, null);
     }
 

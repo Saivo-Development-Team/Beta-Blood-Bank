@@ -6,11 +6,13 @@
 package beta.blood.nurse;
 
 import beta.blood.Handler;
+import beta.blood.auth.LoginService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
@@ -22,7 +24,11 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
  */
 
 
+
 public class NurseHomeController implements Initializable {
+    
+    @FXML
+    Label welcome;
     
     @FXML
     private void logout() throws IOException {
@@ -53,8 +59,8 @@ public class NurseHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
+       welcome.setText("Welcome " + LoginService.getCurrentUser().getName() + " " + LoginService.getCurrentUser().getSurname());
+       
     }
 
 }

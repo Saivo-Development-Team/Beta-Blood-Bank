@@ -17,31 +17,43 @@
          </font>
       </Label>
       <Separator layoutX="14.0" layoutY="83.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Button layoutX="431.0" layoutY="365.0" mnemonicParsing="false" onAction="#logout" prefHeight="20.0" prefWidth="200.0" text="Log out" textFill="RED" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Button layoutX="10.0" layoutY="364.0" mnemonicParsing="false" onAction="#changeDetails" onMouseClicked="#changeDetails" prefHeight="25.0" prefWidth="200.0" text="Change Account Details" textFill="RED" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
-      <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
-  <tabs>
-    <Tab fx:id="dash" text="Dashboard">
-      <content>
-        <AnchorPane fx:id="dashanc" minHeight="0.0" minWidth="0.0" />
-      </content>
-    </Tab>
-    <Tab fx:id="add" text="Add new User/Recipient to the system">
-      <content>
-        <AnchorPane fx:id="addanc" minHeight="0.0" minWidth="0.0" />
-      </content>
-    </Tab>
-      <Tab fx:id="sysrep" text="System Report">
-         <content>
-            <AnchorPane fx:id="sysrepanc" minHeight="0.0" minWidth="0.0" />
-         </content>
-      </Tab>
-      <Tab fx:id="modrep" text="Modify Repositories">
-         <content>
-            <AnchorPane fx:id="modrepanc" minHeight="0.0" minWidth="0.0" />
-         </content>
-      </Tab>
-  </tabs>
-</TabPane>
+      <Button layoutX="431.0" layoutY="365.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="142.0" text="Log out" textFill="RED" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Button layoutX="10.0" layoutY="364.0" mnemonicParsing="false" onAction="#changeDetails" onMouseClicked="#changeDetails" text="Change Account Details" textFill="RED" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      <AnchorPane layoutY="121.0" prefHeight="245.0" prefWidth="610.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <TabPane layoutX="15.0" layoutY="136.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="dash" text="Dashboard">
+            <content>
+              <AnchorPane fx:id="dashanc" minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="580.0">
+                           <children>
+                              <Button fx:id="web" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#openWebpage" text="Go to the SANBS Website" />
+                              <Label fx:id="welcome" layoutX="200.0" layoutY="163.0" prefHeight="73.0" prefWidth="733.0" text="Label" textFill="RED">
+                                 <font>
+                                    <Font size="50.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="add" text="Add new User/Recipient to the system">
+            <content>
+              <AnchorPane fx:id="addanc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab fx:id="sysrep" text="System Report">
+               <content>
+                  <AnchorPane fx:id="sysrepanc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="modrep" text="Modify Repositories">
+               <content>
+                  <AnchorPane fx:id="modrepanc" minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="580.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

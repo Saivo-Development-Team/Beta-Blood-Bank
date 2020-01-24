@@ -7,6 +7,7 @@ package beta.blood.nurse;
 
 import static beta.blood.Handler.setScene;
 import static beta.blood.Helper.StaticData.QUESTIONNAIRE_ARRAY;
+import static beta.blood.Helper.StaticData.MONTH_OPTIONS;
 import static beta.blood.Helper.StaticData.TITLE_OPTIONS;
 import static beta.blood.Helper.alertMessage;
 import static beta.blood.Helper.isNotEmpty;
@@ -23,7 +24,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -52,7 +53,6 @@ public class NurseAddDonorController implements Initializable {
     ScrollPane scrollpane;
     @FXML
     ComboBox<String> combobox;
-
     @FXML
     Button addDonorButton;
     @FXML
@@ -77,11 +77,15 @@ public class NurseAddDonorController implements Initializable {
     RadioButton maleRadioButton;
     @FXML
     RadioButton femaleRadioButton;
+    @FXML
+    ComboBox month;
 
     String donorId;
     char gender = 'N';
     String name, surname, age, email, telephone, cellphone, homeAddress;
     String answers = "";
+    String donorMonth;
+
     VBox mainVBox = new VBox();
     ToggleGroup genderToggle = new ToggleGroup();
 
@@ -93,9 +97,7 @@ public class NurseAddDonorController implements Initializable {
 
     @FXML
     private void addDonor() {
-        donorId = isNotEmpty(donorIdTextField.getText())
-                ? donorIdTextField.getText()
-                : "";
+        donorId = isNotEmpty(donorIdTextField.getText()) ? donorIdTextField.getText() : "";
 
         name = nameTextField.getText();
         surname = surnameTextField.getText();
@@ -104,25 +106,18 @@ public class NurseAddDonorController implements Initializable {
         telephone = telephoneTextField.getText();
         cellphone = cellhoneTextField.getText();
         homeAddress = homeAddressTextArea.getText();
+        donorMonth = month.getValue().toString();
 
         Answers.insert(new Answers(-1, answers));
 
         Answers.getLastInserted((answer) -> {
-            Donor.insert(new Donor(
-                    donorId, name, surname, homeAddress, gender, 
-                    Integer.parseInt(age),
-                    answer.getAnswersId()
-            ));
+            Donor.insert(new Donor(donorId, Integer.parseInt(age), answer.getAnswersId(), name, surname, homeAddress,
+                    gender, donorMonth));
         });
 
         Donor.getLastInserted((donor) -> {
-            Blood.insert(new Blood(
-                    DEFULT_ID,
-                    DEFULT_QUANTITY,
-                    Long.parseLong(donor.getDonorId()),
-                    DEFULT_TYPE,
-                    getCurrentUser().getEmployeeId()
-            ));
+            Blood.insert(new Blood(DEFULT_ID, DEFULT_QUANTITY, Long.parseLong(donor.getDonorId()), DEFULT_TYPE,
+                    getCurrentUser().getEmployeeId()));
         });
 
     }
@@ -152,15 +147,15 @@ public class NurseAddDonorController implements Initializable {
         genderToggle.selectedToggleProperty().addListener((a, b, value) -> {
             RadioButton selected = (RadioButton) value;
             switch (selected.getText().toLowerCase()) {
-                case "male":
-                    gender = 'M';
-                    break;
-                case "female":
-                    gender = 'F';
-                    break;
+            case "male":
+                gender = 'M';
+                break;
+            case "female":
+                gender = 'F';
+                break;
             }
         });
-
+        month.setItems(MONTH_OPTIONS);
         combobox.setItems(TITLE_OPTIONS);
         scrollpane.setContent(mainVBox);
         maleRadioButton.setToggleGroup(genderToggle);
@@ -180,25 +175,21 @@ public class NurseAddDonorController implements Initializable {
                 toggle.selectedToggleProperty().addListener((o, b, value) -> {
                     RadioButton selected = (RadioButton) value;
                     String questionText = "Answering incorrectly to this questions means he/she cannot donate blood";
-                    if (question.answer == null
-                            ? selected.getText() != null
+                    if (question.answer == null ? selected.getText() != null
                             : !question.answer.equals(selected.getText())) {
                         addDonorButton.setDisable(true);
-                        ButtonType result = alertMessage(
-                                questionText, "Invalid Donor",
-                                NONE, new ButtonType("OK")
-                        ).get();
+                        alertMessage(questionText, "Invalid Donor", NONE, new ButtonType("OK")).get();
                     } else {
                         addDonorButton.setDisable(false);
                     }
 
                     switch (selected.getId()) {
-                        case LEFT_RADIO_BUTTON:
-                            questionnaire.submitAnswer(question, selected.getText());
-                            break;
-                        case RIGHT_RADIO_BUTTON:
-                            questionnaire.submitAnswer(question, selected.getText());
-                            break;
+                    case LEFT_RADIO_BUTTON:
+                        questionnaire.submitAnswer(question, selected.getText());
+                        break;
+                    case RIGHT_RADIO_BUTTON:
+                        questionnaire.submitAnswer(question, selected.getText());
+                        break;
                     }
                 });
             }
@@ -206,9 +197,7 @@ public class NurseAddDonorController implements Initializable {
             questionnaire.getAnswers().addListener((Change<? extends String> change) -> {
                 List<String> list = (List<String>) change.getList();
                 for (int i = 0; i < list.size(); i++) {
-                    answers += i + 2 > list.size()
-                            ? "[" + list.get(i) + "]"
-                            : ",[" + list.get(i) + "]";
+                    answers += i + 2 > list.size() ? "[" + list.get(i) + "]" : ",[" + list.get(i) + "]";
                 }
             });
         }
@@ -227,16 +216,16 @@ public class NurseAddDonorController implements Initializable {
                     }
                     ds = ds + array[i];
                     switch (i + 1) {
-                        case 2:
-                            y = Integer.parseInt(ds);
-                            y += y <= 50 ? 2000 : 1900;
-                            break;
-                        case 4:
-                            m = Integer.parseInt(ds);
-                            break;
-                        case 6:
-                            d = Integer.parseInt(ds);
-                            break;
+                    case 2:
+                        y = Integer.parseInt(ds);
+                        y += y <= 50 ? 2000 : 1900;
+                        break;
+                    case 4:
+                        m = Integer.parseInt(ds);
+                        break;
+                    case 6:
+                        d = Integer.parseInt(ds);
+                        break;
                     }
                 }
                 dataOfBirthDatePicker.setValue(LocalDate.of(y, m, d));
